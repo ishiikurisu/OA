@@ -1,0 +1,6 @@
+*.exe
+*.o
+*.sh
+*.bat
+makefile
+*.dll
