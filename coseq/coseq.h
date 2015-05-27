@@ -26,6 +26,15 @@ void write_to_file(FILE* fp, char* to_write)
     fflush(fp);
 }
 
+char* sort_on_memory(char* input_file)
+{
+    char* output_file = concat(input_file, ".sorted");
+
+    /* sort this bitch */
+
+    return output_file;
+}
+
 void match_on_memory(char* i1, char* i2, char* o)
 {
     FILE* in1 = fopen(i1, "r");
@@ -91,5 +100,19 @@ LIST* match_on_RAM(LIST* list1, LIST* list2)
 
     free_list(list1);
     free_list(list2);
+    return output;
+}
+
+void merge_on_memory(char* i1, char* i2, char* o)
+{
+
+}
+
+LIST* merge_on_RAM(LIST* list1, LIST* list2)
+{
+    LIST* output = NULL;
+
+    /* merge this bitch*/
+
     return output;
 }

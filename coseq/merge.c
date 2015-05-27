@@ -27,7 +27,7 @@ LIST* initialize_list(char* input_file)
 
     list = remove_from_list(list, list_length(list) - 1);
     list = sort_list(list);
-    
+
     fclose(fp);
     return list;
 }
@@ -53,7 +53,7 @@ void main(int argc, char* argv[])
 {
     LIST* list1  = initialize_list(argv[1]);
     LIST* list2  = initialize_list(argv[2]);
-    LIST* output = match_on_RAM(list1, list2);
+    LIST* output = merge_on_RAM(list1, list2);
 
     write_output(output, argv[3]);
     free_memory(list1, list2, output);
