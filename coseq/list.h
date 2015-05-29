@@ -1,33 +1,33 @@
 #define inc(A) ((A) = (A)->next)
- 
+
 typedef struct NODE
 {
     struct NODE* next;
     char* info;
 } NODE;
- 
+
 typedef NODE LIST;
- 
+
 LIST* new_list()
 {
     LIST* list = (LIST*) malloc(sizeof(LIST));
- 
+
     list->next = NULL;
     list->info = NULL;
- 
+
     return list;
 }
- 
+
 LIST* tail(LIST* head)
 {
     LIST* list = head;
- 
+
     while (list->next != NULL)
         list = list->next;
- 
+
     return list;
 }
- 
+
 int list_length(LIST* head)
 {
     LIST* list   = head->next;
@@ -47,53 +47,53 @@ char* get_from_list(LIST* head, int index)
     LIST* list = head->next;
     char* outlet = NULL;
     int i = 0;
- 
+
     while ((i != index) && (list != NULL))
     {
         inc(list);
         ++i;
     }
- 
+
     if (list != NULL)
         outlet = list->info;
- 
+
     return outlet;
 }
- 
+
 LIST* add_to_list(LIST* head, char* data)
 {
     LIST* new_node = new_list();
     LIST* list = tail(head);
- 
+
     new_node->info = data;
     list->next = new_node;
- 
+
     return head;
 }
- 
+
 int find_in_list(LIST* head, char* to_find)
 {
     LIST* list = head->next;
     int outlet = -1;
     int index = 0;
- 
+
     while ((list != NULL) && (outlet < 0))
     {
         if (equals(to_find, list->info))
             outlet = index;
- 
+
         ++index;
         inc(list);
     }
- 
+
     return outlet;
 }
- 
+
 char* to_string(LIST* head)
 {
     LIST* list = head->next;
     char* outlet = "";
- 
+
     outlet = concat(outlet, "---\n- list:\n");
     while (list != NULL)
     {
@@ -102,7 +102,7 @@ char* to_string(LIST* head)
         outlet = concat(outlet, "\n");
         inc(list);
     }
- 
+
     outlet = concat(outlet, "...\n");
     return outlet;
 }
@@ -111,7 +111,7 @@ char* to_string_with_title(LIST* head, char* title)
 {
     LIST* list = head->next;
     char* outlet = "";
- 
+
     outlet = concat(outlet, "---\n- ");
     outlet = concat(outlet, title);
     outlet = concat(outlet, ":\n");
@@ -123,15 +123,15 @@ char* to_string_with_title(LIST* head, char* title)
         outlet = concat(outlet, "\n");
         inc(list);
     }
- 
+
     outlet = concat(outlet, "...\n");
     return outlet;
 }
- 
+
 void print_list(LIST* head)
 {
     LIST* list = head->next;
- 
+
     printf("---\n");
     printf("- list:\n");
     while (list != NULL)
@@ -144,18 +144,29 @@ void print_list(LIST* head)
     }
     printf("...\n");
 }
- 
+
+void write_list_to_file(LIST* head, char* output)
+{
+    FILE* outlet = fopen(output, "w");
+    LIST* list   = head->next;
+
+    for (list = head->next; list != NULL; inc(list))
+        fprintf(outlet, "%s\n", list->info);
+
+    fclose(outlet);
+}
+
 int contains(LIST* head, char* to_find)
 {
     LIST* list = head->next;
     int result = 0;
- 
+
     while ((list != NULL) && (result == 0))
     {
         result = equals(to_find, list->info);
         inc(list);
     }
- 
+
     return result;
 }
 
@@ -185,8 +196,12 @@ LIST* using_bubblesort(LIST* head, int(*function)(int))
                 list->info = temp;
                 flag = 1;
             }
-        }        
+        }
     }
+
+    /* MEOW */
+    if ((head->next)->info == NULL)
+        head->next = (head->next)->next;
 
     return head;
 }
@@ -224,34 +239,34 @@ LIST* remove_from_list(LIST* head, int index)
     LIST* to_del = NULL;
     char* outlet = NULL;
     int i = 0;
- 
+
     while ((i + 1 != index) && (list != NULL))
     {
         inc(list);
         ++i;
     }
- 
+
     if (list->next != NULL)
     {
         to_del = list->next;
         list->next = to_del->next;
         free(to_del);
     }
-        
+
     return head;
-}   
+}
 
 void free_list(LIST* head)
 {
     LIST* list = head;
     LIST* memo;
- 
+
     while (list->next != NULL)
     {
         memo = list->next;
         free(list);
         list = memo;
     }
- 
+
     free(list);
 }

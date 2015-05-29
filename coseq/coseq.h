@@ -26,13 +26,62 @@ void write_to_file(FILE* fp, char* to_write)
     fflush(fp);
 }
 
-char* sort_on_memory(char* input_file)
+/*
+void sort_on_RAM(LIST* list)
 {
-    char* output_file = concat(input_file, ".sorted");
+    FILE* in  = fopen(input_file, "r");
+    FILE* out = fopen(output_file, "w");
+}
+*/
 
-    /* sort this bitch */
+#define BUFFER_SIZE (10)
+int build_runs(char* input)
+{
+    FILE* inlet       = fopen(input, "r");
+    FILE* run         = NULL;
+    LIST* subset      = NULL;
+    char* data        = NULL;
+    char* run_name    = NULL;
+    int   added_files = 0;
+    int   added_data  = 0;
 
-    return output_file;
+    while (!feof(inlet))
+    {
+        subset     = new_list();
+        data       = read_from_file(inlet);
+        added_data = 0;
+
+        while (data != NULL && !feof(inlet) && added_data < BUFFER_SIZE)
+        {
+            ++added_data;
+            add_to_list(subset, data);
+            data= read_from_file(inlet);
+        }
+
+        run_name = concat(input, to_array('0' + added_files));
+
+        sort_list(subset);
+        write_list_to_file(subset, run_name);
+        ++added_files;
+    }
+
+    fclose(inlet);
+    return added_files;
+}
+char* sort_on_memory(char* input)
+{
+    char*  output      = concat(input, ".sorted");
+    int    added_files = 0;
+    FILE*  run         = NULL;
+    FILE** run_array   = NULL;
+    FILE*  outlet      = fopen(output, "w");
+
+    added_files = build_runs(input);
+
+    /* merge runs */
+
+
+    return output;
 }
 
 void match_on_memory(char* i1, char* i2, char* o)
