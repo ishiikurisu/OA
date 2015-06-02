@@ -20,19 +20,41 @@ char* read_from_file(FILE* fp)
     return output;
 }
 
+LIST* read_whole_file(char* input_file)
+{
+    FILE* fp   = fopen(input_file, "r");
+    LIST* list = new_list();
+    char* str  = NULL;
+
+    while (!feof(fp))
+    {
+        str = read_from_file(fp);
+        if (str) add_to_list(list, str);
+    }
+
+    fclose(fp);
+    return list;
+}
+
 void write_to_file(FILE* fp, char* to_write)
 {
     fprintf(fp, "%s\n", to_write);
     fflush(fp);
 }
 
-/*
-void sort_on_RAM(LIST* list)
+void sort_on_RAM(char* input_file, char* output_file)
 {
-    FILE* in  = fopen(input_file, "r");
-    FILE* out = fopen(output_file, "w");
+    FILE* out  = fopen(output_file, "w");
+    LIST* list = read_whole_file(input_file);
+
+    list = sort_list(list);
+    inc(list);
+    
+    while (list != NULL)
+        fprintf(out, "%s\n", list->info),
+        inc(list);
+    fclose(out);
 }
-*/
 
 #define BUFFER_SIZE (10)
 int build_runs(char* input)
@@ -154,14 +176,71 @@ LIST* match_on_RAM(LIST* list1, LIST* list2)
 
 void merge_on_memory(char* i1, char* i2, char* o)
 {
+    FILE* inlet1 = fopen(i1, "r");
+    FILE* inlet2 = fopen(i2, "r");
+    FILE* outlet = fopen(o,  "w");
+    char* item1  = read_from_file(inlet1);
+    char* item2  = read_from_file(inlet2);
 
+    while (item1 != NULL || item2 != NULL)
+    {
+        switch (compare(item1, item2))
+        {
+            case BIGGER:
+                fprintf(outlet, "%s\n", item2);
+                item2 = read_from_file(inlet2);
+            break;
+
+            case SMALLER:
+                fprintf(outlet, "%s\n", item1);
+                item1 = read_from_file(inlet1);
+            break;
+
+            default:
+                fprintf(outlet, "%s\n", item1);
+                item1 = read_from_file(inlet1);
+                item2 = read_from_file(inlet2);
+        }
+    }
+
+    fflush(outlet);
+    fclose(outlet);
+    fclose(inlet1);
+    fclose(inlet2);
 }
 
 LIST* merge_on_RAM(LIST* list1, LIST* list2)
 {
-    LIST* output = NULL;
+    LIST* output = new_list();
+    int   index1 = 0;
+    int   index2 = 0;
+    char* item1  = get_from_list(list1 ,index1);
+    char* item2  = get_from_list(list2, index2);
 
-    /* merge this bitch*/
+    while (item1 != NULL || item2 != NULL)
+    {
+
+        switch (compare(item1, item2))
+        {
+            case BIGGER:
+                output = add_to_list(output, item2);
+                ++index2;
+                item2 = get_from_list(list2, index2);
+            break;
+ 
+            case SMALLER:
+                output = add_to_list(output, item1);
+                ++index1;
+                item1 = get_from_list(list1, index1);
+            break;
+ 
+            default:
+                output = add_to_list(output, item1);
+                ++index1; ++index2;
+                item1 = get_from_list(list1, index1);
+                item2 = get_from_list(list2, index2);
+        }
+    }
 
     return output;
 }

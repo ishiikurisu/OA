@@ -26,18 +26,23 @@ LIST* initialize_list(char* input_file)
     }
 
     list = remove_from_list(list, list_length(list) - 1);
-    list = sort_list(list);
+    /* list = sort_list(list); */
     
     fclose(fp);
     return list;
 }
 
-void write_output(LIST* list, char* output_file)
+void write_output(LIST* head, char* output_file)
 {
     FILE* fp   = fopen(output_file, "w");
-    char* data = to_string_with_title(list, output_file);
+    char* data = to_string_with_title(head, output_file);
+    LIST* list = head->next;
 
-    fprintf(fp, data);
+    while (list != NULL)
+       fprintf(fp, "%s\n", list->info),
+       inc(list);
+
+    /* fprintf(fp, data); */
     fflush(fp);
     fclose(fp);
 }
@@ -56,5 +61,5 @@ void main(int argc, char* argv[])
     LIST* output = match_on_RAM(list1, list2);
 
     write_output(output, argv[3]);
-    free_memory(list1, list2, output);
+    /* free_memory(list1, list2, output); */
 }

@@ -64,9 +64,9 @@ int equals(char* s1, char* s2)
 int compare(char* s, char* t)
 {
     if (t == NULL)
-        return BIGGER;
-    if (s == NULL)
         return SMALLER;
+    if (s == NULL)
+        return BIGGER;
 
     int r  = 0;
     int i  = 0;
