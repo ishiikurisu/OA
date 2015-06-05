@@ -1,5 +1,6 @@
-- [ ] Create database structure
-- [ ] Transform database structure to index structure
+- [X] Create database structure
+- [X] Transform database structure to index structure
 - [ ] Write BTree file structure
 - [ ] Search index structure using BTree file structure
+- [ ] Write "insert to btree method"
 - [ ] Feed database file

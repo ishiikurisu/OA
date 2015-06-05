@@ -89,6 +89,7 @@ int find_in_list(LIST* head, char* to_find)
     return outlet;
 }
 
+/*
 char* to_string(LIST* head)
 {
     LIST* list = head->next;
@@ -104,6 +105,21 @@ char* to_string(LIST* head)
     }
 
     outlet = concat(outlet, "...\n");
+    return outlet;
+}
+*/
+char* to_string(LIST* head)
+{
+    LIST* list = head->next;
+    char* outlet = "";
+
+    while (list != NULL)
+    {
+        outlet = concat(outlet, list->info);
+        outlet = concat(outlet, "\n");
+        inc(list);
+    }
+
     return outlet;
 }
 
@@ -233,6 +249,16 @@ char* pop_from_list(LIST* head)
     return result;
 }
 
+LIST* push_to_list(LIST* head, char* item)
+{
+    LIST* list = tail(head);
+    list->next = (LIST*) malloc(sizeof(LIST));
+    inc(list);
+    list->info = item;
+    list->next = NULL;
+    return head;
+}
+
 LIST* remove_from_list(LIST* head, int index)
 {
     LIST* list   = head->next;
@@ -283,12 +309,11 @@ LIST* split(char* string, char to_divide)
     for (i = 0; i < length; ++i)
     {
         section = "";
-        to_add = string[i], i++;
 
-        while (to_add != to_divide && i < length)
+        while (string[i] != to_divide && i < length)
         {
-            section = concat(section, to_array(to_add));
-            to_add = string[i], i++;
+            section = concat(section, to_array(string[i]));
+            i++;
         }
 
         result = add_to_list(result, section);

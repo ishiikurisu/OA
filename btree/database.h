@@ -1,7 +1,4 @@
 #pragma once
-#include "string.h"
-#include "list.h"
-#include "coseq.h"
 
 void write_data_to_file(char* line, FILE* fp)
 {

@@ -5,3 +5,7 @@
 It uses the following syntax:
     Primary Key;Name;Album
     Primary Key;Name;Album
+
+# BTREE file structure
+    PAGE|path
+    NODE|key:value
