@@ -305,7 +305,6 @@ LIST* split(char* string, char to_divide)
     int   length  = strlen(string);
     int   i       = 0;
 
-    printf("%s\n", string);
     for (i = 0; i < length; ++i)
     {
         section = "";

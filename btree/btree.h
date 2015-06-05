@@ -1,7 +1,17 @@
 #pragma once
 #include "btreenode.h"
 
+int is_leaf(BTREE* btree)
+{
+    int result = 1;
+    int i = 0;
 
+    for (i = 0; i < PAGE_SIZE && result; ++i)
+        if (get_from_list(btree->page, i) != NULL)
+            result = 0;
+
+    return result;
+}
 BTREE* get_leaf(BTREE* parent, BTND* node)
 {
     int i;
@@ -9,39 +19,61 @@ BTREE* get_leaf(BTREE* parent, BTND* node)
     BTREE* sibling = NULL;
     char* reference = node->key;
     char* to_test;
+    char* last;
+    char* path;
 
-    /* test if parent is a leaf*/
-    for (i = 0; i < PAGE_SIZE && result; ++i)
-        if (get_from_list(parent->page, i) != NULL)
-            result = 0;
-    if (result)
+    printf("LOG: current node = %s\n", parent->name);
+    if (is_leaf(parent))
         return parent;
 
-    /* discover where to go */
-    to_test = parent->node[0].key;
-    if (compare(reference, to_test) < SMALLER) {
-
-    }
-
-    for (i = 1; i < PAGE_SIZE; ++i)
+    for (i = 0; i < PAGE_SIZE -1; ++i)
     {
-        sibling = NULL;
-
+        to_test = parent->node[i].key;
+        if (to_test == NULL)
+            return parent;
+        else if (compare(reference, to_test) == SMALLER) {
+            printf("LOG: %s < %s\n", reference, to_test);
+            path = get_from_list(parent->page, i);
+            path = concat(path, ".page");
+            sibling = load_btree(path);
+            sibling->name = path;
+            return get_leaf(sibling, node);
+        }
     }
 
-    return sibling;
+    return parent;
 }
+
+int fit_in_btree(BTREE* btree)
+{
+    int result = 0;
+    int i = 0;
+
+    for (i == 0; i < PAGE_SIZE && !result; ++i)
+        if (btree->node[i].key == NULL)
+            result = 1;
+
+    return result;
+}
+
+#include "divide_and_promote.h"
 
 BTREE* insert_in_btree(BTREE* root, BTND* node)
 {
     BTREE* btree = get_leaf(root, node);
-    int result = 0;
-    int i = 0;
 
+    /*
     if (!fit_in_btree(btree))
-        divide_and_promote(btree, node);
+        root = divide_and_promote(root, btree, node);
     else
-        add_to_btree(btree, node);
+    */
+    printf("BEFORE:\n");
+    print_btree(btree);
 
-    return btree;
+    btree = add_to_btree(btree, node);
+    printf("AFTER:\n");
+    print_btree(btree);
+
+    save_btree(btree, concat(btree->name, ".page"));
+    return root;
 }

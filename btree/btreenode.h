@@ -1,5 +1,5 @@
 #pragma once
-#define PAGE_SIZE (4)
+#define PAGE_SIZE (5)
 #define NULL_PAGE ("NULL")
 #define PAGE_TYPE ("PAGE")
 #define NODE_TYPE ("NODE")
@@ -11,13 +11,14 @@ typedef struct {
 typedef BTREE_NODE BTND;
 
 typedef struct {
+    char* name;
     LIST* page;
     BTND* node;
 } BTREE;
 
 BTND* alloc_nodes()
 {
-    BTND* node = (BTND*) malloc(sizeof(BTND) * PAGE_SIZE);
+    BTND* node = (BTND*) malloc(sizeof(BTND) * (PAGE_SIZE - 1));
     int b = -1;
 
     for (b = 0; b < PAGE_SIZE; ++b)
@@ -46,6 +47,7 @@ BTREE* new_btree()
 {
     BTREE* btree = alloc_btree();
 
+    btree->name = NULL;
     btree->page = new_list();
     btree->node = alloc_nodes();
 
@@ -60,7 +62,7 @@ BTREE* add_to_btree(BTREE* btree, BTND* node)
     int i = 0;
 
     add = btree->node[0].key;
-    while (compare(ref, add) == BIGGER)
+    while (compare(ref, add) == BIGGER && i < PAGE_SIZE-1)
     {
         new_nodes[i].key = btree->node[i].key;
         new_nodes[i].value = btree->node[i].value;
@@ -70,7 +72,7 @@ BTREE* add_to_btree(BTREE* btree, BTND* node)
     new_nodes[i].key = node->key;
     new_nodes[i].value = node->value;
     i++;
-    while (i < PAGE_SIZE)
+    while (i < PAGE_SIZE - 1)
     {
         new_nodes[i].key = btree->node[i-1].key;
         new_nodes[i].value = btree->node[i-1].value;
@@ -88,7 +90,7 @@ void print_btree(BTREE* btree)
     char* data = btree->node[0].key;
     char *key, *value;
 
-    printf("---\n- btree node:\n");
+    printf("---\n- %s:\n", btree->name);
     while (btree->node[i].key != NULL && i < PAGE_SIZE)
     {
         key = btree->node[i].key;
@@ -103,6 +105,24 @@ void print_btree(BTREE* btree)
     printf("...\n");
 }
 
+void save_btree(BTREE* btree, char* name)
+{
+    FILE* outlet = fopen(name, "w");
+    char* key    = NULL;
+    char* value  = NULL;
+    int i = 0;
+
+    while (btree->node[i].key != NULL)
+    {
+        key   = btree->node[i].key;
+        value = btree->node[i].value;
+        fprintf(outlet, "NODE|%s:%s"), i++;
+    }
+
+    fflush(outlet);
+    fclose(outlet);
+}
+
 BTREE* load_btree(char* name)
 {
     FILE*  inlet = fopen(name, "r");
@@ -112,11 +132,12 @@ BTREE* load_btree(char* name)
     char*  line  = NULL;
     char*  key   = NULL;
     char*  value = NULL;
-    int    added = 0;
 
+    printf("LOG: loading \"%s\"\n", name);
     while (!feof(inlet))
     {
         line = read_from_file(inlet);
+        printf("LOG: \"%s\" read\n", line), fflush(stdout);
         if (line != NULL) {
             /* TYPE|VALUE */
             data  = split(line, '|');
@@ -126,17 +147,17 @@ BTREE* load_btree(char* name)
             if (compare(key, PAGE_TYPE) == EQUAL) {
                 btree->page = add_to_list(btree->page, value);
             }
-            else if (compare(key, NODE_TYPE) == EQUAL) {
+            if (compare(key, NODE_TYPE) == EQUAL) {
                 /* PPK:PRR */
                 data = split(value, ':');
                 key = get_from_list(data, 0);
                 value = get_from_list(data, 1);
                 bnode = new_btree_node(key, value);
                 add_to_btree(btree, bnode);
-                ++added;
             }
         }
     }
+    printf("LOG: %s loaded\n", name);
 
     fclose(inlet);
     return btree;

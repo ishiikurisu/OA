@@ -1,6 +1,6 @@
 #pragma once
 
-void write_data_to_file(char* line, FILE* fp)
+void write_index_with_PRR(char* line, FILE* fp)
 {
     static int PRR = 0;
     LIST* data = split(line, '|');
@@ -21,7 +21,7 @@ void to_index(char* input, char* output)
     {
         data = read_from_file(inlet);
         if (data != NULL)
-            write_data_to_file(data, outlet);
+            write_index_with_PRR(data, outlet);
     }
 
     fclose(inlet);

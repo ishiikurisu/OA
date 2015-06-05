@@ -3,7 +3,7 @@
 #include "string.h"
 #include "list.h"
 #include "coseq.h"
-#include "btreenode.h"
+#include "btree.h"
 
 int f()
 {
@@ -22,11 +22,17 @@ void write_compare(char* s, char* t)
 
 void btree_test()
 {
-    BTREE* btree = load_btree("bitch.txt");
-    BTND* bnode = new_btree_node("FAFINHA", "10");
+    BTREE* btree = load_btree("root.page");
+    BTND* bnode = NULL;
 
+    btree->name = "root";
     print_btree(btree);
-    add_to_btree(btree, bnode);
+    /* bnode = new_btree_node("IGOR HETERO", "20");
+    btree = insert_in_btree(btree, bnode); */
+    bnode = new_btree_node("CAROL HAINE", "19");
+    btree = insert_in_btree(btree, bnode);
+    bnode = new_btree_node("JUBS", "18");
+    btree = insert_in_btree(btree, bnode);
     print_btree(btree);
 }
 

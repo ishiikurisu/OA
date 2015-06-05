@@ -49,7 +49,7 @@ void sort_on_RAM(char* input_file, char* output_file)
 
     list = sort_list(list);
     inc(list);
-    
+
     while (list != NULL)
         fprintf(out, "%s\n", list->info),
         inc(list);
@@ -227,13 +227,13 @@ LIST* merge_on_RAM(LIST* list1, LIST* list2)
                 ++index2;
                 item2 = get_from_list(list2, index2);
             break;
- 
+
             case SMALLER:
                 output = add_to_list(output, item1);
                 ++index1;
                 item1 = get_from_list(list1, index1);
             break;
- 
+
             default:
                 output = add_to_list(output, item1);
                 ++index1; ++index2;
