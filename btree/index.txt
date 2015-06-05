@@ -1,0 +1,8 @@
+0|XXX
+1|TAM
+2|BOA
+3|KEU
+4|ENP
+5|ANE
+6|OIE
+7|LEK
