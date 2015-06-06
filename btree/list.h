@@ -71,6 +71,34 @@ LIST* add_to_list(LIST* head, char* data)
     return head;
 }
 
+LIST* add_to_list_at_index(LIST* head, char* data, int index)
+{
+    LIST* new_node = new_list();
+    LIST* list = head;
+    int i = 0;
+
+    new_node->info = data;
+    while (list != NULL)
+    {
+        if (i == index) {
+            new_node->next = list->next;
+            list->next = new_node->next;
+            break;
+        }
+
+        inc(list);
+        i++;
+    }
+
+    if (list == NULL) {
+        list = tail(head);
+        list->next = new_node;
+        new_node->next = NULL;
+    }
+
+    return head;
+}
+
 int find_in_list(LIST* head, char* to_find)
 {
     LIST* list = head->next;

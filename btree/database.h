@@ -1,4 +1,7 @@
 #pragma once
+#include "string.h"
+#include "list.h"
+#include "coseq.h"
 
 void write_index_with_PRR(char* line, FILE* fp)
 {
@@ -6,7 +9,7 @@ void write_index_with_PRR(char* line, FILE* fp)
     LIST* data = split(line, '|');
     char* info = get_from_list(data, 0);
 
-    fprintf(fp, "%d|%s\n", PRR, info);
+    fprintf(fp, "%s:%d\n", info, PRR);
     fflush(fp);
     PRR++;
 }

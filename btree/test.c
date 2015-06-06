@@ -22,10 +22,10 @@ void write_compare(char* s, char* t)
 
 void btree_test()
 {
-    BTREE* btree = load_btree("root.page");
+    BTREE* btree = load_btree("page\\root.page");
     BTND* bnode = NULL;
 
-    btree->name = "root";
+    btree->name = "page\\root";
     print_btree(btree);
     /* bnode = new_btree_node("IGOR HETERO", "20");
     btree = insert_in_btree(btree, bnode); */

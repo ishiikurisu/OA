@@ -79,8 +79,16 @@ BTREE* add_to_btree(BTREE* btree, BTND* node)
         ++i;
     }
 
-    free(btree->node);
     btree->node = new_nodes;
+    return btree;
+}
+BTREE* add_node_to_btree(BTREE* btree, BTND* node)
+{ return add_to_btree(btree, node); }
+BTREE* add_page_to_btree(BTREE* btree, char* path)
+{
+    LIST* pages = btree->page;
+    pages = add_to_list(pages, path);
+    btree->page = pages;
     return btree;
 }
 
@@ -112,11 +120,21 @@ void save_btree(BTREE* btree, char* name)
     char* value  = NULL;
     int i = 0;
 
+    rewind(outlet);
+    fprintf(outlet, "%s\n", btree->name);
     while (btree->node[i].key != NULL)
     {
         key   = btree->node[i].key;
         value = btree->node[i].value;
-        fprintf(outlet, "NODE|%s:%s"), i++;
+        fprintf(outlet, "NODE|%s:%s\n", key , value);
+        i++;
+    }
+
+    i = 0;
+    while ((key = get_from_list(btree->page, i)) != NULL)
+    {
+        fprintf(outlet, "PAGE|%s\n", key);
+        i++;
     }
 
     fflush(outlet);
@@ -134,10 +152,12 @@ BTREE* load_btree(char* name)
     char*  value = NULL;
 
     printf("LOG: loading \"%s\"\n", name);
+    btree->name = read_from_file(inlet);
+    printf("LOG: file name: \"%s\"\n", btree->name);
     while (!feof(inlet))
     {
         line = read_from_file(inlet);
-        printf("LOG: \"%s\" read\n", line), fflush(stdout);
+        printf("LOG: \"%s\" read\n", line);
         if (line != NULL) {
             /* TYPE|VALUE */
             data  = split(line, '|');
@@ -147,7 +167,7 @@ BTREE* load_btree(char* name)
             if (compare(key, PAGE_TYPE) == EQUAL) {
                 btree->page = add_to_list(btree->page, value);
             }
-            if (compare(key, NODE_TYPE) == EQUAL) {
+            else if (compare(key, NODE_TYPE) == EQUAL) {
                 /* PPK:PRR */
                 data = split(value, ':');
                 key = get_from_list(data, 0);
@@ -157,7 +177,7 @@ BTREE* load_btree(char* name)
             }
         }
     }
-    printf("LOG: %s loaded\n", name);
+    printf("LOG: \"%s\" loaded\n", name);
 
     fclose(inlet);
     return btree;
