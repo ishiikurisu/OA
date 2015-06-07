@@ -73,6 +73,8 @@ Methods
 + BTREE* alloc_btree()
 + BTREE* new_btree()
 + BTREE* add_to_btree(BTREE*, BTND*)
++ BTREE* add_node_to_btree(BTREE*, BTND*)
++ BTREE* add_page_to_btree(BTREE*, char*)
 + void print_btree(BTREE*)
 + BTREE* load_btree(char*)
 + void free_btree(BTREE*)
@@ -82,5 +84,14 @@ Methods
 Methods
 =======
 
++ BTREE* create_new_page(BTREE*, BTND*)
++ int is_leaf(BTREE*)
++ BTREE* get_sibling(char*)
 + BTREE* get_leaf(BTREE* parent, BTND* node)
-+ BTREE* insert(BTREE*, BTND*)
++ int fit_in_btree(BTREE*)
++ BTREE* insert_in_btree(BTREE*, BTND*)
+
+# divide and promote
+
+To be written yet. Inserting in tree is still a bit too complicated; gotta
+improve it a lot.
