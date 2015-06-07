@@ -96,6 +96,11 @@ char* get_key(BTND* node)
     INND* index = node->data;
     return index->key;
 }
+char* get_value(BTND* node)
+{
+    INND* index = node->data;
+    return index->value;
+}
 
 int number_bnodes(BTND* bnode)
 {
@@ -206,11 +211,29 @@ BTREE* add_node_to_btree(BTREE* btree, char* key, char* value)
     return add_bnode_to_btree(btree, bnode);
 }
 
-BTREE* add_page_to_tree(BTREE* btree, char* path)
+BTREE* add_page_to_btree(BTREE* btree, char* path)
 {
     LIST* page = btree->page;
     btree->page = add_to_list(page, path);
     return btree;
+}
+
+int contains_node(BTREE* btree, BTND* to_find)
+{
+    char* reference  = get_key(to_find);
+    char* to_compare = NULL;
+    BTND* node;
+    int result = 0;
+
+    for (node = btree->node; node!= NULL && !result; inc(node))
+    {
+        to_compare = get_key(node);
+
+        if (compare(reference, to_compare) == EQUAL)
+            result = 1;
+    }
+
+    return result;
 }
 
 int find_place_to_fit(BTREE* btree, BTND* to_find)
@@ -266,7 +289,7 @@ BTREE* load_btree(char* path)
         value = get_from_list(data, 1);
 
         if (compare(key, PAGE_TYPE) == EQUAL) {
-            btree = add_page_to_tree(btree, value);
+            btree = add_page_to_btree(btree, value);
         }
         else if (compare(key, NODE_TYPE) == EQUAL) {
             data  = split(value, ':');

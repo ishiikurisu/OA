@@ -61,23 +61,15 @@ Methods
 Definitions
 ===========
 
-+ struct BTREE_NODE
++ typedef INDEX_NODE INND
 + typedef BTREE_NODE BTND
-+ struct BTREE
++ typedef BTREE BT
 
 Methods
 =======
 
-+ BTND* alloc_nodes()
-+ BTND* new_btree_node(char*, char*)
-+ BTREE* alloc_btree()
-+ BTREE* new_btree()
-+ BTREE* add_to_btree(BTREE*, BTND*)
-+ BTREE* add_node_to_btree(BTREE*, BTND*)
-+ BTREE* add_page_to_btree(BTREE*, char*)
-+ void print_btree(BTREE*)
-+ BTREE* load_btree(char*)
-+ void free_btree(BTREE*)
++ INND* new_index_node()
++ BTND* new_btnode()
 
 # btree
 

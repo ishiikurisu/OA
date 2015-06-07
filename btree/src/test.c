@@ -5,48 +5,23 @@
 #include "coseq.h"
 #include "btree.h"
 
-int f()
-{
-    static int n = -1;
-    n++;
-    return n;
-}
-
-void write_compare(char* s, char* t)
-{
-    if (compare(s, t) == SMALLER)
-        printf("smaller\n");
-    else
-        printf("BIGGER\n");
-}
-
-void test_fit(BT* bt, char* k, char* v)
-{
-    BTND* n = create_node(k, v);
-    int fit = find_place_to_fit(bt, n);
-    printf("%s fit @ %d\n", k, fit);
-    insert(bt, n);
-}
-
-void btree_test(char* input, char* output)
-{
-    BT* btree = load_btree(input);
-    test_fit(btree, "CAROL HAINE", "19");
-    test_fit(btree, "JUBS", "18");
-    /* test_fit(btree, "IGOR HETERO", "20"); */
-}
-
 int main(int argc, char* argv[])
 {
-    int i = 0;
+    BT* btree = create_btree(argv[1]);
+    BTND* node;
+    LIST* data;
+    char* line;
+    char* key;
+    char* value;
 
-    /*
-    for (i = 0; i < 10; ++i)
-        printf("%d\n", f());
-
-    write_compare("joe", "frank");
-    */
-    btree_test(argv[1], argv[2]);
+    while ((line = read_from_file(stdin)) != NULL)
+    {
+        data = split(line, ':');
+        key = get_from_list(data, 0);
+        value = get_from_list(data, 1);
+        node = create_node(key, value);
+        btree = insert(btree, node);
+    }
 
     return 0;
 }
