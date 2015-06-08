@@ -5,9 +5,17 @@
 #include "coseq.h"
 #include "btree.h"
 
+BTND* read_node(char* line)
+{
+    LIST* data = split(line, ':');
+    char* key = get_from_list(data, 0);
+    char* value = get_from_list(data, 1);
+    return create_node(key, value);
+}
+
 int main(int argc, char* argv[])
 {
-    BT* btree = create_btree(argv[1]);
+    BT* btree = create_btree("root");
     BTND* node;
     LIST* data;
     char* line;
@@ -16,10 +24,7 @@ int main(int argc, char* argv[])
 
     while ((line = read_from_file(stdin)) != NULL)
     {
-        data = split(line, ':');
-        key = get_from_list(data, 0);
-        value = get_from_list(data, 1);
-        node = create_node(key, value);
+        node = read_node(line);
         btree = insert(btree, node);
     }
 

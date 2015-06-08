@@ -102,6 +102,21 @@ char* get_value(BTND* node)
     return index->value;
 }
 
+char* get_value_from_key(BTND* bnode, char* key)
+{
+    char* result = NULL;
+    BTND* node   = bnode->next;
+
+    while (node != NULL && result == NULL)
+    {
+        if (compare(get_key(node), key) == EQUAL)
+            result = get_value(node);
+        inc(node);
+    }
+
+    return result;
+}
+
 int number_bnodes(BTND* bnode)
 {
     BTND* node = bnode->next;
@@ -197,9 +212,11 @@ BTREE* add_bnode_to_btree_in_order(BTREE* btree, BTND* bnode)
 
 BTREE* add_bnode_to_btree(BTREE* btree, BTND* bnode)
 {
-    BTND* node = last_node(btree->node);
+    BTND* node  = btree->node;
+    char* key   = get_key(bnode);
+    char* value = get_value(bnode);
 
-    node->next = bnode;
+    node = add_btnode(node, key, value);
     btree->node = node;
 
     return btree;
@@ -213,8 +230,8 @@ BTREE* add_node_to_btree(BTREE* btree, char* key, char* value)
 
 BTREE* add_page_to_btree(BTREE* btree, char* path)
 {
-    LIST* page = btree->page;
-    btree->page = add_to_list(page, path);
+    if (path != NULL)
+        btree->page = add_to_list(btree->page, path);
     return btree;
 }
 
@@ -247,13 +264,13 @@ int find_place_to_fit(BTREE* btree, BTND* to_find)
     /* first step*/
     if (node->next == NULL)
         return result;
+    inc(node);
     last = get_key(node);
     if (compare(key, last) == SMALLER)
         return result;
 
     /* next steps */
-    result++;
-    for (inc(node); node != NULL; inc(node))
+    for (result++, inc(node); node != NULL; result++, inc(node))
     {
         curr = get_key(node);
 
@@ -270,6 +287,8 @@ int find_place_to_fit(BTREE* btree, BTND* to_find)
 
 BTREE* load_btree(char* path)
 {
+    if (path == NULL) return NULL;
+
     char* input = concat(path, ".page");
     FILE* inlet = fopen(input, "r");
     BTREE*   btree = new_btree();
@@ -306,7 +325,7 @@ void save_btree(BTREE* btree)
 {
     char* path   = concat(btree->name, ".page");
     FILE* outlet = fopen(path, "w");
-    BTND* bnode  = btree->node;
+    BTND* node   = btree->node;
     LIST* page   = btree->page;
     char* key    = NULL;
     char* value  = NULL;
@@ -314,17 +333,17 @@ void save_btree(BTREE* btree)
     rewind(outlet);
     fprintf(outlet, "%s\n", btree->name);
 
-    while (bnode != NULL)
+    while (node != NULL)
     {
-        key   = (bnode->data)->key;
-        value = (bnode->data)->value;
+        key   = get_key(node);
+        value = get_value(node);
         if (key != NULL)
             fprintf(outlet, "NODE|%s:%s\n", key, value);
-        inc(bnode);
+        inc(node);
     }
 
     inc(page);
-    while (page)
+    while (page != NULL)
     {
         key = page->info;
         fprintf(outlet, "PAGE|%s\n", key);
@@ -333,4 +352,32 @@ void save_btree(BTREE* btree)
 
     fflush(outlet);
     fclose(outlet);
+}
+
+void write_btree(BTREE* btree)
+{
+    BTND* node   = btree->node;
+    LIST* page   = btree->page;
+    char* key    = NULL;
+    char* value  = NULL;
+
+    fprintf(stdout, "%s\n", btree->name);
+
+    inc(node);
+    while (node != NULL)
+    {
+        key   = get_key(node);
+        value = get_value(node);
+        if (key != NULL)
+            fprintf(stdout, "NODE|%s:%s\n", key, value);
+        inc(node);
+    }
+
+    inc(page);
+    while (page != NULL)
+    {
+        key = page->info;
+        fprintf(stdout, "PAGE|%s\n", key);
+        inc(page);
+    }
 }

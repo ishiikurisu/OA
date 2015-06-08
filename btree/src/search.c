@@ -1,9 +1,26 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "database.h"
+#include "string.h"
+#include "list.h"
+#include "coseq.h"
 #include "btree.h"
 
-main()
+int main(int argc, char* argv[])
 {
+    BT* btree = load_btree(argv[1]);
+    char* line;
+    char* key;
+    char* value;
+    int i;
 
+    while ((key = read_from_file(stdin)) != NULL)
+    {
+        value = search_btree(btree, key);
+        if (value != NULL)
+            printf("%s => %s\n", key, value);
+        else
+            printf("%s NOT FOUND\n", key);
+    }
+
+    return 0;
 }
