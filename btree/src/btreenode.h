@@ -349,6 +349,7 @@ void save_btree(BTREE* btree)
     rewind(outlet);
     fprintf(outlet, "%s\n", btree->name);
 
+    inc(node);
     while (node != NULL)
     {
         key   = get_key(node);
@@ -358,6 +359,7 @@ void save_btree(BTREE* btree)
         inc(node);
     }
 
+    inc(page);
     while (page != NULL)
     {
         key = page->info;

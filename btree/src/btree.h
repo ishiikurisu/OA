@@ -99,15 +99,14 @@ int overflow(BTREE* btree)
         return 0;
 }
 
-BTREE* update(BTREE* btree, BTREE* smaller, BTREE* bigger)
+BTREE* create_new_root(BTREE* smaller, BTREE* bigger)
 {
-    BTREE* replacement = create_btree(btree->name);
+    BTREE* replacement = create_btree(STD_NAME);
 
     replacement = add_bnode_to_btree(replacement, last_node(smaller->node));
     replacement = add_bnode_to_btree(replacement, last_node(bigger->node));
     replacement = add_page_to_btree(replacement, smaller->name);
     replacement = add_page_to_btree(replacement, bigger->name);
-    save_btree(replacement);
 
     return replacement;
 }
@@ -117,18 +116,22 @@ BTREE* divide_and_promote(BTREE* root, BTREE* to_divide)
     divided* siblings = divide(to_divide);
     BTREE*   parent   = get_btree_parent(root, to_divide);
     BTREE*   sibling  = NULL;
+    BTND*    node     = NULL;
 
     if (parent == NULL) {
-        root = update(root, siblings->smaller, siblings->bigger);
+        root = create_new_root(siblings->smaller, siblings->bigger);
+        save_btree(root);
     }
     else {
         sibling = siblings->smaller;
-        promote(root, parent, last_node(sibling->node));
-        parent = add_bnode_to_btree_in_order(parent, last_node(sibling->node));
-        if (overflow(parent))
-            root = divide_and_promote(root, parent);
-        sibling = siblings->bigger;
-        parent = add_bnode_to_btree_in_order(parent, last_node(sibling->node));
+        node    = last_node(sibling->node);
+
+        if (contains_node(parent, node)) {
+            sibling = siblings->bigger;
+            node = last_node(sibling->node);
+        }
+
+        parent = add_bnode_to_btree_in_order(parent, node);
         if (overflow(parent))
             root = divide_and_promote(root, parent);
     }
@@ -139,9 +142,12 @@ BTREE* divide_and_promote(BTREE* root, BTREE* to_divide)
 BTREE* promote(BTREE* root, BTREE* btree, BTND* bnode)
 {
     btree = add_bnode_to_btree_in_order(btree, bnode);
-    if (overflow(btree))
+    if (overflow(btree)) {
+        printf("overflowing...\n");
         root = divide_and_promote(root, btree);
+    }
 
+    save_btree(root);
     return root;
 }
 
@@ -153,8 +159,6 @@ BTREE* insert(BTREE* root, BTND* bnode)
         return root;
 
     root = promote(root, btree, bnode);
-    write_btree(btree);
-    save_btree(btree);
     return root;
 }
 
