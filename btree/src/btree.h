@@ -1,6 +1,7 @@
 #pragma once
 #include "btreenode.h"
 #define PAGE_SIZE (4)
+#define STD_NAME ("root")
 
 int is_leaf(BTREE* btree)
 {
@@ -63,10 +64,11 @@ divided* divide(BTREE* btree)
     LIST*    page    = btree->page;
     BTREE*   smaller = new_btree();
     BTREE*   bigger  = new_btree();
+    char*    path    = NULL;
     int added = 0;
 
     inc(node);
-    for (added = 0; added < PAGE_SIZE / 2; ++added, inc(node))
+    for (added = 0; added < PAGE_SIZE / 2; added++, inc(node))
     {
         smaller = add_bnode_to_btree(smaller, node);
         smaller = add_page_to_btree(smaller, get_from_list(page, added));
@@ -74,10 +76,10 @@ divided* divide(BTREE* btree)
     }
     save_btree(smaller);
 
-    for (NULL; node != NULL; inc(node), ++added)
+    for (NULL; node != NULL; inc(node), added++)
     {
         bigger = add_bnode_to_btree(bigger, node);
-        smaller = add_page_to_btree(smaller, get_from_list(page, added));
+        bigger = add_page_to_btree(bigger, get_from_list(page, added));
         bigger->name = get_key(node);
     }
     save_btree(bigger);
@@ -85,20 +87,6 @@ divided* divide(BTREE* btree)
     result->smaller = smaller;
     result->bigger = bigger;
     return result;
-}
-
-BTND* promote(BTREE* btree)
-{
-    BTND* node = btree->node;
-    BTND* to_promote = node;
-
-    while (node->next != NULL)
-    {
-        inc(node);
-        to_promote = node;
-    }
-
-    return to_promote;
 }
 
 int overflow(BTREE* btree)
@@ -113,20 +101,18 @@ int overflow(BTREE* btree)
 
 BTREE* update(BTREE* btree, BTREE* smaller, BTREE* bigger)
 {
-    BTREE* new_btree;
+    BTREE* replacement = create_btree(btree->name);
 
-    if (btree == NULL)
-        new_btree = create_btree("root");
-    else
-        new_btree = create_btree(btree->name);
+    printf("old parent:\n");
+    write_btree(btree);
 
-    new_btree = add_bnode_to_btree(new_btree, last_node(smaller->node));
-    new_btree = add_bnode_to_btree(new_btree, last_node(bigger->node));
-    new_btree = add_page_to_btree(new_btree, smaller->name);
-    new_btree = add_page_to_btree(new_btree, bigger->name);
-    save_btree(new_btree);
+    replacement = add_bnode_to_btree(replacement, last_node(smaller->node));
+    replacement = add_bnode_to_btree(replacement, last_node(bigger->node));
+    replacement = add_page_to_btree(replacement, smaller->name);
+    replacement = add_page_to_btree(replacement, bigger->name);
+    save_btree(replacement);
 
-    return new_btree;
+    return replacement;
 }
 
 BTREE* divide_and_promote(BTREE* root, BTREE* to_divide)
@@ -136,7 +122,6 @@ BTREE* divide_and_promote(BTREE* root, BTREE* to_divide)
 
     if (parent == NULL) {
         root = update(root, siblings->smaller, siblings->bigger);
-        parent = root;
     }
     else {
         parent = update(parent, siblings->smaller, siblings->bigger);
@@ -157,13 +142,9 @@ BTREE* insert(BTREE* root, BTND* bnode)
         btree = root;
     }
 
+    write_btree(btree);
     save_btree(btree);
     return root;
-}
-
-BTREE* insert_to_btree(BTREE* bt, char* k, char* v)
-{
-    return insert(bt, create_node(k, v));
 }
 
 char* get_from_btree(BTREE* root, BTND* query)
@@ -173,7 +154,6 @@ char* get_from_btree(BTREE* root, BTND* query)
 
     if (root == NULL)
         return NULL;
-
 
     if (contains_node(root, query)) {
         return get_value_from_key(root->node, get_key(query));

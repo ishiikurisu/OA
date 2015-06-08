@@ -1,4 +1,5 @@
 #pragma once
+#define STD_NAME ("root")
 
 typedef struct {
     char* key;
@@ -182,6 +183,14 @@ BTREE* create_btree(char* name)
     return btree;
 }
 
+int is_std_name(char* name)
+{
+    if (compare(name, STD_NAME) == EQUAL)
+        return 1;
+    else
+        return 0;
+}
+
 BTREE* add_bnode_to_btree_in_order(BTREE* btree, BTND* bnode)
 {
     BTND* last = btree->node;
@@ -205,6 +214,8 @@ BTREE* add_bnode_to_btree_in_order(BTREE* btree, BTND* bnode)
         node = last_node(btree->node);
         node->next = bnode;
         bnode->next = NULL;
+        if (!is_std_name(btree->name))
+            btree->name = key;
     }
 
     return btree;
@@ -217,7 +228,10 @@ BTREE* add_bnode_to_btree(BTREE* btree, BTND* bnode)
     char* value = get_value(bnode);
 
     node = add_btnode(node, key, value);
-    btree->node = node;
+    if (!is_std_name(btree->name)) {
+        printf("%s is not standard\n", btree->name);
+        btree->name = key;
+    }
 
     return btree;
 }
@@ -315,6 +329,7 @@ BTREE* load_btree(char* path)
             key   = get_from_list(data, 0);
             value = get_from_list(data, 1);
             btree = add_node_to_btree(btree, key, value);
+            btree->name = key;
         }
     }
 
@@ -342,11 +357,11 @@ void save_btree(BTREE* btree)
         inc(node);
     }
 
-    inc(page);
     while (page != NULL)
     {
         key = page->info;
-        fprintf(outlet, "PAGE|%s\n", key);
+        if (key != NULL)
+            fprintf(outlet, "PAGE|%s\n", key);
         inc(page);
     }
 

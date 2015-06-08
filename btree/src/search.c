@@ -3,6 +3,7 @@
 #include "string.h"
 #include "list.h"
 #include "coseq.h"
+#include "database.h"
 #include "btree.h"
 
 int main(int argc, char* argv[])
@@ -15,6 +16,9 @@ int main(int argc, char* argv[])
 
     while ((key = read_from_file(stdin)) != NULL)
     {
+        if (compare(key, "exit") == EQUAL)
+            break;
+
         value = search_btree(btree, key);
         if (value != NULL)
             printf("%s => %s\n", key, value);

@@ -1,14 +1,14 @@
 # string
 
 Definitions
-===========
+-----------
 
 + int BIGGER  = +1
 + int SMALLER = -1
 + int EQUAL   = 0
 
 Methods
-=======
+-------
 
 + int strlen(char*)
 + char* concat(char*, char*)
@@ -21,13 +21,13 @@ Methods
 # list
 
 Definitions
-===========
+-----------
 
 + struct NODE
 + LIST
 
 Methods
-=======
+-------
 
 + LIST* new_list()
 + LIST* tail(LIST*)
@@ -59,31 +59,61 @@ Methods
 # btreenode
 
 Definitions
-===========
+-----------
 
 + typedef INDEX_NODE INND
 + typedef BTREE_NODE BTND
++ define PAGE_TYPE
++ define NODE_TYPE
 + typedef BTREE BT
 
 Methods
-=======
+-------
 
 + INND* new_index_node()
 + BTND* new_btnode()
++ BTND* last_node(BTND*)
++ BTND* crate_node(char*,char*)
++ BTND* add_btnode(BTND*,char*,char*)
++ BTND* add_to_btnode_at_index(BTND*,char*,char*,int)
++ char* get_key(BTND*)
++ char* get_value(BTND*)
++ char* get_value_from_key(BTND*,char*)
++ int number_bnodes(BTND*)
++ INND* remove_from_btnode(BTND*,int)
++ BTREE* new_btree()
++ BTREE* create_btree(char*)
++ BTREE* add_bnode_to_btree_in_order(BTREE*,BTND*)
++ BTREE* add_bnode_to_btree(BTREE*,BTND*)
++ BTREE* add_node_to_btree(BTREE*,char*,char*)
++ BTREE* add_page_to_btree(BTREE*,char*)
++ bool contains_node(BTREE*,BTND*)
++ int find_place_to_fit(NTREE*,BTND*)
++ BTREE* load_btree(char*)
++ void save_btree(BTREE*)
++ void write_btree(BTREE*)
 
 # btree
 
+Definitions
+-----------
+
++ define PAGE_SIZE
++ struct __divided__
+
 Methods
-=======
+-------
 
-+ BTREE* create_new_page(BTREE*, BTND*)
-+ int is_leaf(BTREE*)
-+ BTREE* get_sibling(char*)
-+ BTREE* get_leaf(BTREE* parent, BTND* node)
-+ int fit_in_btree(BTREE*)
-+ BTREE* insert_in_btree(BTREE*, BTND*)
-
-# divide and promote
-
-To be written yet. Inserting in tree is still a bit too complicated; gotta
-improve it a lot.
++ bool is_leaf(BTREE*)
++ BTREE* get_leaf(BTREE*,BTND*)
++ BTREE* get_node_parent(BTREE*,BTND*)
++ BTREE* get_btree_parent(BTREE*,BTREE*)
++ divided* alloc_struct_divided()
++ divided* divide(BTREE*)
++ BTND* promote(BTREE*)
++ bool overflow(BTREE*)
++ BTREE* update(BTREE*,BTREE*,BTREE*)
++ BTREE* divide_and_promote(BTREE*,BTREE*)
++ BTREE* insert(BTREE*,BTND*)
++ char* get_from_btree(BTREE*,BTND*)
++ char* search_btree(BTREE*,char*)

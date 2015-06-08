@@ -4,7 +4,12 @@
 
 main(int argc, char* argv[])
 {
-    char* input  = argv[1];
-    char* output = argv[2];
+    char* input  = NULL;
+    char* output = NULL;
+
+    if (argc > 1)
+        input = argv[1];
+    if (argc > 2)
+        output = argv[2];
     to_index(input, output);
 }

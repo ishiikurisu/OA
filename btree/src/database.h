@@ -20,6 +20,11 @@ void to_index(char* input, char* output)
     FILE* outlet = fopen(output, "w");
     char* data   = NULL;
 
+    if (input == NULL)
+        inlet = stdin;
+    if (output == NULL)
+        outlet = stdout;
+
     while (!feof(inlet))
     {
         data = read_from_file(inlet);
@@ -27,6 +32,6 @@ void to_index(char* input, char* output)
             write_index_with_PRR(data, outlet);
     }
 
-    fclose(inlet);
-    fclose(outlet);
+    if (input) fclose(inlet);
+    if (output) fclose(outlet);
 }
