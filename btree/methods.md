@@ -41,7 +41,7 @@ Methods
 + LIST* sort_list(LIST*)
 + char* pop_from_list(LIST*)
 + void push_to_list(LIST*, char*)
-+ LIST* renove_from_list(LIST*, int)
++ LIST* remove_from_list(LIST*, int)
 + void free_list(LIST*)
 + LIST* split(char*, char)
 
@@ -73,7 +73,7 @@ Methods
 + INND* new_index_node()
 + BTND* new_btnode()
 + BTND* last_node(BTND*)
-+ BTND* crate_node(char*,char*)
++ BTND* create_node(char*,char*)
 + BTND* add_btnode(BTND*,char*,char*)
 + BTND* add_to_btnode_at_index(BTND*,char*,char*,int)
 + char* get_key(BTND*)

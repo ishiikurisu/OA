@@ -206,6 +206,9 @@ BTREE* add_bnode_to_btree_in_order(BTREE* btree, BTND* bnode)
             break;
         }
 
+        if (compare(key, get_key(node)) == EQUAL)
+            return btree;
+
         last = node;
         inc(node);
     }
@@ -228,10 +231,8 @@ BTREE* add_bnode_to_btree(BTREE* btree, BTND* bnode)
     char* value = get_value(bnode);
 
     node = add_btnode(node, key, value);
-    if (!is_std_name(btree->name)) {
-        printf("%s is not standard\n", btree->name);
+    if (!is_std_name(btree->name))
         btree->name = key;
-    }
 
     return btree;
 }

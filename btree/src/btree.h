@@ -103,9 +103,6 @@ BTREE* update(BTREE* btree, BTREE* smaller, BTREE* bigger)
 {
     BTREE* replacement = create_btree(btree->name);
 
-    printf("old parent:\n");
-    write_btree(btree);
-
     replacement = add_bnode_to_btree(replacement, last_node(smaller->node));
     replacement = add_bnode_to_btree(replacement, last_node(bigger->node));
     replacement = add_page_to_btree(replacement, smaller->name);
@@ -118,16 +115,32 @@ BTREE* update(BTREE* btree, BTREE* smaller, BTREE* bigger)
 BTREE* divide_and_promote(BTREE* root, BTREE* to_divide)
 {
     divided* siblings = divide(to_divide);
-    BTREE* parent = get_btree_parent(root, to_divide);
+    BTREE*   parent   = get_btree_parent(root, to_divide);
+    BTREE*   sibling  = NULL;
 
     if (parent == NULL) {
         root = update(root, siblings->smaller, siblings->bigger);
     }
     else {
-        parent = update(parent, siblings->smaller, siblings->bigger);
+        sibling = siblings->smaller;
+        promote(root, parent, last_node(sibling->node));
+        parent = add_bnode_to_btree_in_order(parent, last_node(sibling->node));
         if (overflow(parent))
-            divide_and_promote(root, parent);
+            root = divide_and_promote(root, parent);
+        sibling = siblings->bigger;
+        parent = add_bnode_to_btree_in_order(parent, last_node(sibling->node));
+        if (overflow(parent))
+            root = divide_and_promote(root, parent);
     }
+
+    return root;
+}
+
+BTREE* promote(BTREE* root, BTREE* btree, BTND* bnode)
+{
+    btree = add_bnode_to_btree_in_order(btree, bnode);
+    if (overflow(btree))
+        root = divide_and_promote(root, btree);
 
     return root;
 }
@@ -136,12 +149,10 @@ BTREE* insert(BTREE* root, BTND* bnode)
 {
     BTREE* btree = get_leaf(root, bnode);
 
-    btree = add_bnode_to_btree_in_order(btree, bnode);
-    if (overflow(btree)) {
-        root = divide_and_promote(root, btree);
-        btree = root;
-    }
+    if (contains_node(root, bnode))
+        return root;
 
+    root = promote(root, btree, bnode);
     write_btree(btree);
     save_btree(btree);
     return root;

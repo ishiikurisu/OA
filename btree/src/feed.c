@@ -15,7 +15,7 @@ BTND* read_node(char* line)
 
 int main(int argc, char* argv[])
 {
-    BT* btree = create_btree("root");
+    BT* btree = create_btree(STD_NAME);
     FILE* inlet = stdin;
     BTND* node;
     LIST* data;
@@ -33,6 +33,5 @@ int main(int argc, char* argv[])
         btree = insert(btree, node);
     }
 
-    printf("%s\n", btree->name);
     return 0;
 }
