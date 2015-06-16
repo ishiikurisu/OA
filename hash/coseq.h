@@ -23,6 +23,22 @@ char* read_from_file(FILE* fp)
     return output;
 }
 
+char* get_line(char* input, int line_number)
+{
+    FILE* inlet = fopen(input, "r");
+    char* line = NULL;
+    char* output = NULL;
+    int i = 0;
+
+    for (i = 0; i < line_number && !feof(inlet); ++i)
+        line = read_from_file(inlet);
+
+    if (i == line_number && !feof(inlet))
+        output = line;
+
+    return output;
+}
+
 LIST* read_whole_file(char* input_file)
 {
     FILE* fp   = fopen(input_file, "r");

@@ -47,16 +47,30 @@ char* find_in_pair(PAIR* head, char* to_find)
     char* outlet = NULL;
     int index = 0;
 
-    while ((pair != NULL) && (outlet < 0))
+    while ((pair != NULL) && (outlet == NULL))
     {
-        if (equals(to_find, pair->key))
+        if (compare(to_find, pair->key) == EQUAL)
             outlet = pair->value;
 
-        ++index;
         inc(pair);
     }
 
     return outlet;
+}
+
+void write_pair(PAIR* head)
+{
+    PAIR* pair = head->next;
+
+    if (pair != NULL) {
+        printf("%s", pair->key);
+        inc(pair);
+    }
+    while (pair != NULL)
+    {
+        printf("\t%s", pair->key);
+        inc(pair);
+    }
 }
 
 #endif
