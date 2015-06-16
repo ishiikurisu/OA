@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "string.h"
-#include "list.h"
-#include "coseq.h"
+#include "src/string.h"
+#include "src/list.h"
+#include "src/coseq.h"
 #include "hash.h"
 #include "hashfunctions.h"
 
@@ -21,11 +21,12 @@ char* search_database(FILE* inlet, char* query)
 
 int main(int argc, char** argv)
 {
-    hashmap* map = new_map(10, stupid);
+    HASH* map   = new_map(10, dumb);
     FILE* inlet = fopen(argv[2], "r");
-    char* line = NULL;
+    char* line  = NULL;
 
     map = feed_map(map, argv[1], ':');
+    /* write_map(map); */
 
     while ((line = read_from_file(stdin)) != NULL)
     {

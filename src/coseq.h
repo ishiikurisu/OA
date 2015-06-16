@@ -1,3 +1,6 @@
+#ifndef COSEQ_H
+#define COSEQ_H 0
+
 char* read_from_file(FILE* fp)
 {
     char* output = NULL;
@@ -18,6 +21,27 @@ char* read_from_file(FILE* fp)
     if (strlen(output) == 0) output = NULL;
 
     return output;
+}
+
+char* get_line_from_file(FILE* inlet, int line_number)
+{
+    char* line = NULL;
+    char* output = NULL;
+    int i = 0;
+
+    for (i = 0, rewind(inlet); i < line_number && !feof(inlet); ++i)
+        line = read_from_file(inlet);
+
+    if (i == line_number && !feof(inlet))
+        output = read_from_file(inlet);
+
+    return output;
+}
+
+char* get_line(char* input, int line_number)
+{
+    FILE* inlet = fopen(input, "r");
+    return get_line_from_file(inlet, line_number);
 }
 
 LIST* read_whole_file(char* input_file)
@@ -244,3 +268,5 @@ LIST* merge_on_RAM(LIST* list1, LIST* list2)
 
     return output;
 }
+
+#endif

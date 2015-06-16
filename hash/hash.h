@@ -1,8 +1,8 @@
 #ifndef HASH_H
 #define HASH_H 0
 
-#include "string.h"
-#include "pair.h"
+#include "src/string.h"
+#include "src/pair.h"
 
 typedef struct {
     int size;
@@ -10,6 +10,8 @@ typedef struct {
     int (*func)(char*);
     int (*hash)(char*);
 } hashmap;
+
+typedef hashmap HASH;
 
 hashmap* new_map(int size, int (*hash)(char*))
 {
