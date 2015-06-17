@@ -1,3 +1,6 @@
+#ifndef JOE_STRING_H
+#define JOE_STRING_H 0
+
 int strlen(char* s)
 {
     int i = 0;
@@ -28,6 +31,20 @@ char* to_array(char ch)
     out[0] = ch;
     out[1] = '\0';
     return out;
+}
+
+char* int_to_string(int input)
+{
+    int size = 1;
+    char* output = NULL;
+
+    while ((input / (10 * size)) != 0)
+        ++size;
+
+    output = (char*) malloc(sizeof(char) * (1 + size));
+    sprintf(output, "%d", input);
+
+    return output;
 }
 
 char* substring(char* string, int start, int end)
@@ -92,3 +109,5 @@ int compare(char* s, char* t)
 
 char last_char(char* string)
 { return string[strlen(string) - 1]; }
+
+#endif

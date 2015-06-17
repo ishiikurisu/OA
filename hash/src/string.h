@@ -33,6 +33,20 @@ char* to_array(char ch)
     return out;
 }
 
+char* int_to_string(int input)
+{
+    int size = 1;
+    char* output = NULL;
+
+    while ((input / (10 * size)) != 0)
+        ++size;
+
+    output = (char*) malloc(sizeof(char) * (1 + size));
+    sprintf(output, "%d", input);
+
+    return output;
+}
+
 char* substring(char* string, int start, int end)
 {
     int i;

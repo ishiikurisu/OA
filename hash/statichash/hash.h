@@ -1,8 +1,7 @@
 #ifndef HASH_H
 #define HASH_H 0
 
-#include "src/string.h"
-#include "src/pair.h"
+/* please include the pair.h header*/
 
 typedef struct {
     int size;

@@ -3,8 +3,9 @@
 #include "src/string.h"
 #include "src/list.h"
 #include "src/coseq.h"
-#include "hash.h"
-#include "hashfunctions.h"
+#include "src/pair.h"
+#include "statichash/hash.h"
+#include "src/hashfunctions.h"
 
 char* search_database(FILE* inlet, char* query)
 {
