@@ -16,11 +16,11 @@ char* read()
     return read_from_file(stdin);
 }
 
-char* get_option(hashmap* map)
+char* get_option(bucketmap* bucket)
 {
     char* message = "";
     char* key = read();
-    char* value = get_from_map(map, key);
+    char* value = get_from_bucket(bucket, key);
 
     message = concat(message, key);
     message = concat(message, ": ");
@@ -29,7 +29,7 @@ char* get_option(hashmap* map)
     return message;
 }
 
-char* add_option(hashmap* map)
+char* add_option(bucketmap* bucket)
 {
     char* input = read();
     char* output = "added ";
@@ -37,34 +37,34 @@ char* add_option(hashmap* map)
     char* key = get_from_list(data, 0);
     char* value = get_from_list(data, 1);
 
-    map = put_in_map(map, key, value);
+    bucket = add_to_bucket(bucket, key, value);
     output = concat(output, key);
 
     return output;
 }
 
-char* del_option(hashmap* map)
+char* del_option(bucketmap* bucket)
 {
     char* input = read();
     char* output = concat(input, " returned ");
 
-    return concat(output, remove_key(map, input));
+    return concat(output, remove_from_bucket(bucket, input));
 }
 
 int main(int argc, char** argv)
 {
-    hashmap* map = new_map(10, dumb);
+    bucketmap* bucket = new_bucket(10, dumb, NULL);
     char* line  = read();
-    map = feed_map(map, argv[1], ':');
 
+    bucket = bucketify_file(argv[1], bucket, ':');
     for ( ; ; )
     {
         if (compare(line, GET_OPTION) == EQUAL)
-            line = get_option(map);
+            line = get_option(bucket);
         else if (compare(line, ADD_OPTION) == EQUAL)
-            line = add_option(map);
+            line = add_option(bucket);
         else if (compare(line, DEL_OPTION) == EQUAL)
-            line = del_option(map);
+            line = del_option(bucket);
         else if (compare(line, QUIT_OPTION) == EQUAL)
             break;
         else
