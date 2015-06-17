@@ -105,4 +105,9 @@ char* get_from_bucket(bucketmap* bucket, char* to_find)
     return value;
 }
 
+void remove_from_bucket()
+{
+
+}
+
 #endif

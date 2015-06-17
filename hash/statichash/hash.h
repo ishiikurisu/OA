@@ -93,4 +93,10 @@ hashmap* feed_map(hashmap* map, char* input, char sep)
     return map;
 }
 
+char* remove_key(hashmap* map, char* key)
+{
+    int index = get_address(map, key);
+    return delete_pair(map->data[index], key);
+}
+
 #endif

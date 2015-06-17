@@ -73,4 +73,31 @@ void write_pair(PAIR* head)
     }
 }
 
+char* delete_pair(PAIR* head, char* to_find)
+{
+    PAIR* list  = head;
+    PAIR* del   = NULL;
+    char* key   = NULL;
+    char* value = NULL;
+
+    while (list->next != NULL)
+    {
+        key = (list->next)->key;
+
+        if (compare(to_find, key) == EQUAL)
+            break;
+
+        inc(list);
+    }
+
+    if (list->next != NULL) {
+        del = list->next;
+        list->next = del->next;
+        value = del->value;
+        free(del);
+    }
+
+    return value;
+}
+
 #endif
