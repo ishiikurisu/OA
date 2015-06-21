@@ -78,5 +78,6 @@ int main(int argc, char** argv)
         line = read();
     }
 
+    save_bucket(bucket, "new_index.txt");
     return 0;
 }

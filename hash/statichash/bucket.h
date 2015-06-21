@@ -156,4 +156,26 @@ char* remove_from_bucket(bucketmap* bucket, char* to_remove)
     return out;
 }
 
+void save_bucket(bucketmap* bucket, char* output)
+{
+    FILE* outlet = fopen(output, "w");
+    FILE* inlet = NULL;
+    char* input = NULL;
+    LIST* data = NULL;
+    hashmap* map = bucket->hash;
+    int limit = map->size;
+    int index = 0;
+
+    for (index = 0; index < limit; ++index)
+    {
+        input = get_path_to_index(bucket, index);
+        data = read_whole_file(input);
+        for (inc(data); data != NULL; inc(data))
+            fprintf(outlet, "%s\n", data->info);
+        fclose(inlet);
+    }
+
+    fclose(outlet);
+}
+
 #endif
