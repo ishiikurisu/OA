@@ -25,12 +25,19 @@ char* concat(char* string, char* to_add)
     return new_str;
 }
 
+#define cat(A,B) ((A)=concat((A), (B)))
+
 char* to_array(char ch)
 {
     char* out = (char*) malloc(sizeof(char) * 2);
     out[0] = ch;
     out[1] = '\0';
     return out;
+}
+
+char* ctos(char ch)
+{
+    return to_array(ch);
 }
 
 char* int_to_string(int input)
@@ -46,6 +53,11 @@ char* int_to_string(int input)
 
     return output;
 }
+char* itos(int number)
+{
+    return int_to_string(number);
+}
+
 
 char* substring(char* string, int start, int end)
 {
@@ -77,6 +89,7 @@ int equals(char* s1, char* s2)
 #define BIGGER  (+1)
 #define SMALLER (-1)
 #define EQUAL   (0)
+#define EQUALS  (EQUAL)
 
 int compare(char* s, char* t)
 {
