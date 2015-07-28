@@ -1,6 +1,5 @@
 #ifndef HASH_H
 #define HASH_H 0
-
 #include <stdlib.h>
 #include <stdio.h>
 /* please include the list.h header */
@@ -44,6 +43,7 @@ DICT* put_in_map(DICT* map, char* key, char* value)
 }
 DICT* map_put(DICT* m, char* k, char* v){ return put_in_map(m, k, v); }
 DICT* map_add(DICT* m, char* k, char* v){ return put_in_map(m, k, v); }
+#define put(M,K,V) (M=put_in_map((M),(K),(V)))
 
 char* get_from_map(DICT* map, char* key)
 {
@@ -51,6 +51,7 @@ char* get_from_map(DICT* map, char* key)
     return pair_find(map->data[get_address(map, key)], key);
 }
 char* map_get(DICT* m, char* k) { return get_from_map(m, k); }
+#define get(M,O) (get_from_map((M),(O)))
 
 int map_contains_key(DICT* map, char* key)
 {

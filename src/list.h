@@ -1,5 +1,5 @@
 #ifndef LIST_H
-#define LIST_H
+#define LIST_H 0
 #define inc(A) ((A) = (A)->next)
 #include <stdlib.h>
 #include <stdio.h>
