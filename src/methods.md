@@ -63,7 +63,7 @@ Maps:
 
 + put
 
-Cosequantial list processing
+Cosequential list processing
 ============================
 
 Can be added by the `coseq.h` header. 
