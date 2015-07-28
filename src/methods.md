@@ -37,16 +37,16 @@ Every function in those headers use the following convention:
 
 ## Specific to every type
 
-+ Lists
-  - add_at
-  - pop
-  - push
-  - sort
-  - split(char*, char)
-  - associate
-  - strsplit
+``` yaml
+Lists:
+- add_at
+- pop
+- push
+- sort
+- split(char*, char)
+- associate
+- strsplit
+```
 
 + Maps
   - put
-
-Under construction. 	

@@ -1,6 +1,8 @@
 #ifndef HASH_H
 #define HASH_H 0
 
+#include <stdlib.h>
+#include <stdio.h>
 /* please include the list.h header */
 
 typedef struct {

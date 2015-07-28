@@ -1,4 +1,6 @@
 #ifndef JOE_STRING_H
+#include <stdlib.h>
+#include <stdio.h>
 #define JOE_STRING_H 0
 
 int strlen(char* s)
