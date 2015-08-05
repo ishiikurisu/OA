@@ -1,4 +1,4 @@
-This folder contains the headers in the C language made
+This folder contains the headers in C language made
 during this course.
 
 String
