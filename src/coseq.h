@@ -1,8 +1,5 @@
 #ifndef COSEQ_H
 #define COSEQ_H 0
-#include <stdio.h>
-#include <stdlib.h>
-/* please include the oa's version of string.h */
 
 char* read_from_file(FILE* fp)
 {

@@ -1,6 +1,5 @@
 #include <math.h>
 #include <limits.h>
-#include <string.h>
 
 int stupid(char* input)
 {

@@ -1,8 +1,7 @@
 #ifndef LIST_H
-#define LIST_H 0
+#define LIST_H
+
 #define inc(A) ((A) = (A)->next)
-#include <stdlib.h>
-#include <stdio.h>
 
 typedef struct NODE
 {

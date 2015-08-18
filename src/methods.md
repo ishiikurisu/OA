@@ -1,39 +1,28 @@
-This folder contains the headers in C language made
-during this course.
+# String
 
-String
-======
++ int strlen(char*)
++ char* concat(char*, char*)
++ char* ctos(char)
++ char* itos(int)
++ char* substr(char*, int, int)
++ int compare(char*, char*)
++ char last_char(char*)
++ char* tidy_string(char*)
++ char** strsplit(char*,char) -- under construction
 
-``` C
-int strlen(char*);
-char* concat(char*, char*);
-char* ctos(char);
-char* itos(int);
-char* substr(char*, int, int);
-int compare(char*, char*);
-char last_char(char*);
-char* tidy_string(char*);
-char** strsplit(char*,char); /* under construction */
-```
-
-Linked data structures
-======================
+# Linked data types
 
 Every function in those headers use the following convention:
 
     type_method(obj, args...)
 
-Available DSs
--------------
+## Available LDTs
 
 + Lists
 + Maps
 + Sets -- under construction
 
-Methods
--------
-
-Those methods are common to every data structure:
+## Methods
 
 + new
 + length
@@ -47,27 +36,24 @@ Those methods are common to every data structure:
 + remove
 + free
 
-Specific to every type
-----------------------
+## Specific to every type
 
-Lists:
++ Lists
+  - add_at
+  - pop
+  - push
+  - sort
+  - split(char*, char)
+  - associate
+  - strsplit
 
-+ add_at
-+ pop
-+ push
-+ sort
-+ split(char*, char)
-+ associate
-+ strsplit
-
-Maps:
-
-+ put
++ Maps
+  - put
 
 Cosequential list processing
 ============================
 
-Can be added by the `coseq.h` header. 
+Can be added by the `coseq.h` header.
 
 Methods
 -------
