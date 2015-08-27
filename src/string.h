@@ -1,32 +1,48 @@
 #ifndef JOE_STRING_H
 #define JOE_STRING_H 0
 #include <stdbool.h>
-
-int strlen(char* s)
-{
-    int i = 0;
-    if (s) while (s[i]) ++i;
-    return i;
-}
+#include <string.h>
 
 char* concat(char* string, char* to_add)
 {
-    char* new_str;
+    char* new_str = NULL;
+    char *s = NULL;
     int len;
-    int i, j;
+    int j;
 
     len = strlen(string) + strlen(to_add);
     new_str = (char*) malloc(sizeof(char) * (len + 1));
 
-    for (i = 0, j = 0; i < strlen(string); ++i, ++j)
-        new_str[j] = string[i];
-    for (i = 0; i <= strlen(to_add); ++i, ++j)
-        new_str[j] = to_add[i];
+    for (s = string, j = 0; *s; ++s, ++j)
+        new_str[j] = *s;
+    for (s = to_add; *s; ++s, ++j)
+        new_str[j] = *s;
 
     return new_str;
 }
 
-#define cat(A,B) ((A)=concat((A), (B)))
+char* new_concat(char* to_hold, char* to_add)
+{
+    int l1 = strlen(to_hold);
+    int l2 = strlen(to_add);
+    int len = l1 + l2;
+    char* new_str = malloc(sizeof(char) * (len + 1));
+
+    memcpy(new_str, to_hold, l1);
+    memcpy(new_str + l1, to_add, l2);
+
+    new_str[len] = '\0';
+    return new_str;
+}
+
+char *CAT_MACRO(char *to_hold, char *to_add)
+{
+    char *outlet = new_concat(to_hold, to_add);
+    free(to_hold); free(to_add);
+    return outlet;
+}
+
+#define cat(A,B) ((A)=CAT_MACRO((A), (B)))
 
 char* to_array(char ch)
 {
