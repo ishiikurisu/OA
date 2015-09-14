@@ -6,7 +6,7 @@ char *query_output(int argc, char **argv)
     char *output = argv[1];
 
     if (argc == 2)
-        cat(output, ".lz78");
+        ape(output, ".lz78");
     else
         output = argv[2];
 

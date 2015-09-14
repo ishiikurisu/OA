@@ -7,3 +7,4 @@
 #include "./coseq.h"
 #include "./dict.h"
 #include "./hashfunctions.h"
+#include "./buffer.h"

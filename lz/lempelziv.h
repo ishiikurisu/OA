@@ -1,4 +1,5 @@
 #pragma once
+#include <stdlib.h>
 #include <oa.h>
 
 /****************
@@ -7,22 +8,32 @@
 
 char *fill(BUFFER *inlet, LIST *windows)
 {
-    return NULL;
+    char *view = string_new();
+
+    do {cat(view, ctos(buffer_read(inlet))); }
+    while (list_contains(windows, view));
+
+    return view;
 }
 
-int find_prefix(LIST *windows, char *view)
+int find_prefix(LIST* windows, char* view)
 {
-    return 0;
-}
+    char* to_find = NULL;
+    int index = -1;
 
-char last_char(char *view)
-{
-    return '\0';
+    if (view != NULL)
+    {
+        to_find = substring(view, 0, strlen(view) - 1);
+        index = list_find(windows, to_find);
+    }
+
+    return index + 1;
 }
 
 void write_node(BUFFER *out, int index, char last)
 {
-
+    fwrite(&index, sizeof(int), 1, out->stream);
+    fwrite(&last, sizeof(char), 1, out->stream);
 }
 
 /*
@@ -47,18 +58,18 @@ void LZ78(char *input, char *output)
 {
     BUFFER *inlet = buffer_new(input, "r", 256);
     BUFFER *outlet = buffer_new(output, "w", 256);
-    char* view = string_new();
+    char* view = NULL;
     LIST* windows = list_new();
 
     view = fill(inlet, windows);
-    while (buffer_is_available(inlet))
+    while (!buffer_feof(inlet))
     {
-
         write_node(outlet,
                    find_prefix(windows, view),
                    last_char(view));
         push(windows, view);
-        view  = fill(inlet, windows);
+        free(view);
+        view = fill(inlet, windows);
     }
 
     free(view);
