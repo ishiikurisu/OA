@@ -1,5 +1,5 @@
 #include <iostream>
-#include "criador-indices.hpp"
+#include "criador-indices-primario.hpp"
 
 std::string pedir_listas()
 {
@@ -13,11 +13,18 @@ std::string pedir_listas()
 
 void setup()
 {
-	CriadorIndices ci;
+	CriadorIndicesPrimario cip;
+	CriadorIndicesSecundario cis;
+	std::string nome_lista;
 	// OrdenadorIndices oi;
 
-	ci.gerar_indices(pedir_listas());
-	ci.gerar_indices(pedir_listas());
+	nome_lista = pedir_listas();
+	cip.gerar_indices(nome_lista);
+	cis.gerar_indices(nome_lista);
+
+	nome_lista = pedir_listas();
+	cip.gerar_indices(nome_lista);
+	cis.gerar_indices(nome_lista);
 	// oi.ordenar_indices(ci.gerar_indices(pedir_listas()));
 	// oi.ordenar_indices(ci.gerar_indices(pedir_listas()));
 }
