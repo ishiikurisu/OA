@@ -41,6 +41,13 @@ std::string CriadorIndicesPrimario::gerar_chave(std::string linha)
 	{
 		saida+=linha[count];
 	}
+
+	saida += " ";
+	for (count = 52; count < 52+8; ++count)
+	{
+		saida += linha[count];
+	}
+
 	std::cout << saida << std::endl;
 	return saida;
 }

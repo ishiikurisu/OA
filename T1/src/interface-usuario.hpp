@@ -1,6 +1,10 @@
 #include <iostream>
+#include <criador-indices-primario.hpp>
+#include <criador-indices-secundario.hpp>
+#include <ordenador-indices.hpp>
 #ifdef _WIN32
-#define clear() system("cls")
+// #define clear() system("cls")
+#define clear() NULL
 #else
 #define clear() system("clear")
 #endif
@@ -11,6 +15,7 @@ public:
 	InterfaceUsuario();
 	std::string pedir_listas(void);
 	bool escolher_opcao(void);
+	void setup();
 };
 
 InterfaceUsuario::InterfaceUsuario()
@@ -59,4 +64,19 @@ bool InterfaceUsuario::escolher_opcao()
 	}
 
 	return permanecer;
+}
+
+void InterfaceUsuario::setup()
+{
+	CriadorIndicesPrimario cip;
+	CriadorIndicesSecundario cis;
+	OrdenadorIndices oi;
+	std::string nome_lista;
+
+	for (int i = 0; i < 2; ++i)
+	{
+		nome_lista = pedir_listas();
+		oi.ordenar(cip.gerar_indices(nome_lista));
+		cis.gerar_indices(nome_lista);
+	}
 }
