@@ -1,15 +1,9 @@
-#include <iostream>
-#include "criador-indices-primario.hpp"
+#include <criador-indices-primario.hpp>
+#include <criador-indices-secundario.hpp>
+#include <interface-usuario.hpp>
 
-std::string pedir_listas()
-{
-	std::string nome;
-
-	std::cout << "Escreva o nome do arquivo: ";
-	std::getline(std::cin, nome);
-
-	return nome;
-}
+bool APP_ON = true;
+InterfaceUsuario interface;
 
 void setup()
 {
@@ -18,22 +12,26 @@ void setup()
 	std::string nome_lista;
 	// OrdenadorIndices oi;
 
-	nome_lista = pedir_listas();
+	nome_lista = interface.pedir_listas();
 	cip.gerar_indices(nome_lista);
 	cis.gerar_indices(nome_lista);
 
-	nome_lista = pedir_listas();
+	nome_lista = interface.pedir_listas();
 	cip.gerar_indices(nome_lista);
 	cis.gerar_indices(nome_lista);
 	// oi.ordenar_indices(ci.gerar_indices(pedir_listas()));
 	// oi.ordenar_indices(ci.gerar_indices(pedir_listas()));
 }
 
+void loop()
+{
+	APP_ON = interface.escolher_opcao();
+}
+
 int main(int argc, char const *argv[]) {
 	setup();
-	/*
-	while (true)
+	while (APP_ON)
 		loop();
-	*/
+
 	return 0;
 }

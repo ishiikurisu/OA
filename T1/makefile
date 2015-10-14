@@ -1,4 +1,5 @@
 options = -lm -O3 -ansi -Wall
+addpath = -I"src"
 
-main: main.cpp criador-indices-primario.hpp
-	g++ main.cpp -o main.exe $(options)
+main: src/main.cpp
+	g++ src/main.cpp -o main.exe $(options) $(addpath)

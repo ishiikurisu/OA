@@ -59,7 +59,7 @@ std::string CriadorIndicesPrimario::gerar_indices(std::string endereco)
 	std::getline(inlet, linha);
 	for (size_t cont = 1; linha.length() > 1; ++cont, std::getline(inlet, linha))
 	{
-		outlet << gerar_chave(linha) << " " << cont << std::endl;
+		outlet << gerar_chave(linha) << std::endl;
 	}
 
 	inlet.close();

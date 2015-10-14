@@ -50,7 +50,7 @@ std::string CriadorIndicesSecundario::gerar_indices(std::string endereco)
 	std::fstream outlet;  //arquivos de indices secundarios
 
 	inlet.open(endereco.c_str(), std::fstream::in);
-	prima.open(saida.c_str(), std::fstream::out);
+	outlet.open(saida.c_str(), std::fstream::out);
 
 	/* gerar índice primário */
 	std::getline(inlet, linha);
