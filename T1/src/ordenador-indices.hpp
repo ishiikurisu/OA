@@ -8,9 +8,11 @@
 class OrdenadorIndices{
 	std::vector<std::string> preencher_do_arquivo(std::string);
 	void escrever_para_arquivo(std::string, std::vector<std::string>);
+	bool comparar(std::string, std::string);
 public:
-	OrdenadorIndices (void){};
-	void ordenar (std::string);
+	OrdenadorIndices(void) {};
+	void ordernar_roubando(std::string);
+	void ordenar(std::string);
 };
 
 /*
@@ -41,12 +43,24 @@ void OrdenadorIndices::escrever_para_arquivo(std::string path, std::vector<std::
 	outlet.close();
 }
 
+bool OrdenadorIndices::comparar(std::string s, std::string t)
+{
+	return (s.compare(t) > 0);
+}
+
 /*
 * FUNCOES PUBLICAS
 */
-void OrdenadorIndices::ordenar (std::string endereco)
+
+void OrdenadorIndices::ordernar_roubando(std::string endereco)
 {
 	std::vector<std::string> chaves = preencher_do_arquivo(endereco);
 	std::sort(chaves.begin(), chaves.end()); // CHEATING
 	escrever_para_arquivo(endereco, chaves);
+}
+
+void OrdenadorIndices::ordenar (std::string endereco)
+{
+	return;
+	// std::std::vector<std::string> ;
 }

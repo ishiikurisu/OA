@@ -76,7 +76,8 @@ void InterfaceUsuario::setup()
 	for (int i = 0; i < 2; ++i)
 	{
 		nome_lista = pedir_listas();
-		oi.ordenar(cip.gerar_indices(nome_lista));
+		nome_lista = cip.gerar_indices(nome_lista);
+		oi.ordernar_roubando(nome_lista);
 		cis.gerar_indices(nome_lista);
 	}
 }

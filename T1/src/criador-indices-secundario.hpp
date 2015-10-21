@@ -2,11 +2,14 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
+#include <map>
 
 class CriadorIndicesSecundario {
 private:
+	std::string itos(size_t);
 	std::string gerar_saida(std::string);
-	std::string gerar_chave (std::string);
+	std::string gerar_chave (std::string, size_t);
+	std::map<std::string, size_t> led;
 public:
 	CriadorIndicesSecundario(void) {};
 	std::string gerar_indices(std::string);
@@ -15,29 +18,43 @@ public:
 std::string CriadorIndicesSecundario::gerar_saida(std::string endereco)
 {
 	std::string saida;
-	size_t i = 0;
 
-	saida = "indice";
-	for (; i < endereco.length() && endereco.at(i) != '/'; ++i)
-		;
-	for (++i; i < endereco.length() && endereco.at(i) != '.'; ++i)
+	for (size_t i = 0; i < endereco.length() && endereco.at(i) != '.'; ++i)
 		saida += endereco.at(i);
 
 	saida += ".sec";
-	std::cout << "\t" << saida << std::endl;
+	std::cout << "# " << saida << ":" << std::endl;
 	return saida;
 
 }
 
-std::string CriadorIndicesSecundario::gerar_chave(std::string linha)
+std::string CriadorIndicesSecundario::itos(size_t n)
+{
+	char s[256];
+	std::string r;
+	sprintf(s, "%d", n);
+	r += s;
+	return r;
+}
+
+std::string CriadorIndicesSecundario::gerar_chave(std::string linha, size_t no_linha)
 {
 	std::string saida;
-	int count;
-	for (count=52; count<=53; count++)
-	{
-		saida+=linha[count];
+
+	for (int count = 16; count < 18; count++)
+		saida += linha[count];
+
+	std::cout << "  \'" << saida << "\'" << std::endl;
+	if (led.count(saida)) {
+		size_t temp = led[saida];
+		led[saida] = no_linha;
+		saida += " " + itos(temp);
 	}
-	std::cout << saida << std::endl;
+	else {
+		led[saida] = no_linha;
+		saida += " -1";
+	}
+
 	return saida;
 }
 
@@ -56,10 +73,11 @@ std::string CriadorIndicesSecundario::gerar_indices(std::string endereco)
 	std::getline(inlet, linha);
 	for (size_t cont = 1; linha.length() > 1; ++cont, std::getline(inlet, linha))
 	{
-		outlet << gerar_chave(linha) << " " << cont << std::endl;
+		outlet << gerar_chave(linha, cont) << std::endl;
 	}
 
 	inlet.close();
 	outlet.close();
+	led.clear();
 	return saida;
 }
