@@ -10,6 +10,7 @@ int main(int argc, char const *argv[]) {
 	string bacon = "bacon";
 	map<string, int> age;
 	stringstream ss;
+	int i;
 
 	age[joe] = 21;
 	age[haine] = 19;
@@ -23,6 +24,9 @@ int main(int argc, char const *argv[]) {
 		cout << age[joe] << endl;
 	if (age.count(bacon))
 		cout << age[bacon] << endl;
+
+	i = 2;
+	cout << joe.at(i--) << endl;
 
 	return 0;
 }

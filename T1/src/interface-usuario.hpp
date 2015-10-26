@@ -2,20 +2,24 @@
 #include <criador-indices-primario.hpp>
 #include <criador-indices-secundario.hpp>
 #include <ordenador-indices.hpp>
+#include <adicionar-indices.hpp>
+#include <vector>
 #ifdef _WIN32
-// #define clear() system("cls")
-#define clear() NULL
+#define clear() system("cls")
+// #define clear() NULL
 #else
 #define clear() system("clear")
 #endif
 
 class InterfaceUsuario
 {
+	std::vector<std::string> listas;
 public:
 	InterfaceUsuario();
 	std::string pedir_listas(void);
 	bool escolher_opcao(void);
 	void setup();
+	void adicionar();
 };
 
 InterfaceUsuario::InterfaceUsuario()
@@ -39,7 +43,7 @@ bool InterfaceUsuario::escolher_opcao()
 	int op = -1;
 	std::string junk;
 
-	clear();
+	// clear();
 	std::cout << "Escolha uma opcao:" << std::endl;
 	std::cout << "  0. SAIR" << std::endl;
 	std::cout << "  1. INCLUIR" << std::endl;
@@ -53,8 +57,11 @@ bool InterfaceUsuario::escolher_opcao()
 	{
 		case 0:
 			permanecer = false;
-			clear();
 			std::cout << "See ya :)" << std::endl;
+		break;
+
+		case 1:
+			adicionar();
 		break;
 
 		default:
@@ -76,8 +83,35 @@ void InterfaceUsuario::setup()
 	for (int i = 0; i < 2; ++i)
 	{
 		nome_lista = pedir_listas();
+		listas.push_back(nome_lista);
 		nome_lista = cip.gerar_indices(nome_lista);
 		oi.ordernar_roubando(nome_lista);
 		cis.gerar_indices(nome_lista);
 	}
+}
+
+void InterfaceUsuario::adicionar()
+{
+	AdicionadorIndices ai;
+	std::vector<std::string>::iterator l;
+	const char* campos[] = {"Matricula", "Nome", "OP", "Curso", "Turma", NULL};
+	std::vector<std::string> dados;
+	std::string dado;
+	std::string arquivo;
+	int i;
+
+	std::cout << "Adicionar em qual arquivo?" << std::endl;
+	for (i = 1, l = listas.begin(); l != listas.end(); ++l, ++i)
+		std::cout << "  " << i << ". " << *l << std::endl;
+	std::cin >> i;
+	std::cout << std::endl;
+	arquivo = listas.at(--i);
+	for (i = 0; campos[i] != NULL; ++i)
+	{
+		std::cout << campos[i] << ": " << std::endl;
+		std::getline(std::cin, dado);
+		dados.push_back(dado);
+	}
+
+	ai.adicionar(arquivo, dados);
 }

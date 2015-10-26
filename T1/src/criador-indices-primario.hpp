@@ -4,11 +4,9 @@
 #include <cstdlib>
 
 class CriadorIndicesPrimario {
-private:
+public:
 	std::string gerar_saida(std::string);
 	std::string gerar_chave(std::string);
-
-public:
 	CriadorIndicesPrimario(void) {};
 	std::string gerar_indices(std::string);
 };

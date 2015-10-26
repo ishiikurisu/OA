@@ -1,4 +1,4 @@
-- [ ] Criar criador de índices
+- [x] Criar criador de índices
   + Ele deverá ler uma lista e gerar dois índices: um primário e secundário
   - [x] Gerar índice primário
   - [x] Gerar índice secundário
