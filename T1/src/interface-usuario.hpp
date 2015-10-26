@@ -92,9 +92,9 @@ void InterfaceUsuario::setup()
 
 void InterfaceUsuario::adicionar()
 {
+	const char* campos[] = {"Matricula", "Nome", "OP", "Curso", "Turma", NULL};
 	AdicionadorIndices ai;
 	std::vector<std::string>::iterator l;
-	const char* campos[] = {"Matricula", "Nome", "OP", "Curso", "Turma", NULL};
 	std::vector<std::string> dados;
 	std::string dado;
 	std::string arquivo;
@@ -104,13 +104,14 @@ void InterfaceUsuario::adicionar()
 	for (i = 1, l = listas.begin(); l != listas.end(); ++l, ++i)
 		std::cout << "  " << i << ". " << *l << std::endl;
 	std::cin >> i;
-	std::cout << std::endl;
+	// std::cout << std::endl;
 	arquivo = listas.at(--i);
 	for (i = 0; campos[i] != NULL; ++i)
 	{
 		std::cout << campos[i] << ": " << std::endl;
 		std::getline(std::cin, dado);
 		dados.push_back(dado);
+		std::cout << "DEBUG: " << campos[i] << ": " << dado << std::endl;
 	}
 
 	ai.adicionar(arquivo, dados);

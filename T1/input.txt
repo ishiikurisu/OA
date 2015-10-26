@@ -1,8 +1,7 @@
 lists/lista1.txt
 lists/lista2.txt
 1
-1
-666666
+1 666666
 Joe Frank
 39
 EM

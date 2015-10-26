@@ -35,6 +35,7 @@ void AdicionadorIndices::escrever_dados(std::vector<std::string> dados)
 	size_t i = 0;
 
 	/* matricula */
+	for (i = 0; dados[0][i] == ' '; ++i)
 	fs << dados[0] << " ";
 
 	/* nome */
