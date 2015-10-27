@@ -7,7 +7,7 @@
 class AdicionadorIndices
 {
 	int contar_linhas();
-	void escrever_dados(std::vector<std::string>);
+	std::string gerar_chave(std::vector<std::string>);
 	std::fstream fs;
 public:
 	AdicionadorIndices() {};
@@ -29,46 +29,48 @@ int AdicionadorIndices::contar_linhas()
 	return c;
 }
 
-void AdicionadorIndices::escrever_dados(std::vector<std::string> dados)
+std::string AdicionadorIndices::gerar_chave(std::vector<std::string> dados)
 {
+	std::string saida;
 	std::string dado;
 	size_t i = 0;
 
 	/* matricula */
-	for (i = 0; dados[0][i] == ' '; ++i)
-	fs << dados[0] << " ";
+	saida += dados[0] + " ";
 
 	/* nome */
 	dado = dados[1];
 	if (dado.length() > 40) {
 		for (i = 0; i < 40; ++i)
-			fs << dado.at(i);
+			saida += dado.at(i);
 	}
 	else {
-		fs << dado;
-		for (i = 0; i < 40 - dado.length(); ++i)
-			fs << " ";
+		saida += dado;
+		for (i = dado.length(); i < 40; ++i)
+			saida += " ";
 	}
-	fs << " ";
+	saida += " ";
 
 	/* op */
-	fs << dados[2] << " ";
+	saida += dados[2] + "  ";
 
 	/* curso */
 	dado = dados[3];
 	if (dado.length() > 8) {
 		for (i = 0; i < 8; ++i)
-			fs << dado.at(i);
+			saida += dado.at(i);
 	}
 	else {
-		fs << dado;
-		for (i = 0; i < 8 - dado.length(); ++i)
-			fs << " ";
+		saida += dado;
+		for (i = dado.length(); i < 8; ++i)
+			saida += " ";
 	}
-	fs << " ";
+	saida += " ";
 
 	/* turma */
-	fs << dados[4] << std::endl;
+	saida += dados[4] + "\n";
+
+	return saida;
 }
 
 /*******************
@@ -77,26 +79,29 @@ void AdicionadorIndices::escrever_dados(std::vector<std::string> dados)
 void AdicionadorIndices::adicionar(std::string entrada,
 	                               std::vector<std::string> dados)
 {
-	int i;
 	std::string chave;
-	std::string junk;
-	// CriadorIndicesPrimario cip;
+	CriadorIndicesPrimario cip;
 	// CriadorIndicesSecundario cis;
+
+	chave = gerar_chave(dados);
 
 	/* lidar com arquivo de dados */
 	fs.open(entrada.c_str());
 	fs.seekg(0, fs.end);
-	escrever_dados(dados);
+	fs << chave;
 	fs.close();
 
 	/* lidar com arquivo de chaves primárias */
-	// fs.open(cip.gerar_saida(entrada));
-	// chave = cip.gerar_chave();
-	// fs.close();
+	entrada = cip.gerar_saida(entrada);
+	fs.open(entrada.c_str());
+	chave = cip.gerar_chave(chave);
+	fs.seekg(0, fs.end);
+	fs << chave;
+	fs.close();
 
 	/* lidar com arquivo de chaves secundarias */
-	// fs.open(cis.gerar_saida());
-	// chave = cis.gerar_chave();
+	// fs.open(cis.gerar_saida(entrada).c_str());
+	// chave = cis.gerar_chave(chave);
 	// fs.close();
 }
 

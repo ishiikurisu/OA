@@ -23,7 +23,7 @@ std::string CriadorIndicesSecundario::gerar_saida(std::string endereco)
 		saida += endereco.at(i);
 
 	saida += ".sec";
-	std::cout << "# " << saida << ":" << std::endl;
+	// std::cout << "# " << saida << ":" << std::endl;
 	return saida;
 
 }
@@ -44,7 +44,7 @@ std::string CriadorIndicesSecundario::gerar_chave(std::string linha, size_t no_l
 	for (int count = 16; count < 18; count++)
 		saida += linha[count];
 
-	std::cout << "  \'" << saida << "\'" << std::endl;
+	// std::cout << "  \'" << saida << "\'" << std::endl;
 	if (led.count(saida)) {
 		size_t temp = led[saida];
 		led[saida] = no_linha;

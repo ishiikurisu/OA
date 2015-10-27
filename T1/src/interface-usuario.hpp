@@ -3,6 +3,7 @@
 #include <criador-indices-secundario.hpp>
 #include <ordenador-indices.hpp>
 #include <adicionar-indices.hpp>
+#include <toolbox.hpp>
 #include <vector>
 #ifdef _WIN32
 #define clear() system("cls")
@@ -103,15 +104,16 @@ void InterfaceUsuario::adicionar()
 	std::cout << "Adicionar em qual arquivo?" << std::endl;
 	for (i = 1, l = listas.begin(); l != listas.end(); ++l, ++i)
 		std::cout << "  " << i << ". " << *l << std::endl;
-	std::cin >> i;
-	// std::cout << std::endl;
+	std::getline(std::cin, dado);
+	std::getline(std::cin, dado);
+	i = stoi(dado.c_str());
 	arquivo = listas.at(--i);
 	for (i = 0; campos[i] != NULL; ++i)
 	{
 		std::cout << campos[i] << ": " << std::endl;
 		std::getline(std::cin, dado);
 		dados.push_back(dado);
-		std::cout << "DEBUG: " << campos[i] << ": " << dado << std::endl;
+		// std::cout << "DEBUG: " << campos[i] << ": " << dado << std::endl;
 	}
 
 	ai.adicionar(arquivo, dados);

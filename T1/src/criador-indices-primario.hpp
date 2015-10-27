@@ -17,13 +17,13 @@ std::string CriadorIndicesPrimario::gerar_saida(std::string endereco)
 	size_t i = 0;
 
 	saida = "indice";
-	for (; i < endereco.length() && endereco.at(i) != '/'; ++i)
+	for (; i < endereco.length() && endereco.at(i) != '/' && endereco.at(i) != '\\'; ++i)
 		;
 	for (++i; i < endereco.length() && endereco.at(i) != '.'; ++i)
 		saida += endereco.at(i);
 
 	saida += ".ind";
-	std::cout << "\t" << saida << std::endl;
+	// std::cout << "\t" << saida << std::endl;
 	return saida;
 }
 
@@ -46,7 +46,7 @@ std::string CriadorIndicesPrimario::gerar_chave(std::string linha)
 		saida += linha[count];
 	}
 
-	std::cout << saida << std::endl;
+	// std::cout << saida << std::endl;
 	return saida;
 }
 
