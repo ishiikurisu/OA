@@ -52,13 +52,15 @@ bool OrdenadorIndices::comparar(std::string s, std::string t)
 std::vector<std::string> OrdenadorIndices::heapsort(std::vector<std::string> chaves)
 {
 	std::vector<std::string> heapArray;
-	std::vector<std::string>::iterator it = chaves.begin();
+	std::vector<std::string>::iterator it;
 	int num, k;
-
-	for (++it; it != chaves.end(); ++it)
+	std::cout << "heapsorting" << std::endl;
+	for (it = chaves.begin(); it != chaves.end(); ++it)
 	{
+		//std::cout << "  it: " << *it << std::endl;
 		heapArray.push_back(*it);
 		k=heapArray.size()-1;
+		//std::cout << "  k: " <<  k << std::endl;
 		while(k>0)
 		{
 			num=k/2;
@@ -71,6 +73,7 @@ std::vector<std::string> OrdenadorIndices::heapsort(std::vector<std::string> cha
 				heapArray[num]=array;
 			}
 			k=num;
+			//std::cout << " " << heapArray[k] <<std::endl;
 		}
 
 	}
