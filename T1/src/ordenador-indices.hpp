@@ -7,6 +7,7 @@
 
 class OrdenadorIndices{
 	std::vector<std::string> preencher_do_arquivo(std::string);
+	std::vector<std::string> heapsort(std::vector<std::string>);
 	void escrever_para_arquivo(std::string, std::vector<std::string>);
 	bool comparar(std::string, std::string);
 public:
@@ -15,9 +16,9 @@ public:
 	void ordenar(std::string);
 };
 
-/*
-* FUNCOES PRIVADAS
-*/
+/*******************
+* FUNCOES PRIVADAS *
+*******************/
 std::vector<std::string> OrdenadorIndices::preencher_do_arquivo(std::string input)
 {
 	std::fstream inlet;
@@ -48,9 +49,38 @@ bool OrdenadorIndices::comparar(std::string s, std::string t)
 	return (s.compare(t) > 0);
 }
 
-/*
-* FUNCOES PUBLICAS
-*/
+std::vector<std::string> OrdenadorIndices::heapsort(std::vector<std::string> chaves)
+{
+	std::vector<std::string> heapArray;
+	std::vector<std::string>::iterator it = chaves.begin();
+	int num, k;
+
+	for (++it; it != chaves.end(); ++it)
+	{
+		heapArray.push_back(*it);
+		k=heapArray.size()-1;
+		while(k>0)
+		{
+			num=k/2;
+			if(comparar(heapArray[k], heapArray[num])>0)
+				;
+			else
+			{
+				std::string array=heapArray[k];
+				heapArray[k]=heapArray[num];
+				heapArray[num]=array;
+			}
+			k=num;
+		}
+
+	}
+
+	return heapArray;
+}
+
+/*******************
+* FUNCOES PUBLICAS *
+*******************/
 
 void OrdenadorIndices::ordernar_roubando(std::string endereco)
 {
@@ -61,6 +91,5 @@ void OrdenadorIndices::ordernar_roubando(std::string endereco)
 
 void OrdenadorIndices::ordenar (std::string endereco)
 {
-	return;
-	// std::std::vector<std::string> ;
+	escrever_para_arquivo(endereco, heapsort(preencher_do_arquivo(endereco)));
 }

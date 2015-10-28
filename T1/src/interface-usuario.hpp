@@ -3,6 +3,7 @@
 #include <criador-indices-secundario.hpp>
 #include <ordenador-indices.hpp>
 #include <adicionar-indices.hpp>
+#include <excluir-indices.hpp>
 #include <toolbox.hpp>
 #include <vector>
 #ifdef _WIN32
@@ -21,6 +22,7 @@ public:
 	bool escolher_opcao(void);
 	void setup();
 	void adicionar();
+	void excluir();
 };
 
 InterfaceUsuario::InterfaceUsuario()
@@ -65,9 +67,14 @@ bool InterfaceUsuario::escolher_opcao()
 			adicionar();
 		break;
 
+		case 2:
+			excluir();
+		break;
+
 		default:
 			std::cout << "OPCAO NAO IMPLEMENTADA" << std::endl;
 			std::cout << "Aperte `Enter` para sair" << std::endl;
+			std::getline(std::cin, junk);
 			std::getline(std::cin, junk);
 	}
 
@@ -86,7 +93,7 @@ void InterfaceUsuario::setup()
 		nome_lista = pedir_listas();
 		listas.push_back(nome_lista);
 		nome_lista = cip.gerar_indices(nome_lista);
-		oi.ordernar_roubando(nome_lista);
+		oi.ordenar(nome_lista);
 		cis.gerar_indices(nome_lista);
 	}
 }
@@ -117,4 +124,13 @@ void InterfaceUsuario::adicionar()
 	}
 
 	ai.adicionar(arquivo, dados);
+}
+
+void InterfaceUsuario::excluir()
+{
+	ApagadorIndices ai;
+
+	/* pedir por matricula */
+	/* procurar em qual arquivo está a matrícula */
+	/* excluir */
 }
