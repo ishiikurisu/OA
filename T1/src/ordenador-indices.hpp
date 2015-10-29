@@ -10,6 +10,7 @@ class OrdenadorIndices{
 	std::vector<std::string> heapsort(std::vector<std::string>);
 	void escrever_para_arquivo(std::string, std::vector<std::string>);
 	bool comparar(std::string, std::string);
+	std::vector<std::string> desmontar(std::vector<std::string>);
 public:
 	OrdenadorIndices(void) {};
 	void ordernar_roubando(std::string);
@@ -49,31 +50,42 @@ bool OrdenadorIndices::comparar(std::string s, std::string t)
 	return (s.compare(t) > 0);
 }
 
+std::vector<std::string> OrdenadorIndices::desmontar(std::vector<std::string> inlet)
+{
+// 	std::vector<std::string> outlet;
+// 	std::vector<std::string>::iterator it;
+//
+// 	for ()
+//
+//
+// 	return outlet;
+//
+	return inlet;
+}
+
+/* implementação do heapsort como descrita por Folk, pg 170 do pdf */
 std::vector<std::string> OrdenadorIndices::heapsort(std::vector<std::string> chaves)
 {
 	std::vector<std::string> heapArray;
 	std::vector<std::string>::iterator it;
 	int num, k;
-	std::cout << "heapsorting" << std::endl;
+
 	for (it = chaves.begin(); it != chaves.end(); ++it)
 	{
-		//std::cout << "  it: " << *it << std::endl;
 		heapArray.push_back(*it);
 		k=heapArray.size()-1;
-		//std::cout << "  k: " <<  k << std::endl;
+
 		while(k>0)
 		{
 			num=k/2;
-			if(comparar(heapArray[k], heapArray[num])>0)
-				;
-			else
+			if(!comparar(heapArray[k], heapArray[num]))
 			{
-				std::string array=heapArray[k];
-				heapArray[k]=heapArray[num];
-				heapArray[num]=array;
+				std::cout << "change" << std::endl;
+				std::string array = heapArray[k];
+				heapArray[k] = heapArray[num];
+				heapArray[num] = array;
 			}
 			k=num;
-			//std::cout << " " << heapArray[k] <<std::endl;
 		}
 
 	}

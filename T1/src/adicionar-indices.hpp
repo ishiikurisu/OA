@@ -68,7 +68,7 @@ std::string AdicionadorIndices::gerar_chave(std::vector<std::string> dados)
 	saida += " ";
 
 	/* turma */
-	saida += dados[4] + "\n";
+	saida += dados[4];
 
 	return saida;
 }
@@ -88,7 +88,7 @@ void AdicionadorIndices::adicionar(std::string entrada,
 	/* lidar com arquivo de dados */
 	fs.open(entrada.c_str());
 	fs.seekg(0, fs.end);
-	fs << chave;
+	fs << chave << std::endl;
 	fs.close();
 
 	/* lidar com arquivo de chaves primárias */
@@ -96,7 +96,7 @@ void AdicionadorIndices::adicionar(std::string entrada,
 	fs.open(entrada.c_str());
 	chave = cip.gerar_chave(chave);
 	fs.seekg(0, fs.end);
-	fs << chave;
+	fs << chave << std::endl;
 	fs.close();
 
 	/* lidar com arquivo de chaves secundarias */
