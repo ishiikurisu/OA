@@ -10,6 +10,7 @@ class OrdenadorIndices{
 	std::vector<std::string> heapsort(std::vector<std::string>);
 	void escrever_para_arquivo(std::string, std::vector<std::string>);
 	bool comparar(std::string, std::string);
+	std::vector<std::string> trocar(std::vector<std::string>, int, int);
 	std::vector<std::string> desmontar(std::vector<std::string>);
 public:
 	OrdenadorIndices(void) {};
@@ -39,7 +40,7 @@ void OrdenadorIndices::escrever_para_arquivo(std::string path, std::vector<std::
 	std::fstream outlet;
 	std::vector<std::string>::iterator it;
 
-	outlet.open(path.c_str(), std::fstream::in);
+	outlet.open(path.c_str(), std::fstream::out);
 	for (it = in.begin(); it != in.end(); ++it)
 		outlet << *it << std::endl;
 	outlet.close();
@@ -50,17 +51,46 @@ bool OrdenadorIndices::comparar(std::string s, std::string t)
 	return (s.compare(t) > 0);
 }
 
+std::vector<std::string> OrdenadorIndices::trocar(std::vector<std::string> arr, int n, int m)
+{
+	std::string temp = arr[n];
+	arr[n] = arr[m];
+	arr[m] = temp;
+	return arr;
+}
+
 std::vector<std::string> OrdenadorIndices::desmontar(std::vector<std::string> inlet)
 {
-// 	std::vector<std::string> outlet;
-// 	std::vector<std::string>::iterator it;
-//
-// 	for ()
-//
-//
-// 	return outlet;
-//
-	return inlet;
+	std::vector<std::string> outlet;
+	std::string junk;
+	int k, n;
+
+	while (inlet.size() > 2)
+	{
+		junk = inlet.at(1);
+		outlet.push_back(junk);
+
+		inlet[1] = inlet.at(inlet.size()-1); // put the largest value into	 root
+		k = 1; // node of heap that contains the largest value
+
+		while (2*k < (int) inlet.size()-1)
+		{
+			if (!comparar(inlet[2*k], inlet[2*k+1]))
+				n = 2*k;
+			else
+				n = 2*k + 1;
+
+			if (!comparar(inlet[k], inlet[n]))
+				trocar(inlet, k, n);
+
+			k = n;
+		}
+
+		inlet.erase(inlet.begin()+1);
+	}
+
+	outlet.push_back(inlet.at(1));
+	return outlet;
 }
 
 /* implementação do heapsort como descrita por Folk, pg 170 do pdf */
@@ -70,27 +100,29 @@ std::vector<std::string> OrdenadorIndices::heapsort(std::vector<std::string> cha
 	std::vector<std::string>::iterator it;
 	int num, k;
 
+	heapArray.push_back("---");
 	for (it = chaves.begin(); it != chaves.end(); ++it)
 	{
 		heapArray.push_back(*it);
 		k=heapArray.size()-1;
 
-		while(k>0)
+		while(k>1)
 		{
 			num=k/2;
 			if(!comparar(heapArray[k], heapArray[num]))
 			{
-				std::cout << "change" << std::endl;
-				std::string array = heapArray[k];
-				heapArray[k] = heapArray[num];
-				heapArray[num] = array;
+				// std::cout << "change" << std::endl;
+				std::string array=heapArray[k];
+				heapArray[k]=heapArray[num];
+				heapArray[num]=array;
 			}
 			k=num;
 		}
 
 	}
 
-	return heapArray;
+	// return heapArray;
+	return desmontar(heapArray);
 }
 
 /*******************

@@ -1,9 +1,11 @@
 #include <iostream>
+#include <mostrar-indices.hpp>
 #include <criador-indices-primario.hpp>
 #include <criador-indices-secundario.hpp>
 #include <ordenador-indices.hpp>
 #include <adicionar-indices.hpp>
 #include <excluir-indices.hpp>
+#include <intercalar-indices.hpp>
 #include <toolbox.hpp>
 #include <vector>
 #ifdef _WIN32
@@ -23,6 +25,7 @@ public:
 	void setup();
 	void adicionar();
 	void excluir();
+	void intercalar();
 };
 
 InterfaceUsuario::InterfaceUsuario()
@@ -38,6 +41,23 @@ std::string InterfaceUsuario::pedir_listas()
 	std::getline(std::cin, nome);
 
 	return nome;
+}
+
+void InterfaceUsuario::setup()
+{
+	CriadorIndicesPrimario cip;
+	CriadorIndicesSecundario cis;
+	OrdenadorIndices oi;
+	std::string nome_lista;
+
+	for (int i = 0; i < 2; ++i)
+	{
+		nome_lista = pedir_listas();
+		listas.push_back(nome_lista);
+		nome_lista = cip.gerar_indices(nome_lista);
+		oi.ordenar(nome_lista);
+		cis.gerar_indices(nome_lista);
+	}
 }
 
 bool InterfaceUsuario::escolher_opcao()
@@ -67,8 +87,12 @@ bool InterfaceUsuario::escolher_opcao()
 			adicionar();
 		break;
 
-		case 2:
-			excluir();
+		// case 2:
+		// 	excluir();
+		// break;
+
+		case 4:
+			intercalar();
 		break;
 
 		default:
@@ -81,27 +105,12 @@ bool InterfaceUsuario::escolher_opcao()
 	return permanecer;
 }
 
-void InterfaceUsuario::setup()
-{
-	CriadorIndicesPrimario cip;
-	CriadorIndicesSecundario cis;
-	OrdenadorIndices oi;
-	std::string nome_lista;
-
-	for (int i = 0; i < 2; ++i)
-	{
-		nome_lista = pedir_listas();
-		listas.push_back(nome_lista);
-		nome_lista = cip.gerar_indices(nome_lista);
-		oi.ordenar(nome_lista);
-		cis.gerar_indices(nome_lista);
-	}
-}
-
 void InterfaceUsuario::adicionar()
 {
 	const char* campos[] = {"Matricula", "Nome", "OP", "Curso", "Turma", NULL};
 	AdicionadorIndices ai;
+	OrdenadorIndices oi;
+	MostradorIndices mi;
 	std::vector<std::string>::iterator l;
 	std::vector<std::string> dados;
 	std::string dado;
@@ -123,7 +132,10 @@ void InterfaceUsuario::adicionar()
 		// std::cout << "DEBUG: " << campos[i] << ": " << dado << std::endl;
 	}
 
+	std::cout << "--- # Antes:" << std::endl; mi.mostrar(arquivo);
 	ai.adicionar(arquivo, dados);
+	std::cout << "--- # Depois:" << std::endl; mi.mostrar(arquivo);
+	std::cout << "..." << std::endl;
 }
 
 void InterfaceUsuario::excluir()
@@ -133,4 +145,13 @@ void InterfaceUsuario::excluir()
 	/* pedir por matricula */
 	/* procurar em qual arquivo está a matrícula */
 	/* excluir */
+}
+
+void InterfaceUsuario::intercalar()
+{
+	IntercaladorIndices ii;
+	MostradorIndices mi;
+
+	ii.intercalar(listas[0], listas[1]);
+	mi.mostrar("lista12.txt");
 }

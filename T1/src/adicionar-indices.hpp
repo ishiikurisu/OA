@@ -81,6 +81,7 @@ void AdicionadorIndices::adicionar(std::string entrada,
 {
 	std::string chave;
 	CriadorIndicesPrimario cip;
+	OrdenadorIndices oi;
 	// CriadorIndicesSecundario cis;
 
 	chave = gerar_chave(dados);
@@ -90,6 +91,7 @@ void AdicionadorIndices::adicionar(std::string entrada,
 	fs.seekg(0, fs.end);
 	fs << chave << std::endl;
 	fs.close();
+	oi.ordenar(entrada);
 
 	/* lidar com arquivo de chaves primárias */
 	entrada = cip.gerar_saida(entrada);
@@ -98,6 +100,7 @@ void AdicionadorIndices::adicionar(std::string entrada,
 	fs.seekg(0, fs.end);
 	fs << chave << std::endl;
 	fs.close();
+	oi.ordenar(entrada);
 
 	/* lidar com arquivo de chaves secundarias */
 	// fs.open(cis.gerar_saida(entrada).c_str());

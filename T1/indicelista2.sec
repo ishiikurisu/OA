@@ -1,10 +1,10 @@
 CC -1
-EC -1
 CC 1
+CC 2
 CC 3
+EC -1
 CC 4
-CC 5
-EC 2
+EC 5
 EC 7
 EC 8
 CC 6

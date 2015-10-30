@@ -21,4 +21,11 @@ Carol Haine
 19
 GEO
 A
+1
+2
+010123
+Arduino Nano
+03
+EE
+B
 0
