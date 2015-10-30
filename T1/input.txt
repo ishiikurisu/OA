@@ -1,5 +1,5 @@
-lists/lista1.txt
-lists/lista2.txt
+data/lista1.txt
+data/lista2.txt
 1
 2
 666666
