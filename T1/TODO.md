@@ -9,4 +9,4 @@
   - [x] Incluir registro
   - [ ] Excluir registro
   - [ ] Atualizar registro
-  - [ ] Intercalar registros
+  - [x] Intercalar registros

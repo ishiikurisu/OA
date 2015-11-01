@@ -18,6 +18,7 @@
 class InterfaceUsuario
 {
 	std::vector<std::string> listas;
+	MostradorIndices mostrador;
 public:
 	InterfaceUsuario();
 	std::string pedir_listas(void);
@@ -87,10 +88,6 @@ bool InterfaceUsuario::escolher_opcao()
 			adicionar();
 		break;
 
-		// case 2:
-		// 	excluir();
-		// break;
-
 		case 4:
 			intercalar();
 		break;
@@ -110,7 +107,6 @@ void InterfaceUsuario::adicionar()
 	const char* campos[] = {"Matricula", "Nome", "OP", "Curso", "Turma", NULL};
 	AdicionadorIndices ai;
 	OrdenadorIndices oi;
-	MostradorIndices mi;
 	std::vector<std::string>::iterator l;
 	std::vector<std::string> dados;
 	std::string dado;
@@ -129,12 +125,11 @@ void InterfaceUsuario::adicionar()
 		std::cout << campos[i] << ": " << std::endl;
 		std::getline(std::cin, dado);
 		dados.push_back(dado);
-		// std::cout << "DEBUG: " << campos[i] << ": " << dado << std::endl;
 	}
 
-	std::cout << "--- # Antes:" << std::endl; mi.mostrar(arquivo);
+	std::cout << "--- # Antes:" << std::endl; mostrador.mostrar(arquivo);
 	ai.adicionar(arquivo, dados);
-	std::cout << "--- # Depois:" << std::endl; mi.mostrar(arquivo);
+	std::cout << "--- # Depois:" << std::endl; mostrador.mostrar(arquivo);
 	std::cout << "..." << std::endl;
 }
 
@@ -150,8 +145,10 @@ void InterfaceUsuario::excluir()
 void InterfaceUsuario::intercalar()
 {
 	IntercaladorIndices ii;
-	MostradorIndices mi;
 
+	// std::cout << "# intercalando..." << std::endl;
 	ii.intercalar(listas[0], listas[1]);
-	mi.mostrar("lista12.txt");
+	std::cout << "--- # lista intercalada" << std::endl;
+	mostrador.mostrar("lista12.txt");
+	std::cout << "..." << std::endl;
 }
