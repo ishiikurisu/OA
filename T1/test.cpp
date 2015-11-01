@@ -3,12 +3,14 @@
 #include <map>
 #include <sstream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 int main(int argc, char const *argv[]) {
 	string joe = "joe";
 	string haine = "carol";
 	string bacon = "bacon";
+	vector<string> qotsa = {"josh", "troy", "mark", "dave", "nick"};
 	map<string, int> age;
 	stringstream ss;
 	int i;
@@ -35,12 +37,26 @@ int main(int argc, char const *argv[]) {
 	vector<int>::iterator it;
 	cout << "writing stuff" << endl;
 	for (it = num.begin(); it != num.end(); ++it)
-	{
 		cout << "  " <<  *it << endl;
-	}
 
 	i = 2;
 	cout << joe.at(i--) << endl;
+
+	cout << "# sorting" << endl;
+	cout << "before" << endl;
+	cout << "------" << endl;
+	vector<string>::iterator queen;
+	for (queen = qotsa.begin(); queen != qotsa.end(); ++queen)
+		cout << "- " << *queen << endl;
+	sort(qotsa.begin(), qotsa.end());
+	cout << endl;
+	cout << "after" << endl;
+	cout << "-----" << endl;
+	for (queen = qotsa.begin(); queen != qotsa.end(); ++queen)
+		cout << "- " << *queen << endl;
+	cout << endl;
+
+
 
 	return 0;
 }

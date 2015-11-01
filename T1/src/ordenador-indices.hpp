@@ -3,6 +3,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <vector>
+#include <math.h>
 #include <algorithm>
 
 class OrdenadorIndices{
@@ -14,7 +15,7 @@ class OrdenadorIndices{
 	std::vector<std::string> desmontar(std::vector<std::string>);
 public:
 	OrdenadorIndices(void) {};
-	void ordernar_roubando(std::string);
+	void ordenar_roubando(std::string);
 	void ordenar(std::string);
 };
 
@@ -129,7 +130,7 @@ std::vector<std::string> OrdenadorIndices::heapsort(std::vector<std::string> cha
 * FUNCOES PUBLICAS *
 *******************/
 
-void OrdenadorIndices::ordernar_roubando(std::string endereco)
+void OrdenadorIndices::ordenar_roubando(std::string endereco)
 {
 	std::vector<std::string> chaves = preencher_do_arquivo(endereco);
 	std::sort(chaves.begin(), chaves.end()); // CHEATING

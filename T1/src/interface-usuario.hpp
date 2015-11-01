@@ -56,7 +56,7 @@ void InterfaceUsuario::setup()
 		nome_lista = pedir_listas();
 		listas.push_back(nome_lista);
 		nome_lista = cip.gerar_indices(nome_lista);
-		oi.ordenar(nome_lista);
+		oi.ordenar_roubando(nome_lista);
 		cis.gerar_indices(nome_lista);
 	}
 }
@@ -106,7 +106,6 @@ void InterfaceUsuario::adicionar()
 {
 	const char* campos[] = {"Matricula", "Nome", "OP", "Curso", "Turma", NULL};
 	AdicionadorIndices ai;
-	OrdenadorIndices oi;
 	std::vector<std::string>::iterator l;
 	std::vector<std::string> dados;
 	std::string dado;

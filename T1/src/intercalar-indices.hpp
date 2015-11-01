@@ -61,7 +61,7 @@ void IntercaladorIndices::intercalar(std::string arquivo1, std::string arquivo2)
 	std::getline(in1, s1);
 	std::getline(in2, s2);
 
-	while (s1.length() > 1 && s2.length() > 1) {
+	while (s1.length() > 1 || s2.length() > 1) {
 		switch (comparar(s1, s2)) {
 			case MAIOR:
 				out << s2 << std::endl;

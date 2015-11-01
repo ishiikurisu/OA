@@ -91,7 +91,7 @@ void AdicionadorIndices::adicionar(std::string entrada,
 	fs.seekg(0, fs.end);
 	fs << chave << std::endl;
 	fs.close();
-	oi.ordenar(entrada);
+	oi.ordenar_roubando(entrada);
 
 	/* lidar com arquivo de chaves primárias */
 	entrada = cip.gerar_saida(entrada);
@@ -100,7 +100,7 @@ void AdicionadorIndices::adicionar(std::string entrada,
 	fs.seekg(0, fs.end);
 	fs << chave << std::endl;
 	fs.close();
-	oi.ordenar(entrada);
+	oi.ordenar_roubando(entrada);
 
 	/* lidar com arquivo de chaves secundarias */
 	// fs.open(cis.gerar_saida(entrada).c_str());
