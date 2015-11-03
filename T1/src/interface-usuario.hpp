@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <mostrar-indices.hpp>
+#include <procurar.hpp>
 #include <criador-indices-primario.hpp>
 #include <criador-indices-secundario.hpp>
 #include <ordenador-indices.hpp>
@@ -17,6 +18,7 @@
 
 class InterfaceUsuario
 {
+	std::string procurar(std::string);
 	std::vector<std::string> listas;
 	MostradorIndices mostrador;
 public:
@@ -29,6 +31,22 @@ public:
 	void atualizar();
 	void intercalar();
 };
+
+std::string InterfaceUsuario::procurar(std::string matricula)
+{
+	Procurador pr;
+	std::vector<std::string>::iterator lista;
+	std::string resultado;
+
+	for (lista = listas.begin(); lista != listas.end(); ++lista)
+	{
+		resultado = pr.procurar(*lista, matricula);
+		if (resultado.length() > 0)
+			return resultado;
+	}
+
+	return std::string("");
+}
 
 InterfaceUsuario::InterfaceUsuario()
 {
@@ -103,9 +121,6 @@ bool InterfaceUsuario::escolher_opcao()
 
 		default:
 			std::cout << "OPCAO NAO IMPLEMENTADA" << std::endl;
-			std::cout << "Aperte `Enter` para sair" << std::endl;
-			std::getline(std::cin, junk);
-			std::getline(std::cin, junk);
 	}
 
 	return permanecer;
@@ -165,21 +180,35 @@ void InterfaceUsuario::excluir()
 void InterfaceUsuario::atualizar()
 {
 	AtualizadorIndices ai;
-	std::string matricula_antiga;
-	std::string matricula_nova;
-	std::string nome;
+	std::string dado;
+ 	std::vector<std::string> antigos;
+	std::vector<std::string> novos;
+	std::vector<std::string>::iterator lista;
 
-	std::cout << "Digite sua matricula" << std::endl;
-	std::getline(std::cin, matricula_antiga);
-	/* mostrar nome da pessoa */
-	std::cout << "Digite sua nova matricula";
-	std::cout << " (deixe em branco para a mesma matricula): " << std::endl;
-	std::getline(std::cin, matricula_nova);
-	std::cout << "Digite seu nome";
-	std::cout << " (deixe em branco para o mesmo nome): " << std::endl;
-	std::getline(std::cin, nome);
+	std::cout << "Digite sua matricula:" << std::endl;
+	std::getline(std::cin, dado);
+	std::getline(std::cin, dado);
+	antigos.push_back(dado);
+	dado = procurar(dado);
+	if (dado.length() > 0) {
+		antigos.push_back(dado);
+		std::cout << "Nome do aluno: " << std::endl;
+		std::cout << dado << std::endl;
+		std::cout << "Digite sua nova matricula";
+		std::cout << " (deixe em branco para a mesma matricula): " << std::endl;
+		std::getline(std::cin, dado);
+		novos.push_back(dado);
+		std::cout << "Digite seu nome";
+		std::cout << " (deixe em branco para o mesmo nome): " << std::endl;
+		std::getline(std::cin, dado);
+		novos.push_back(dado);
+		for (lista = listas.begin(); lista != listas.end(); ++lista)
+			ai.atualizar(*lista, antigos, novos);
+	}
+	else {
+		std::cout << "Matricula nao encontrada" << std::endl;
+	}
 
-	ai.atualizar();
 }
 
 void InterfaceUsuario::intercalar()

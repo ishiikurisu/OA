@@ -4,5 +4,5 @@ del *.ind
 del *.sec
 del lista12.txt
 mingw32-make main
-more input.txt | main.exe
-del main.bin
+more input.txt | main.bin
+del *.bin
