@@ -1,0 +1,28 @@
+Trabalho 1 de Organização de Arquivos
+=====================================
+
+Alunos:
+
+- Cristiano Alves da Silva Júnior - 13/0070629
+- Isabela Rosa Sambuichi - 13/0050123
+
+Instruções de uso
+-----------------
+
+Usando o software make e o arquivo `makefile` fornecido,
+compile e rode o programa usando o seguinte script:
+
+``` unix shell
+make main
+./main.bin
+```
+
+Dentro do programa, será pedido o endereço dos dois
+arquivos. Após isso, entraremos no menu principal, com
+5 opções:
+
++ Sair
++ Incluir
++ Excluir
++ Atualizar
++ Intercalar

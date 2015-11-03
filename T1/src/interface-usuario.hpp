@@ -1,13 +1,14 @@
 #include <iostream>
+#include <vector>
 #include <mostrar-indices.hpp>
 #include <criador-indices-primario.hpp>
 #include <criador-indices-secundario.hpp>
 #include <ordenador-indices.hpp>
 #include <adicionar-indices.hpp>
 #include <excluir-indices.hpp>
+#include <atualizar-indices.hpp>
 #include <intercalar-indices.hpp>
 #include <toolbox.hpp>
-#include <vector>
 #ifdef _WIN32
 #define clear() system("cls")
 #else
@@ -25,6 +26,7 @@ public:
 	void setup();
 	void adicionar();
 	void excluir();
+	void atualizar();
 	void intercalar();
 };
 
@@ -91,6 +93,10 @@ bool InterfaceUsuario::escolher_opcao()
 			excluir();
 		break;
 
+		case 3:
+			atualizar();
+		break;
+
 		case 4:
 			intercalar();
 		break;
@@ -154,6 +160,26 @@ void InterfaceUsuario::excluir()
 		mostrador.mostrar(*lista);
 	}
 	/* excluir */
+}
+
+void InterfaceUsuario::atualizar()
+{
+	AtualizadorIndices ai;
+	std::string matricula_antiga;
+	std::string matricula_nova;
+	std::string nome;
+
+	std::cout << "Digite sua matricula" << std::endl;
+	std::getline(std::cin, matricula_antiga);
+	/* mostrar nome da pessoa */
+	std::cout << "Digite sua nova matricula";
+	std::cout << " (deixe em branco para a mesma matricula): " << std::endl;
+	std::getline(std::cin, matricula_nova);
+	std::cout << "Digite seu nome";
+	std::cout << " (deixe em branco para o mesmo nome): " << std::endl;
+	std::getline(std::cin, nome);
+
+	ai.atualizar();
 }
 
 void InterfaceUsuario::intercalar()
