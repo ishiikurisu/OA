@@ -10,7 +10,6 @@
 #include <vector>
 #ifdef _WIN32
 #define clear() system("cls")
-// #define clear() NULL
 #else
 #define clear() system("clear")
 #endif
@@ -88,6 +87,10 @@ bool InterfaceUsuario::escolher_opcao()
 			adicionar();
 		break;
 
+		case 2:
+			excluir();
+		break;
+
 		case 4:
 			intercalar();
 		break;
@@ -135,9 +138,21 @@ void InterfaceUsuario::adicionar()
 void InterfaceUsuario::excluir()
 {
 	ApagadorIndices ai;
+	std::string matricula;
+	std::vector<std::string>::iterator lista;
 
-	/* pedir por matricula */
-	/* procurar em qual arquivo está a matrícula */
+	std::cout << "Digite a matricula: " << std::endl;
+	std::getline(std::cin, matricula);
+	std::getline(std::cin, matricula);
+
+	for (lista = listas.begin(); lista != listas.end(); ++lista)
+	{
+		std::cout << "--- # Antes: " << std::endl;
+		mostrador.mostrar(*lista);
+		ai.excluir(*lista, matricula);
+		std::cout << "--- # Depois: " << std::endl;
+		mostrador.mostrar(*lista);
+	}
 	/* excluir */
 }
 
@@ -145,7 +160,6 @@ void InterfaceUsuario::intercalar()
 {
 	IntercaladorIndices ii;
 
-	// std::cout << "# intercalando..." << std::endl;
 	ii.intercalar(listas[0], listas[1]);
 	std::cout << "--- # lista intercalada" << std::endl;
 	mostrador.mostrar("lista12.txt");

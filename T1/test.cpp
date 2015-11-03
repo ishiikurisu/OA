@@ -56,7 +56,9 @@ int main(int argc, char const *argv[]) {
 		cout << "- " << *queen << endl;
 	cout << endl;
 
-
+	cout << "# searching" << endl;
+	cout << bacon.find("ac") << endl;
+	cout << bacon.find("ad") << endl;
 
 	return 0;
 }
