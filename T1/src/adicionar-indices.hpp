@@ -3,6 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <criador-indices-primario.hpp>
+#include <criador-indices-secundario.hpp>
 
 class AdicionadorIndices
 {
@@ -80,9 +81,9 @@ void AdicionadorIndices::adicionar(std::string entrada,
 	                               std::vector<std::string> dados)
 {
 	std::string chave;
-	CriadorIndicesPrimario cip;
 	OrdenadorIndices oi;
-	// CriadorIndicesSecundario cis;
+	CriadorIndicesPrimario cip;
+	CriadorIndicesSecundario cis;
 
 	chave = gerar_chave(dados);
 
@@ -101,6 +102,7 @@ void AdicionadorIndices::adicionar(std::string entrada,
 	fs << chave << std::endl;
 	fs.close();
 	oi.ordenar_roubando(entrada);
+	cis.gerar_indices(entrada);
 
 	/* lidar com arquivo de chaves secundarias */
 	// fs.open(cis.gerar_saida(entrada).c_str());

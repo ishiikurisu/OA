@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <criador-indices-primario.hpp>
+#include <criador-indices-secundario.hpp>
 #define TEMP ("saida.temp")
 
 class AtualizadorIndices
@@ -67,7 +69,6 @@ void AtualizadorIndices::atualizar_arquivo_principal(std::string nome_arquivo,
 	rename(TEMP, nome_arquivo.c_str());
 }
 
-#include <criador-indices-primario.hpp>
 void AtualizadorIndices::atualizar_arquivo_chaves(std::string nome_arquivo,
 	                               std::vector<std::string> antigos,
 								   std::vector<std::string> novos)
@@ -81,6 +82,7 @@ void AtualizadorIndices::atualizar_arquivo_chaves(std::string nome_arquivo,
 	std::string chave_nova;
 	std::string linha;
 	CriadorIndicesPrimario cip;
+	CriadorIndicesSecundario cis;
 	size_t i;
 
 	inlet.open(cip.gerar_saida(nome_arquivo).c_str(), std::fstream::in);
@@ -112,6 +114,7 @@ void AtualizadorIndices::atualizar_arquivo_chaves(std::string nome_arquivo,
 	outlet.close();
 	remove(cip.gerar_saida(nome_arquivo).c_str());
 	rename(TEMP, cip.gerar_saida(nome_arquivo).c_str());
+	cis.gerar_indices(cip.gerar_saida(nome_arquivo));
 }
 
 /*******************

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <criador-indices-primario.hpp>
+#include <criador-indices-secundario.hpp>
 #define ARQTEMP ("saida.temp")
 
 class ApagadorIndices
@@ -48,9 +49,11 @@ void ApagadorIndices::apagar_no_arquivo(std::string nome_arquivo, std::string ma
 
 void ApagadorIndices::excluir(std::string arquivo, std::string matricula) {
 	CriadorIndicesPrimario cip;
+	CriadorIndicesSecundario cis;
 
 	apagar_no_arquivo(arquivo, matricula);
 	apagar_no_arquivo(cip.gerar_saida(arquivo), matricula);
+	cis.gerar_indices(cip.gerar_saida(arquivo));
 }
 
 #undef ARQTEMP

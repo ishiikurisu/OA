@@ -10,11 +10,6 @@
 #include <atualizar-indices.hpp>
 #include <intercalar-indices.hpp>
 #include <toolbox.hpp>
-#ifdef _WIN32
-#define clear() system("cls")
-#else
-#define clear() system("clear")
-#endif
 
 class InterfaceUsuario
 {
@@ -86,7 +81,6 @@ bool InterfaceUsuario::escolher_opcao()
 	int op = -1;
 	std::string junk;
 
-	// clear();
 	std::cout << "Escolha uma opcao:" << std::endl;
 	std::cout << "  0. SAIR" << std::endl;
 	std::cout << "  1. INCLUIR" << std::endl;
@@ -150,9 +144,9 @@ void InterfaceUsuario::adicionar()
 		dados.push_back(dado);
 	}
 
-	std::cout << "--- # Antes:" << std::endl; mostrador.mostrar(arquivo);
+	std::cout << "--- # Antes" << std::endl; mostrador.mostrar(arquivo);
 	ai.adicionar(arquivo, dados);
-	std::cout << "--- # Depois:" << std::endl; mostrador.mostrar(arquivo);
+	std::cout << "--- # Depois" << std::endl; mostrador.mostrar(arquivo);
 	std::cout << "..." << std::endl;
 }
 
@@ -173,8 +167,8 @@ void InterfaceUsuario::excluir()
 		ai.excluir(*lista, matricula);
 		std::cout << "--- # Depois: " << std::endl;
 		mostrador.mostrar(*lista);
+		std::cout << "..." << std::endl;
 	}
-	/* excluir */
 }
 
 void InterfaceUsuario::atualizar()
@@ -209,6 +203,7 @@ void InterfaceUsuario::atualizar()
 			ai.atualizar(*lista, antigos, novos);
 			std::cout << "--- # Depois" << std::endl;
 			mostrador.mostrar(*lista);
+			std::cout << "..." << std::endl;
 		}
 	}
 	else {
