@@ -42,10 +42,17 @@ void AtualizadorIndices::atualizar_arquivo_principal(std::string nome_arquivo,
 	{
 		if (linha.find(matricula_antiga) < linha.length()) {
 			outlet << matricula_nova << " ";
-			outlet << nome_novo;
-			for (i = nome_novo.length(); i <= 40; ++i)
-				outlet << " ";
-			for (i = 49; i < linha.length(); ++i)
+			if (nome_novo.length() < 40) {
+				outlet << nome_novo;
+				for (i = nome_novo.length(); i < 40; ++i)
+					outlet << " ";
+			}
+			else {
+				for (i = 0; i < 40; ++i)
+					outlet << nome_novo[i];
+			}
+			outlet << " ";
+			for (i = 48; i < linha.length(); ++i)
 				outlet << linha.at(i);
 			outlet << std::endl; // substring inalterada da linha
 		}
@@ -82,14 +89,18 @@ void AtualizadorIndices::atualizar_arquivo_chaves(std::string nome_arquivo,
 	nome_antigo = antigos[1];
 	matricula_nova = (novos[0].length() > 0)? novos[0] : matricula_antiga;
 	nome_novo = (novos[1].length() > 0)? novos[1] : nome_antigo;
-	chave_nova = cip.gerar_chave(matricula_nova + " " + nome_novo + "          ");
+	chave_nova = matricula_nova + " " + nome_novo;
+	for (i = 0; i < 70; chave_nova += " ", ++i);
+	chave_nova = cip.gerar_chave(chave_nova);
 
 	for (std::getline(inlet, linha); linha.length() > 1; std::getline(inlet, linha))
 	{
 		if (linha.find(matricula_antiga) < linha.length()) {
-			outlet << chave_nova << " ";
-			for (i = chave_nova.length(); i < linha.length(); ++i)
-				outlet << linha.at(i);
+			for (i = 0; i < 15; ++i)
+				outlet << chave_nova[i];
+			outlet << " ";
+			for (i = 16; i < linha.length(); ++i)
+				outlet << linha[i];
 			outlet << std::endl;
 		}
 		else {

@@ -203,7 +203,13 @@ void InterfaceUsuario::atualizar()
 		std::getline(std::cin, dado);
 		novos.push_back(dado);
 		for (lista = listas.begin(); lista != listas.end(); ++lista)
+		{
+			std::cout << "--- # Antes" << std::endl;
+			mostrador.mostrar(*lista);
 			ai.atualizar(*lista, antigos, novos);
+			std::cout << "--- # Depois" << std::endl;
+			mostrador.mostrar(*lista);
+		}
 	}
 	else {
 		std::cout << "Matricula nao encontrada" << std::endl;
