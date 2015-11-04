@@ -138,10 +138,9 @@ std::vector<std::string> OrdenadorIndices::heapsort(std::vector<std::string> cha
 * FUNCOES PUBLICAS *
 *******************/
 
-// enquanto não conseguimos implementar o heapsort,
-// vamos ordenar o arquivo usando a função std::sort 
 void OrdenadorIndices::ordenar_roubando(std::string endereco)
 {
+	std::cout << "entrou no roubando" << std::endl;
 	std::vector<std::string> chaves = preencher_do_arquivo(endereco);
 	std::sort(chaves.begin(), chaves.end()); // CHEATING
 	escrever_para_arquivo(endereco, chaves);
