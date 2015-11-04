@@ -9,20 +9,19 @@ Alunos:
 Instruções de uso
 -----------------
 
-Usando o software make e o arquivo `makefile` fornecido,
-compile e rode o programa usando o seguinte script:
+Usando o software make e o arquivo `makefile` fornecido, compile e rode o programa usando o seguinte script:
 
 ``` unix shell
-make main
+make
 ./main.bin
 ```
 
-Dentro do programa, será pedido o endereço dos dois
-arquivos. Após isso, entraremos no menu principal, com
-5 opções:
+Dentro do programa, será pedido o endereço dos dois arquivos. A partir deles, serão gerados 4 arquivos: dois índices primários e dois índices secundários. Após isso, entraremos no menu principal, com 5 opções:
 
 + Sair
 + Incluir
 + Excluir
 + Atualizar
 + Intercalar
+
+Com exceção da opção "Sair", dentro de cada uma delas, serão pedidas as informações necessárias para a atualização do banco de dados. A opção "Intercalar" gera um novo arquivo, chamado "lista12.txt", que contém todas as matrículas existentes no banco de dados.

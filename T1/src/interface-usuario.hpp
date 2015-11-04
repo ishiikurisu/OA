@@ -14,11 +14,11 @@
 class InterfaceUsuario
 {
 	std::string procurar(std::string);
+	std::string pedir_listas(void);
 	std::vector<std::string> listas;
 	MostradorIndices mostrador;
 public:
-	InterfaceUsuario();
-	std::string pedir_listas(void);
+	InterfaceUsuario() {};
 	bool escolher_opcao(void);
 	void setup();
 	void adicionar();
@@ -27,6 +27,9 @@ public:
 	void intercalar();
 };
 
+/*******************
+* FUNÇÕES PRIVADAS *
+*******************/
 std::string InterfaceUsuario::procurar(std::string matricula)
 {
 	Procurador pr;
@@ -43,11 +46,6 @@ std::string InterfaceUsuario::procurar(std::string matricula)
 	return std::string("");
 }
 
-InterfaceUsuario::InterfaceUsuario()
-{
-	return;
-}
-
 std::string InterfaceUsuario::pedir_listas()
 {
 	std::string nome;
@@ -58,6 +56,10 @@ std::string InterfaceUsuario::pedir_listas()
 	return nome;
 }
 
+/*******************
+* FUNÇÕES PÚBLICAS *
+*******************/
+// Começo do programa: montar os índices primário e secundário
 void InterfaceUsuario::setup()
 {
 	CriadorIndicesPrimario cip;
@@ -75,6 +77,8 @@ void InterfaceUsuario::setup()
 	}
 }
 
+// Menu principal: mostra quais opções disponíveis
+// e chama opção selecionada
 bool InterfaceUsuario::escolher_opcao()
 {
 	bool permanecer = true;
@@ -88,7 +92,8 @@ bool InterfaceUsuario::escolher_opcao()
 	std::cout << "  3. ATUALIZAR" << std::endl;
 	std::cout << "  4. INTERCALAR" << std::endl;
 	std::cout << "Opcao: ";
-	std::cin >> op;
+	std::getline(std::cin, junk);
+	op = stoi(junk.c_str());
 
 	switch (op)
 	{
@@ -120,6 +125,13 @@ bool InterfaceUsuario::escolher_opcao()
 	return permanecer;
 }
 
+//
+// OPÇÕES DISPONÍVEIS
+//
+// Cada uma dessas funções pegam as informações necessárias para
+// a opção escolhida e chamam o objeto responsável pela atualização
+// necessária nos arquivos
+
 void InterfaceUsuario::adicionar()
 {
 	const char* campos[] = {"Matricula", "Nome", "OP", "Curso", "Turma", NULL};
@@ -133,7 +145,6 @@ void InterfaceUsuario::adicionar()
 	std::cout << "Adicionar em qual arquivo?" << std::endl;
 	for (i = 1, l = listas.begin(); l != listas.end(); ++l, ++i)
 		std::cout << "  " << i << ". " << *l << std::endl;
-	std::getline(std::cin, dado);
 	std::getline(std::cin, dado);
 	i = stoi(dado.c_str());
 	arquivo = listas.at(--i);
@@ -158,14 +169,13 @@ void InterfaceUsuario::excluir()
 
 	std::cout << "Digite a matricula: " << std::endl;
 	std::getline(std::cin, matricula);
-	std::getline(std::cin, matricula);
 
 	for (lista = listas.begin(); lista != listas.end(); ++lista)
 	{
-		std::cout << "--- # Antes: " << std::endl;
+		std::cout << "--- # Antes" << std::endl;
 		mostrador.mostrar(*lista);
 		ai.excluir(*lista, matricula);
-		std::cout << "--- # Depois: " << std::endl;
+		std::cout << "--- # Depois" << std::endl;
 		mostrador.mostrar(*lista);
 		std::cout << "..." << std::endl;
 	}
@@ -180,7 +190,6 @@ void InterfaceUsuario::atualizar()
 	std::vector<std::string>::iterator lista;
 
 	std::cout << "Digite sua matricula:" << std::endl;
-	std::getline(std::cin, dado);
 	std::getline(std::cin, dado);
 	antigos.push_back(dado);
 	dado = procurar(dado);
@@ -209,7 +218,6 @@ void InterfaceUsuario::atualizar()
 	else {
 		std::cout << "Matricula nao encontrada" << std::endl;
 	}
-
 }
 
 void InterfaceUsuario::intercalar()
