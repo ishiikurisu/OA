@@ -1,0 +1,9 @@
+- [ ] Implementar a B-Tree
+  - [ ] Implementar adição de dados
+  - [ ] Implementar busca
+- [ ] Escrever interface gráfica
+  - [ ] Criar classe banco de dados
+    - [ ] Conectar banco de dados à estrutura de arquivos
+  - [ ] Escrever menus
+    - [x] Adicionar
+	- [ ] Buscar

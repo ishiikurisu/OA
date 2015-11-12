@@ -1,16 +1,17 @@
 #pragma once
 #include <cstdlib>
+#include <string>
 #include <iostream>
 #include <fstream>
-#include <btree.hpp>
+#include <banco.hpp>
 #include <toolbox.hpp>
 
 class InterfaceUsuario
 {
 	void adicionar();
 	void buscar();
-	BTree btree;
-	char *caminho;
+	Banco banco;
+	std::string caminho;
 public:
 	InterfaceUsuario() {};
 	void setup();
@@ -22,19 +23,20 @@ void InterfaceUsuario::setup()
 	std::fstream arquivo;
 	std::string linha;
 
-	caminho = (char*) malloc(sizeof(char) * 11);
 	caminho = "lista.txt";
-	arquivo.open(caminho, std::fstream::in);
+	arquivo.open(caminho.c_str(), std::fstream::in);
 
 	std::cout << "# Arquivo original" << std::endl;
 	std::getline(arquivo, linha);
 	while (linha.length() > 1)
 	{
 		std::cout << "+ " << linha << std::endl;
-		btree.adicionar(linha);
+		banco.popular(linha);
 		std::getline(arquivo, linha);
 	}
 
+	banco.definir_arquivo_principal(caminho);
+	banco.mostrar();
 	arquivo.close();
 }
 
@@ -60,9 +62,9 @@ bool InterfaceUsuario::draw()
 		// 	buscar();
 		// break;
 		//
-		// case 2:
-		// 	adicionar();
-		// break;
+		case 2:
+			adicionar();
+		break;
 
 		default:
 			std::cout << "Opção não implementada" << std::endl;
@@ -82,5 +84,38 @@ void InterfaceUsuario::buscar()
 
 void InterfaceUsuario::adicionar()
 {
+	std::string info;
+	std::string linha;
+	int a;
 
+	std::cout << "--- # Adicionar" << std::endl;
+
+	std::cout << "Matricula do aluno:" << std::endl;
+	std::getline(std::cin, linha);
+	info += linha + " ";
+
+	std::cout << "Nome:" << std::endl;
+	std::getline(std::cin, linha);
+	if (linha.length() < 40)
+		for (a = linha.length(); a < 40; linha += ' ', ++a);
+	info += linha + " ";
+
+	std::cout << "Opção:" << std::endl;
+	std::getline(std::cin, linha);
+	if (linha.length() < 3)
+		for (a = linha.length(); a < 3; linha += ' ', ++a);
+	info += linha + " ";
+
+	std::cout << "Curso:" << std::endl;
+	std::getline(std::cin, linha);
+	if (linha.length() < 8)
+		for (a = linha.length(); a < 8; linha += ' ', ++a);
+	info += linha + " ";
+
+	std::cout << "Turma:" << std::endl;
+	std::getline(std::cin, linha);
+	info += linha;
+
+	std::cout << "..." << std::endl;
+	banco.adicionar(info);
 }
