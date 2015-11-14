@@ -1,34 +1,95 @@
 #ifndef BTREE_H
 #define BTREE_H
+#include <stdio.h>
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <string>
+#include <node.hpp>
+#define TAMANHO_PAGINA 16
+#define NOME_PAGINA ("indicelista.bt")
 
 class BTree
 {
-	std::vector<std::string> dados;
+	char* gerar_nome_pagina(size_t);
+	void carregar_pagina();
+	void escrever_pagina();
+	std::vector<Node> dados;
+	std::vector<std::string> enderecos;
+	int numero_paginas;
 public:
-	BTree()	{};
+	BTree();
 	void adicionar(std::string, size_t);
 	void mostrar();
+	friend class Node;
 };
+
+/*******************
+* FUNÇÕES PRIVADAS *
+*******************/
+
+char* BTree::gerar_nome_pagina(size_t numero)
+{
+	char *nome = (char*) malloc(sizeof(char) * 256);
+	sprintf(nome, "%s.%03d", NOME_PAGINA, numero_paginas);
+	return nome;
+}
+
+void BTree::carregar_pagina()
+{
+
+}
+
+void BTree::escrever_pagina()
+{
+	std::fstream pagina;
+	char *nome_pagina = gerar_nome_pagina(numero_paginas);
+	std::vector<Node>::iterator no;
+
+	pagina.open(nome_pagina, std::fstream::out);
+
+	for (no = dados.begin(); no != dados.end(); ++no)
+	{
+		pagina << no->pk << " " << no->linha << std::endl;
+	}
+
+	free(nome_pagina);
+	pagina.close();
+}
+
+/*******************
+* FUNÇÕES PÚBLICAS *
+*******************/
+
+BTree::BTree()
+{
+	numero_paginas = 1;
+}
 
 void BTree::adicionar(std::string dado, size_t no_linha)
 {
-	dados.push_back(dado);
+	Node no(dado, no_linha);
+	dados.push_back(no);
+
+	if (dados.size() >= TAMANHO_PAGINA) {
+		escrever_pagina();
+		dados.clear();
+		++numero_paginas;
+	}
 }
 
 void BTree::mostrar()
 {
-	std::vector<std::string>::iterator it;
+	std::vector<Node>::iterator it;
 
+	escrever_pagina();
 	std::cout << "--- # BTree" << std::endl;
 	for (it = dados.begin(); it != dados.end(); ++it)
 	{
-		std::cout << "- " << *it << std::endl;
+		it->mostrar();
 	}
 
-	std::cout << "---" << std::endl;
+	std::cout << "..." << std::endl;
 }
 
 #endif /* end of include guard: BTREE_H */

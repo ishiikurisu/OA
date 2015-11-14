@@ -1,5 +1,7 @@
 - [ ] Implementar a B-Tree
   - [ ] Implementar adição de dados
+    - [ ] Adicionar em ordem na página
+	+ Decisão de design: como lidar com páginas?
   - [ ] Implementar busca
 - [ ] Escrever interface gráfica
   - [ ] Criar classe banco de dados
