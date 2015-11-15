@@ -7,7 +7,7 @@
 #include <string>
 #include <node.hpp>
 #define TAMANHO_PAGINA 16
-#define NOME_PAGINA ("indicelista.bt")
+#define NOME_PAGINA ("indicelista.%03d.bt")
 
 class BTree
 {
@@ -31,7 +31,7 @@ public:
 char* BTree::gerar_nome_pagina(size_t numero)
 {
 	char *nome = (char*) malloc(sizeof(char) * 256);
-	sprintf(nome, "%s.%03d", NOME_PAGINA, numero_paginas);
+	sprintf(nome, NOME_PAGINA, numero_paginas);
 	return nome;
 }
 
@@ -69,9 +69,17 @@ BTree::BTree()
 void BTree::adicionar(std::string dado, size_t no_linha)
 {
 	Node no(dado, no_linha);
-	dados.push_back(no);
+	size_t i = 0;
 
+	/* adicionar ordenado */
+	for (i = 0; i < dados.size(); ++i)
+		if (dados[i].get_pk().compare(no.get_pk()) > 0)
+			break /* ou vá a outra página, se tiver */;
+	dados.insert(dados.begin() + i, no);
+
+	/* checar se deve dividir a página */
 	if (dados.size() >= TAMANHO_PAGINA) {
+		// enquanto não dividimos a página...
 		escrever_pagina();
 		dados.clear();
 		++numero_paginas;
@@ -85,9 +93,7 @@ void BTree::mostrar()
 	escrever_pagina();
 	std::cout << "--- # BTree" << std::endl;
 	for (it = dados.begin(); it != dados.end(); ++it)
-	{
 		it->mostrar();
-	}
 
 	std::cout << "..." << std::endl;
 }

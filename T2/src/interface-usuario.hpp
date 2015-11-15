@@ -55,7 +55,6 @@ bool InterfaceUsuario::draw()
 		case 0:
 			permaneca = false;
 			std::cout << "Obrigado por usar a aplicacao :)" << std::endl;
-			std::getline(std::cin, junk);
 		break;
 
 		// case 1:
