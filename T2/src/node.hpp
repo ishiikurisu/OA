@@ -6,10 +6,10 @@
 class Node
 {
 	std::string pk;
-	size_t linha;
+	unsigned int linha;
 public:
 	Node();
-	Node(std::string, size_t);
+	Node(std::string, unsigned int);
 	std::string get_pk();
 	void mostrar();
 	friend class BTree;
@@ -24,7 +24,7 @@ Node::Node()
 
 }
 
-Node::Node(std::string c, size_t l)
+Node::Node(std::string c, unsigned int l)
 {
 	pk = c;
 	linha = l;

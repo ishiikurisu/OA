@@ -9,7 +9,7 @@ class Banco
 	std::string arquivo_principal;
 	std::string arquivo_chaves;
 	BTree btree;
-	size_t no_dados;
+	unsigned int no_dados;
 public:
 	Banco();
 	void definir_arquivo_principal(std::string);
@@ -62,7 +62,7 @@ void Banco::adicionar(std::string dado)
 	fs.open(arquivo_principal.c_str(), std::fstream::in);
 	fs.seekg(0, fs.end);
 	fs << dado << std::endl;
-	
+
 	popular(dado);
 	fs.close();
 }

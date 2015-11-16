@@ -11,7 +11,7 @@
 
 class BTree
 {
-	char* gerar_nome_pagina(size_t);
+	char* gerar_nome_pagina(unsigned int);
 	void carregar_pagina();
 	void escrever_pagina();
 	std::vector<Node> dados;
@@ -19,7 +19,7 @@ class BTree
 	int numero_paginas;
 public:
 	BTree();
-	void adicionar(std::string, size_t);
+	void adicionar(std::string, unsigned int);
 	void mostrar();
 	friend class Node;
 };
@@ -28,7 +28,7 @@ public:
 * FUNÇÕES PRIVADAS *
 *******************/
 
-char* BTree::gerar_nome_pagina(size_t numero)
+char* BTree::gerar_nome_pagina(unsigned int numero)
 {
 	char *nome = (char*) malloc(sizeof(char) * 256);
 	sprintf(nome, NOME_PAGINA, numero_paginas);
@@ -66,10 +66,10 @@ BTree::BTree()
 	numero_paginas = 1;
 }
 
-void BTree::adicionar(std::string dado, size_t no_linha)
+void BTree::adicionar(std::string dado, unsigned int no_linha)
 {
 	Node no(dado, no_linha);
-	size_t i = 0;
+	unsigned int i = 0;
 
 	/* adicionar ordenado */
 	for (i = 0; i < dados.size(); ++i)
