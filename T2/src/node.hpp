@@ -12,7 +12,7 @@ public:
 	Node(std::string, unsigned int);
 	std::string get_pk();
 	void mostrar();
-	friend class BTree;
+	friend class Pagina;
 };
 
 /*******************
