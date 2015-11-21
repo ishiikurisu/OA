@@ -1,11 +1,1 @@
-- [ ] Implementar a B-Tree
-  - [ ] Implementar adição de dados
-    - [x] Adicionar em ordem na página
-	+ Decisão de design: como lidar com páginas?
-  - [ ] Implementar busca
-- [ ] Escrever interface gráfica
-  - [x] Criar classe banco de dados
-    - [x] Conectar banco de dados à estrutura de arquivos
-  - [ ] Escrever menus
-    - [x] Adicionar
-	- [ ] Buscar
+﻿- [ ] Implementar a BTree do Folk
