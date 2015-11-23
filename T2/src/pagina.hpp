@@ -13,13 +13,17 @@ class Pagina
 	char* gerar_nome_pagina(unsigned int);
 	void carregar_pagina();
 	void escrever_pagina();
+	Node adicionar_filha(Node, unsigned int);
+	Node dividir_filhos();
 	unsigned int no_pagina;
 	unsigned int no_pagina_pai;
 public:
 	Pagina();
-	void adicionar(std::string, unsigned int);
+	Node adicionar(Node);
+	Node adicionar(std::string, unsigned int);
 	void salvar();
 	void definir_pagina(unsigned int);
+	Pagina* dividir();
 	unsigned int tamanho();
 	std::vector<Node> dados;
 	std::vector<unsigned int> filhos;
@@ -74,6 +78,33 @@ void Pagina::escrever_pagina()
 	pagina.close();
 }
 
+Node Pagina::adicionar_filha(Node dado, unsigned int pagina)
+{
+	Pagina filha;
+	filha.definir_pagina(pagina);
+	filha.carregar_pagina();
+	dado = filha.adicionar(dado);
+	filha.salvar();
+	return dado;
+}
+
+Node Pagina::dividir_filhos()
+{
+	Pagina *paginas = dividir();
+	Pagina menor = paginas[0];
+	Pagina meio  = paginas[1];
+	Pagina maior = paginas[2];
+
+	menor.definir_pagina(NUMERO_PAGINA);
+	filhos.push_back(NUMERO_PAGINA++);
+
+	maior.definir_pagina(NUMERO_PAGINA);
+	filhos.push_back(NUMERO_PAGINA++);
+
+	free(paginas);
+	return meio.dados[0];
+}
+
 /*******************
 * FUNÇÕES PÚBLICAS *
 *******************/
@@ -84,21 +115,16 @@ Pagina::Pagina()
 	no_pagina_pai = -1;
 }
 
-void Pagina::adicionar(std::string dado, unsigned int no_linha)
+Node Pagina::adicionar(Node no)
 {
-	Node no(dado, no_linha);
-	unsigned int i;
+	unsigned int i = 0;
 
 	if (filhos.size() > 0) {
 		/* ainda não está em uma folha */
 		for (i = 0; i < dados.size(); ++i)
 			if (dados[i].get_pk().compare(no.get_pk()) > 0)
 				break;
-		Pagina filha;
-		filha.definir_pagina(filhos[i]);
-		filha.carregar_pagina();
-		filha.adicionar(dado, no_linha);
-		filha.salvar();
+		no = adicionar_filha(no, filhos[i]);
 	}
 	else {
 		/* está em uma folha */
@@ -108,11 +134,42 @@ void Pagina::adicionar(std::string dado, unsigned int no_linha)
 		dados.insert(dados.begin() + i, no);
 
 		if (dados.size() >= TAMANHO_PAGINA) {
-			escrever_pagina();
+			no = dividir_filhos();
 			dados.clear();
+			escrever_pagina();
 			++NUMERO_PAGINA;
 		}
 	}
+
+	return no;
+}
+
+Node Pagina::adicionar(std::string dado, unsigned int no_linha)
+{
+	Node no(dado, no_linha);
+	return adicionar(no);
+}
+
+Pagina* Pagina::dividir()
+{
+	Pagina *outlet = new Pagina[5];
+	Pagina menor;
+	Pagina maior;
+	Pagina meio;
+	unsigned int i;
+
+	for (i = 0; i < filhos.size()/2; ++i)
+		menor.filhos.push_back(filhos[i]),
+		menor.dados.push_back(dados[i]);
+	meio.filhos.push_back(filhos[i]);
+	for (++i; i < filhos.size(); ++i)
+		maior.filhos.push_back(filhos[i]),
+		maior.dados.push_back(dados[i]);
+
+	outlet[0] = menor;
+	outlet[1] = meio;
+	outlet[2] = maior;
+	return outlet;
 }
 
 void Pagina::salvar()

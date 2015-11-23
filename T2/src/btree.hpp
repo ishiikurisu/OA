@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <node.hpp>
 #include <pagina.hpp>
 
 class BTree
@@ -33,7 +34,10 @@ BTree::BTree()
 
 void BTree::adicionar(std::string dado, unsigned int no_linha)
 {
-	raiz.adicionar(dado, no_linha);
+	Node resultado = raiz.adicionar(dado, no_linha);
+
+	while (resultado.get_pk().length() > 1)
+		resultado = raiz.adicionar(resultado);
 }
 
 /*
