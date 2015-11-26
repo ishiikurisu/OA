@@ -66,7 +66,7 @@ void Pagina::carregar_pagina()
 void Pagina::escrever_pagina()
 {
 	std::fstream pagina;
-	char *nome_pagina = gerar_nome_pagina(NUMERO_PAGINA);
+	char *nome_pagina = gerar_nome_pagina(no_pagina);
 	std::vector<Node>::iterator no;
 
 	pagina.open(nome_pagina, std::fstream::out);
