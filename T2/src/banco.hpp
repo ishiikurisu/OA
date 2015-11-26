@@ -29,7 +29,7 @@ std::string Banco::gerar_chave(std::string linha)
 
 	for (i = 0; i < 6; ++i)
 		chave += linha.at(i);
-	for (i = 8; i < 12; ++i)
+	for (i = 7; i < 11; ++i)
 		chave += linha.at(i);
 
 	return chave;

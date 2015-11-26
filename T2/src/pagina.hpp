@@ -3,6 +3,7 @@
 #include <vector>
 #include <fstream>
 #include <node.hpp>
+#include <toolbox.hpp>
 #define TAMANHO_PAGINA (16)
 #define NOME_PAGINA ("indicelista.%03d.bt")
 
@@ -23,6 +24,7 @@ public:
 	Node adicionar(std::string, unsigned int);
 	void salvar();
 	void definir_pagina(unsigned int);
+	void definir_pai(unsigned int);
 	Pagina* dividir();
 	unsigned int tamanho();
 	std::vector<Node> dados;
@@ -96,10 +98,14 @@ Node Pagina::dividir_filhos()
 	Pagina maior = paginas[2];
 
 	menor.definir_pagina(NUMERO_PAGINA);
+	menor.definir_pai(no_pagina);
 	filhos.push_back(NUMERO_PAGINA++);
+	menor.escrever_pagina();
 
 	maior.definir_pagina(NUMERO_PAGINA);
+	maior.definir_pai(no_pagina);
 	filhos.push_back(NUMERO_PAGINA++);
+	maior.escrever_pagina();
 
 	free(paginas);
 	return meio.dados[0];
@@ -134,10 +140,11 @@ Node Pagina::adicionar(Node no)
 		dados.insert(dados.begin() + i, no);
 
 		if (dados.size() >= TAMANHO_PAGINA) {
+			toolbox::debug("dividindo");
 			no = dividir_filhos();
 			dados.clear();
+			dados.push_back(no);
 			escrever_pagina();
-			++NUMERO_PAGINA;
 		}
 	}
 
@@ -159,11 +166,9 @@ Pagina* Pagina::dividir()
 	unsigned int i;
 
 	for (i = 0; i < filhos.size()/2; ++i)
-		menor.filhos.push_back(filhos[i]),
 		menor.dados.push_back(dados[i]);
-	meio.filhos.push_back(filhos[i]);
+	meio.dados.push_back(dados[i]);
 	for (++i; i < filhos.size(); ++i)
-		maior.filhos.push_back(filhos[i]),
 		maior.dados.push_back(dados[i]);
 
 	outlet[0] = menor;
@@ -180,6 +185,11 @@ void Pagina::salvar()
 void Pagina::definir_pagina(unsigned int pag)
 {
 	no_pagina = pag;
+}
+
+void Pagina::definir_pai(unsigned int pai)
+{
+	no_pagina_pai = pai;
 }
 
 unsigned int Pagina::tamanho()

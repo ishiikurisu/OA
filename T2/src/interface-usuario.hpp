@@ -5,13 +5,13 @@
 #include <fstream>
 #include <banco.hpp>
 #include <toolbox.hpp>
+#define CAMINHO ("lista.txt")
 
 class InterfaceUsuario
 {
 	void adicionar();
 	void buscar();
 	Banco banco;
-	std::string caminho;
 public:
 	InterfaceUsuario() {};
 	void setup();
@@ -23,19 +23,18 @@ void InterfaceUsuario::setup()
 	std::fstream arquivo;
 	std::string linha;
 
-	caminho = "lista.txt";
-	arquivo.open(caminho.c_str(), std::fstream::in);
+	arquivo.open(CAMINHO, std::fstream::in);
 
-	std::cout << "# Arquivo original" << std::endl;
+	// std::cout << "# Arquivo original" << std::endl;
 	std::getline(arquivo, linha);
 	while (linha.length() > 1)
 	{
-		std::cout << "+ " << linha << std::endl;
+		// std::cout << "+ " << linha << std::endl;
 		banco.popular(linha);
 		std::getline(arquivo, linha);
 	}
 
-	banco.definir_arquivo_principal(caminho);
+	banco.definir_arquivo_principal(CAMINHO);
 	banco.mostrar();
 	arquivo.close();
 }
@@ -118,3 +117,5 @@ void InterfaceUsuario::adicionar()
 	std::cout << "..." << std::endl;
 	banco.adicionar(info);
 }
+
+#undef CAMINHO
