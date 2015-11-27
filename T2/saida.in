@@ -1,0 +1,326 @@
+g++ src/main.cpp -o main.bin -lm -O3 -std=c++11 -ansi -Wall -I"src"
+!DEBUG! dado: 024312Leon
+-- # pagina 
+...
+!DEBUG! dado: 031272Andr
+-- # pagina 
+- 024312Leon
+...
+!DEBUG! dado: 035830Roge
+-- # pagina 
+- 024312Leon
+- 031272Andr
+...
+!DEBUG! dado: 041881Ana 
+-- # pagina 
+- 024312Leon
+- 031272Andr
+- 035830Roge
+...
+!DEBUG! dado: 042290Brun
+-- # pagina 
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana 
+...
+!DEBUG! dado: 042780Dani
+-- # pagina 
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana 
+- 042290Brun
+...
+!DEBUG! dado: 042865Dani
+-- # pagina 
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana 
+- 042290Brun
+- 042780Dani
+...
+!DEBUG! dado: 043217Erik
+-- # pagina 
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana 
+- 042290Brun
+- 042780Dani
+- 042865Dani
+...
+!DEBUG! dado: 043341Fabr
+-- # pagina 
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana 
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+...
+!DEBUG! dado: 044072Igor
+-- # pagina 
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana 
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+- 043341Fabr
+...
+!DEBUG! dado: 045058Marc
+-- # pagina 
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana 
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+- 043341Fabr
+- 044072Igor
+...
+!DEBUG! dado: 046306Rodr
+-- # pagina 
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana 
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+- 043341Fabr
+- 044072Igor
+- 045058Marc
+...
+!DEBUG! dado: 046708Thia
+-- # pagina 
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana 
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+- 043341Fabr
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+...
+!DEBUG! dado: 046713Thia
+-- # pagina 
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana 
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+- 043341Fabr
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+...
+!DEBUG! dado: 046802Tiag
+-- # pagina 
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana 
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+- 043341Fabr
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+...
+!DEBUG! dado: 046944Vito
+-- # pagina 
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana 
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+- 043341Fabr
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+...
+!DEBUG! dividindo
+-- # pagina 
+...
+- # pagina 
+...
+-- # pagina 
+- 024312Leon
+...
+!DEBUG! dado: 046946Vito
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 046956Vito
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 046961Vito
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 015511Ange
+-- # pagina 
+- 024312Leon
+...
+-- # pagina 
+...
+!DEBUG! dado: 031147Ande
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 031200Andr
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 032725Fell
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 033282Henr
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 037396Hugo
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 042348Brun
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 042728Dani
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 043648Fran
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 044281Jorg
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 044637Leon
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 045460Muri
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 044072Igor
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 045585Otav
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 045927Rafa
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 042780Dani
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 045934Rafa
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 046245Robe
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 046674Thar
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 046718Thia
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+!DEBUG! dado: 046961Vito
+-- # pagina 
+- 024312Leon
+...
+- # pagina 
+...
+# Selecione uma opcao
+0. Sair
+1. Buscar
+2. Adicionar
+Obrigado por usar a aplicacao :)

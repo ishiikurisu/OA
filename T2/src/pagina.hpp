@@ -16,10 +16,12 @@ class Pagina
 	void escrever_pagina();
 	Node adicionar_filha(Node, unsigned int);
 	Node dividir_filhos();
+	void lidar_com_pai(Node);
 	unsigned int no_pagina;
 	unsigned int no_pagina_pai;
 public:
 	Pagina();
+	void identificar();
 	Node adicionar(Node);
 	Node adicionar(std::string, unsigned int);
 	void salvar();
@@ -41,6 +43,16 @@ char* Pagina::gerar_nome_pagina(unsigned int numero)
 	char *nome = (char*) malloc(sizeof(char) * 20);
 	sprintf(nome, NOME_PAGINA, numero);
 	return nome;
+}
+
+void Pagina::identificar()
+{
+	std::vector<Node>::iterator dado;
+
+	toolbox::cat("--- # pagina " + no_pagina);
+	for (dado = dados.begin(); dado != dados.end(); ++dado)
+		toolbox::cat(("- " + (*dado).get_pk()).c_str());
+	toolbox::cat("...");
 }
 
 void Pagina::carregar_pagina()
@@ -107,8 +119,18 @@ Node Pagina::dividir_filhos()
 	filhos.push_back(NUMERO_PAGINA++);
 	maior.escrever_pagina();
 
+	menor.identificar();
+	maior.identificar();
 	free(paginas);
 	return meio.dados[0];
+}
+
+void Pagina::lidar_com_pai(Node no)
+{
+	dados.clear();
+	dados.push_back(no);
+	filhos.push_back(NUMERO_PAGINA-2);
+	filhos.push_back(NUMERO_PAGINA-1);
 }
 
 /*******************
@@ -125,6 +147,7 @@ Node Pagina::adicionar(Node no)
 {
 	unsigned int i = 0;
 
+	identificar();
 	if (filhos.size() > 0) {
 		/* ainda não está em uma folha */
 		for (i = 0; i < dados.size(); ++i)
@@ -142,8 +165,8 @@ Node Pagina::adicionar(Node no)
 		if (dados.size() >= TAMANHO_PAGINA) {
 			toolbox::debug("dividindo");
 			no = dividir_filhos();
-			dados.clear();
-			dados.push_back(no);
+			lidar_com_pai(no);
+			identificar();
 			escrever_pagina();
 		}
 	}
@@ -157,6 +180,7 @@ Node Pagina::adicionar(std::string dado, unsigned int no_linha)
 	return adicionar(no);
 }
 
+/* está adicionando coisas aos filhos? */
 Pagina* Pagina::dividir()
 {
 	Pagina *outlet = new Pagina[5];
