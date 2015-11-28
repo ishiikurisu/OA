@@ -39,13 +39,14 @@ void BTree::adicionar(Node no)
 {
 	Pagina *filha = raiz.achar_filha(no);
 	filha->adicionar(no);
-	toolbox::debug(filha->escrever().c_str());
+	// toolbox::debug(filha->escrever().c_str());
 
 	while (filha->overflow())
 	{
 		std::cout << "overflow!" << std::endl;
+		no = filha->dividir_filhas();
+		toolbox::debug(no.get_pk().c_str());
 		exit(-1);
-		// no = filha.dividir_filhas();
 		// filha.lidar_com_pai(no);
         /*insert to parent*/
         /*parent is now child*/

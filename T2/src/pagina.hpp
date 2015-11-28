@@ -13,6 +13,7 @@ class Pagina
 {
     char* gerar_nome_pagina(unsigned int);
     void carregar_pagina();
+    Pagina* dividir_pagina();
     unsigned int no_pagina;
     unsigned int no_pai;
     std::vector<Node> dados;
@@ -24,7 +25,7 @@ public:
     Pagina* achar_filha(Node);
     void adicionar(Node);
     bool overflow();
-    // void dividir_filhas();
+    Node dividir_filhas();
     // void lidar_com_pai(Node);
     void definir_pagina(unsigned int);
     void definir_pai(unsigned int);
@@ -66,6 +67,20 @@ void Pagina::carregar_pagina()
 	pagina.close();
 }
 
+Pagina* Pagina::dividir_pagina()
+{
+	Pagina *outlet = new Pagina[5];
+	unsigned int i;
+
+	for (i = 0; i < dados.size()/2; ++i)
+        outlet[0].dados.push_back(dados[i]);
+    outlet[1].dados.push_back(dados[i]);
+	for (++i; i < dados.size(); ++i)
+		outlet[2].dados.push_back(dados[i]);
+
+	return outlet;
+}
+
 /*******************
 * FUNÇÕES PÚBLICAS *
 *******************/
@@ -104,7 +119,7 @@ void Pagina::adicionar(Node no)
     {
         for (i = 0; i < dados.size(); ++i)
         {
-            std::cout << dados[i].get_pk() << " x " << no.get_pk() << std::endl;
+            // std::cout << dados[i].get_pk() << " x " << no.get_pk() << std::endl;
             if (dados[i].get_pk().compare(no.get_pk()) > 0)
                 break;
         }
@@ -116,6 +131,37 @@ void Pagina::adicionar(Node no)
 bool Pagina::overflow()
 {
     return (dados.size() > TAMANHO_PAGINA);
+}
+
+Node Pagina::dividir_filhas()
+{
+	Pagina *paginas = dividir_pagina();
+	Pagina menor = paginas[0];
+	Pagina meio  = paginas[1];
+	Pagina maior = paginas[2];
+
+    std::vector<Node>::iterator it;
+    std::cout << "menor:" << std::endl;
+    for (it = menor.dados.begin(); it != menor.dados.end(); ++it)
+        std::cout << "  " << (*it).get_pk() << std::endl;
+    std::cout << "maior:" << std::endl;
+    for (it = maior.dados.begin(); it != maior.dados.end(); ++it)
+        std::cout << "  " << (*it).get_pk() << std::endl;
+
+	menor.definir_pagina(NUMERO_PAGINA);
+	menor.definir_pai(no_pagina);
+	filhas.push_back(NUMERO_PAGINA++);
+	menor.salvar();
+
+	maior.definir_pagina(NUMERO_PAGINA);
+	maior.definir_pai(no_pagina);
+	filhas.push_back(NUMERO_PAGINA++);
+	maior.salvar();
+
+	// menor.identificar();
+	// maior.identificar();
+	free(paginas);
+	return meio.dados[0];
 }
 
 void Pagina::definir_pagina(unsigned int no)
