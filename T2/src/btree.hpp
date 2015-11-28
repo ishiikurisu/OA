@@ -5,9 +5,9 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include <node.hpp>
-#include <page.hpp>
 #include <toolbox.hpp>
+#include <node.hpp>
+#include <pagina.hpp>
 
 class BTree
 {
