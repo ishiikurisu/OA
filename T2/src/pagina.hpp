@@ -21,7 +21,7 @@ public:
     Pagina() { no_pai = -1; };
     Pagina(unsigned int);
     ~Pagina() {};
-    Pagina achar_filha(Node);
+    Pagina* achar_filha(Node);
     void adicionar(Node);
     bool overflow();
     // void dividir_filhas();
@@ -70,21 +70,25 @@ void Pagina::carregar_pagina()
 * FUNÇÕES PÚBLICAS *
 *******************/
 
-Pagina::Pagina(unsigned int no) : Pagina::Pagina()
+Pagina::Pagina(unsigned int no)
 {
     no_pagina = no;
+    no_pai = -1;
     carregar_pagina();
 }
 
-Pagina Pagina::achar_filha(Node no)
+Pagina* Pagina::achar_filha(Node no)
 {
     unsigned int i;
 
     if (filhas.size() == 0)
-        return (*this);
+        return this;
     for (i = 0; i < dados.size(); ++i)
+    {
+        std::cout << dados[i].get_pk() << " x " << no.get_pk() << std::endl;
         if (dados[i].get_pk().compare(no.get_pk()) > 0)
             break;
+    }
     Pagina filha(filhas[i]);
     filha.definir_pai(no_pagina);
     return filha.achar_filha(no);
@@ -93,16 +97,25 @@ Pagina Pagina::achar_filha(Node no)
 void Pagina::adicionar(Node no)
 {
     unsigned int i;
-    for (i = 0; i < dados.size(); ++i)
-        if (dados[i].get_pk().compare(no.get_pk()) > 0)
-            break;
-    dados.insert(dados.begin() + i, no);
+
+    if (dados.size() == 0)
+        dados.push_back(no);
+    else
+    {
+        for (i = 0; i < dados.size(); ++i)
+        {
+            std::cout << dados[i].get_pk() << " x " << no.get_pk() << std::endl;
+            if (dados[i].get_pk().compare(no.get_pk()) > 0)
+                break;
+        }
+        dados.insert(dados.begin() + i, no);
+    }
     salvar();
 }
 
 bool Pagina::overflow()
 {
-    return (filhas.size() > 0);
+    return (dados.size() > TAMANHO_PAGINA);
 }
 
 void Pagina::definir_pagina(unsigned int no)

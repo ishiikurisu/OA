@@ -37,11 +37,11 @@ BTree::BTree()
 
 void BTree::adicionar(Node no)
 {
-	Pagina filha = raiz.achar_filha(no);
-	filha.adicionar(no);
-	toolbox::debug(filha.escrever().c_str());
+	Pagina *filha = raiz.achar_filha(no);
+	filha->adicionar(no);
+	toolbox::debug(filha->escrever().c_str());
 
-	while (filha.overflow())
+	while (filha->overflow())
 	{
 		std::cout << "overflow!" << std::endl;
 		exit(-1);

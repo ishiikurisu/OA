@@ -62,9 +62,9 @@ void Banco::adicionar(std::string dado)
 	fs.open(arquivo_principal.c_str(), std::fstream::in);
 	fs.seekg(0, fs.end);
 	fs << dado << std::endl;
+	fs.close();
 
 	popular(dado);
-	fs.close();
 }
 
 void Banco::mostrar()
