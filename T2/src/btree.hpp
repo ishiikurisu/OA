@@ -6,7 +6,7 @@
 #include <vector>
 #include <string>
 #include <node.hpp>
-#include <pagina.hpp>
+#include <page.hpp>
 #include <toolbox.hpp>
 
 class BTree
@@ -17,7 +17,9 @@ class BTree
 public:
 	BTree();
 	void adicionar(std::string, unsigned int);
+	void adicionar(Node);
 	// void mostrar();
+	friend class Pagina;
 };
 
 /*******************
@@ -33,13 +35,27 @@ BTree::BTree()
 	raiz.definir_pagina(1);
 }
 
+void BTree::adicionar(Node no)
+{
+	Pagina filha = raiz.achar_filha(no);
+	filha.adicionar(no);
+	toolbox::debug(filha.escrever().c_str());
+
+	while (filha.overflow())
+	{
+		std::cout << "overflow!" << std::endl;
+		exit(-1);
+		// no = filha.dividir_filhas();
+		// filha.lidar_com_pai(no);
+        /*insert to parent*/
+        /*parent is now child*/
+	}
+}
+
 void BTree::adicionar(std::string dado, unsigned int no_linha)
 {
-	toolbox::debug(("dado: " + dado).c_str());
-	Node resultado = raiz.adicionar(dado, no_linha);
-
-	// while (resultado.get_pk().length() > 1)
-	// 	resultado = raiz.adicionar(resultado);
+	Node no(dado, no_linha);
+	adicionar(no);
 }
 
 /*

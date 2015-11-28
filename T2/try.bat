@@ -1,4 +1,5 @@
 copy specs\lista.txt .
 mingw32-make
-main.bin
-del *.bin *.bt *.txt
+more inlet.in | main.bin
+del *.bin *.txt
+REM del *.bt

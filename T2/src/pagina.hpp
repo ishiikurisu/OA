@@ -15,7 +15,7 @@ class Pagina
 	void carregar_pagina();
 	void escrever_pagina();
 	Node adicionar_filha(Node, unsigned int);
-	Node dividir_filhos();
+	Node dividir_filhas();
 	void lidar_com_pai(Node);
 	unsigned int no_pagina;
 	unsigned int no_pagina_pai;
@@ -25,12 +25,13 @@ public:
 	Node adicionar(Node);
 	Node adicionar(std::string, unsigned int);
 	void salvar();
+	Pagina achar_filha(Node);
 	void definir_pagina(unsigned int);
 	void definir_pai(unsigned int);
 	Pagina* dividir();
 	unsigned int tamanho();
 	std::vector<Node> dados;
-	std::vector<unsigned int> filhos;
+	std::vector<unsigned int> filhas;
 	friend class Node;
 };
 
@@ -102,7 +103,7 @@ Node Pagina::adicionar_filha(Node dado, unsigned int pagina)
 	return dado;
 }
 
-Node Pagina::dividir_filhos()
+Node Pagina::dividir_filhas()
 {
 	Pagina *paginas = dividir();
 	Pagina menor = paginas[0];
@@ -111,12 +112,12 @@ Node Pagina::dividir_filhos()
 
 	menor.definir_pagina(NUMERO_PAGINA);
 	menor.definir_pai(no_pagina);
-	filhos.push_back(NUMERO_PAGINA++);
+	filhas.push_back(NUMERO_PAGINA++);
 	menor.escrever_pagina();
 
 	maior.definir_pagina(NUMERO_PAGINA);
 	maior.definir_pai(no_pagina);
-	filhos.push_back(NUMERO_PAGINA++);
+	filhas.push_back(NUMERO_PAGINA++);
 	maior.escrever_pagina();
 
 	menor.identificar();
@@ -129,8 +130,8 @@ void Pagina::lidar_com_pai(Node no)
 {
 	dados.clear();
 	dados.push_back(no);
-	filhos.push_back(NUMERO_PAGINA-2);
-	filhos.push_back(NUMERO_PAGINA-1);
+	filhas.push_back(NUMERO_PAGINA-2);
+	filhas.push_back(NUMERO_PAGINA-1);
 }
 
 /*******************
@@ -143,17 +144,31 @@ Pagina::Pagina()
 	no_pagina_pai = -1;
 }
 
+Pagina Pagina::achar_filha(Node no)
+{
+	unsigned int i;
+
+	if (filhas.size(0))
+		return &this;
+	for (i = 0; i < dados.size(); ++i)
+		if (dados[i].get_pk().compare(no.get_pk()) > 0)
+			break;
+	Pagina filha;
+	filha.
+	return filha.achar_filha(no, filhas[i]);
+}
+
 Node Pagina::adicionar(Node no)
 {
 	unsigned int i = 0;
 
 	identificar();
-	if (filhos.size() > 0) {
+	if (filhas.size() > 0) {
 		/* ainda não está em uma folha */
 		for (i = 0; i < dados.size(); ++i)
 			if (dados[i].get_pk().compare(no.get_pk()) > 0)
 				break;
-		no = adicionar_filha(no, filhos[i]);
+		no = adicionar_filha(no, filhas[i]);
 	}
 	else {
 		/* está em uma folha */
@@ -164,7 +179,7 @@ Node Pagina::adicionar(Node no)
 
 		if (dados.size() >= TAMANHO_PAGINA) {
 			toolbox::debug("dividindo");
-			no = dividir_filhos();
+			no = dividir_filhas();
 			lidar_com_pai(no);
 			identificar();
 			escrever_pagina();
@@ -180,7 +195,7 @@ Node Pagina::adicionar(std::string dado, unsigned int no_linha)
 	return adicionar(no);
 }
 
-/* está adicionando coisas aos filhos? */
+/* está adicionando coisas aos filhas? */
 Pagina* Pagina::dividir()
 {
 	Pagina *outlet = new Pagina[5];
@@ -189,10 +204,10 @@ Pagina* Pagina::dividir()
 	Pagina meio;
 	unsigned int i;
 
-	for (i = 0; i < filhos.size()/2; ++i)
+	for (i = 0; i < filhas.size()/2; ++i)
 		menor.dados.push_back(dados[i]);
 	meio.dados.push_back(dados[i]);
-	for (++i; i < filhos.size(); ++i)
+	for (++i; i < filhas.size(); ++i)
 		maior.dados.push_back(dados[i]);
 
 	outlet[0] = menor;
