@@ -7,7 +7,7 @@
 #define TAMANHO_PAGINA (16)
 #define NOME_PAGINA ("indicelista.%03d.bt")
 
-volatile unsigned int NUMERO_PAGINA = 1;
+unsigned int NUMERO_PAGINA = 1;
 
 class Pagina
 {
@@ -15,20 +15,20 @@ class Pagina
     void carregar_pagina();
     Pagina* dividir_pagina();
     unsigned int no_pagina;
-    unsigned int no_pai;
+    unsigned int no_mae;
     std::vector<Node> dados;
     std::vector<unsigned int> filhas;
 public:
-    Pagina() { no_pai = -1; };
+    Pagina() { no_mae = -1; };
     Pagina(unsigned int);
     ~Pagina() {};
     Pagina* achar_filha(Node);
     void adicionar(Node);
     bool overflow();
     Node dividir_filhas();
-    // void lidar_com_pai(Node);
+    Pagina* lidar_com_mae();
     void definir_pagina(unsigned int);
-    void definir_pai(unsigned int);
+    void definir_mae(unsigned int);
     void salvar();
     std::string escrever();
     std::string identificar();
@@ -78,6 +78,7 @@ Pagina* Pagina::dividir_pagina()
 	for (++i; i < dados.size(); ++i)
 		outlet[2].dados.push_back(dados[i]);
 
+    dados.clear();
 	return outlet;
 }
 
@@ -88,7 +89,7 @@ Pagina* Pagina::dividir_pagina()
 Pagina::Pagina(unsigned int no)
 {
     no_pagina = no;
-    no_pai = -1;
+    no_mae = -1;
     carregar_pagina();
 }
 
@@ -105,7 +106,7 @@ Pagina* Pagina::achar_filha(Node no)
             break;
     }
     Pagina filha(filhas[i]);
-    filha.definir_pai(no_pagina);
+    filha.definir_mae(no_pagina);
     return filha.achar_filha(no);
 }
 
@@ -148,14 +149,14 @@ Node Pagina::dividir_filhas()
     for (it = maior.dados.begin(); it != maior.dados.end(); ++it)
         std::cout << "  " << (*it).get_pk() << std::endl;
 
-	menor.definir_pagina(NUMERO_PAGINA);
-	menor.definir_pai(no_pagina);
-	filhas.push_back(NUMERO_PAGINA++);
+	menor.definir_pagina(++NUMERO_PAGINA);
+	menor.definir_mae(no_pagina);
+	filhas.push_back(NUMERO_PAGINA);
 	menor.salvar();
 
-	maior.definir_pagina(NUMERO_PAGINA);
-	maior.definir_pai(no_pagina);
-	filhas.push_back(NUMERO_PAGINA++);
+	maior.definir_pagina(++NUMERO_PAGINA);
+	maior.definir_mae(no_pagina);
+	filhas.push_back(NUMERO_PAGINA);
 	maior.salvar();
 
 	// menor.identificar();
@@ -164,10 +165,28 @@ Node Pagina::dividir_filhas()
 	return meio.dados[0];
 }
 
+Pagina* Pagina::lidar_com_mae()
+{
+    /* esta página não tem uma mãe */
+    // ela se torna a nova raiz
+    /* caso contrário... */
+    // retorne a mãe
+
+    if (no_mae == (unsigned int) -1)
+    {
+        std::cout << "i am my own mother" << std::endl;
+        return this;
+    }
+
+    Pagina* mae = new Pagina();
+    mae->definir_pagina(no_mae);
+    return mae;
+}
+
 void Pagina::definir_pagina(unsigned int no)
 { no_pagina = no; }
-void Pagina::definir_pai(unsigned int no)
-{ no_pai = no; }
+void Pagina::definir_mae(unsigned int no)
+{ no_mae = no; }
 
 void Pagina::salvar()
 {

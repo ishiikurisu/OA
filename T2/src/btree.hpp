@@ -33,23 +33,20 @@ public:
 BTree::BTree()
 {
 	raiz.definir_pagina(1);
+	raiz.definir_mae(-1);
 }
 
 void BTree::adicionar(Node no)
 {
 	Pagina *filha = raiz.achar_filha(no);
 	filha->adicionar(no);
-	// toolbox::debug(filha->escrever().c_str());
 
 	while (filha->overflow())
 	{
 		std::cout << "overflow!" << std::endl;
 		no = filha->dividir_filhas();
-		toolbox::debug(no.get_pk().c_str());
-		exit(-1);
-		// filha.lidar_com_pai(no);
-        /*insert to parent*/
-        /*parent is now child*/
+		filha = filha->lidar_com_mae();
+		filha->adicionar(no);
 	}
 }
 
