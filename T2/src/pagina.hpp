@@ -131,6 +131,7 @@ void Pagina::adicionar(Node no)
         dados.push_back(no);
     else
     {
+        /* THIS IS THE REASON OF THE SEGMENTATION FAULT */
         std::cout << "dados.size() == " << this->dados.size() << std::endl;
         for (i = 0; i < dados.size(); ++i)
         {
