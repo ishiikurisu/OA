@@ -21,7 +21,7 @@ class Pagina
 public:
     Pagina() { no_mae = -1; };
     Pagina(unsigned int);
-    ~Pagina() {};
+    ~Pagina() { };
     Pagina* achar_filha(Node);
     void adicionar(Node);
     bool overflow();
@@ -52,16 +52,28 @@ void Pagina::carregar_pagina()
     std::fstream pagina;
 	char *nome_pagina = gerar_nome_pagina(no_pagina);
 	std::string pk;
-	unsigned int no_linha;
+	unsigned int num, i, n;
 
-	pagina >> pk;
-	while (pk.length() > 0)
+    if (toolbox::file_exists(nome_pagina))
+        pagina.open(nome_pagina, std::fstream::in);
+    else
+        exit(2);
+
+    /* ler dados */
+	pagina >> n;
+    for (i = 0; i < n; ++i)
 	{
-		pagina >> no_linha;
-		Node no(pk, no_linha);
-		dados.push_back(no);
-		pagina >> pk;
+		pagina >> pk >> num;
+		dados.push_back(Node(pk, num));
 	}
+
+    /* ler filhas */
+    pagina >> n;
+    for (i = 0; i < n; ++i)
+    {
+        pagina >> num;
+        filhas.push_back(num);
+    }
 
 	free(nome_pagina);
 	pagina.close();
@@ -101,7 +113,7 @@ Pagina* Pagina::achar_filha(Node no)
         return this;
     for (i = 0; i < dados.size(); ++i)
     {
-        std::cout << dados[i].get_pk() << " x " << no.get_pk() << std::endl;
+        // std::cout << dados[i].get_pk() << " x " << no.get_pk() << std::endl;
         if (dados[i].get_pk().compare(no.get_pk()) > 0)
             break;
     }
@@ -114,16 +126,19 @@ void Pagina::adicionar(Node no)
 {
     unsigned int i;
 
+    toolbox::debug(("adding " + no.get_pk() + "...").c_str());
     if (dados.size() == 0)
         dados.push_back(no);
     else
     {
+        std::cout << "dados.size() == " << this->dados.size() << std::endl;
         for (i = 0; i < dados.size(); ++i)
         {
-            // std::cout << dados[i].get_pk() << " x " << no.get_pk() << std::endl;
+            std::cout << "- " << dados[i].get_pk() << " x " << no.get_pk() << std::endl;
             if (dados[i].get_pk().compare(no.get_pk()) > 0)
                 break;
         }
+        std::cout << "for returned " << i << std::endl;
         dados.insert(dados.begin() + i, no);
     }
     salvar();
@@ -141,13 +156,13 @@ Node Pagina::dividir_filhas()
 	Pagina meio  = paginas[1];
 	Pagina maior = paginas[2];
 
-    std::vector<Node>::iterator it;
-    std::cout << "menor:" << std::endl;
-    for (it = menor.dados.begin(); it != menor.dados.end(); ++it)
-        std::cout << "  " << (*it).get_pk() << std::endl;
-    std::cout << "maior:" << std::endl;
-    for (it = maior.dados.begin(); it != maior.dados.end(); ++it)
-        std::cout << "  " << (*it).get_pk() << std::endl;
+    // std::vector<Node>::iterator it;
+    // std::cout << "menor:" << std::endl;
+    // for (it = menor.dados.begin(); it != menor.dados.end(); ++it)
+    //     std::cout << "  " << (*it).get_pk() << std::endl;
+    // std::cout << "maior:" << std::endl;
+    // for (it = maior.dados.begin(); it != maior.dados.end(); ++it)
+    //     std::cout << "  " << (*it).get_pk() << std::endl;
 
 	menor.definir_pagina(++NUMERO_PAGINA);
 	menor.definir_mae(no_pagina);
@@ -161,7 +176,7 @@ Node Pagina::dividir_filhas()
 
 	// menor.identificar();
 	// maior.identificar();
-	free(paginas);
+    free(paginas);
 	return meio.dados[0];
 }
 
@@ -174,7 +189,7 @@ Pagina* Pagina::lidar_com_mae()
 
     if (no_mae == (unsigned int) -1)
     {
-        std::cout << "i am my own mother" << std::endl;
+        // std::cout << "i am my own mother" << std::endl;
         return this;
     }
 
@@ -184,7 +199,11 @@ Pagina* Pagina::lidar_com_mae()
 }
 
 void Pagina::definir_pagina(unsigned int no)
-{ no_pagina = no; }
+{
+    no_pagina = no;
+    // carregar_pagina(); //?
+}
+
 void Pagina::definir_mae(unsigned int no)
 { no_mae = no; }
 
@@ -192,14 +211,17 @@ void Pagina::salvar()
 {
     std::fstream pagina;
 	char *nome_pagina = gerar_nome_pagina(no_pagina);
-	std::vector<Node>::iterator no;
+	std::vector<Node>::iterator dado;
+    std::vector<unsigned int>::iterator filha;
 
 	pagina.open(nome_pagina, std::fstream::out);
 
-	for (no = dados.begin(); no != dados.end(); ++no)
-	{
-		pagina << no->pk << " " << no->linha << std::endl;
-	}
+    pagina << dados.size() << std::endl;
+	for (dado = dados.begin(); dado != dados.end(); ++dado)
+        pagina << dado->pk << " " << dado->linha << std::endl;
+    pagina << filhas.size() << std::endl;
+    for (filha = filhas.begin(); filha != filhas.end(); ++filha)
+        pagina << *filha << std::endl;
 
 	free(nome_pagina);
 	pagina.close();

@@ -39,6 +39,7 @@ BTree::BTree()
 void BTree::adicionar(Node no)
 {
 	Pagina *filha = raiz.achar_filha(no);
+	std::cout << "wtf: " << filha->dados.size() << std::endl;
 	filha->adicionar(no);
 
 	while (filha->overflow())
@@ -52,8 +53,7 @@ void BTree::adicionar(Node no)
 
 void BTree::adicionar(std::string dado, unsigned int no_linha)
 {
-	Node no(dado, no_linha);
-	adicionar(no);
+	adicionar(Node(dado, no_linha));
 }
 
 /*

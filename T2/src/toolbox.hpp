@@ -1,5 +1,6 @@
 #pragma once
 #include <stdio.h>
+#include <sys/stat.h>
 
 namespace toolbox {
 
@@ -18,6 +19,16 @@ namespace toolbox {
 	void debug(const char *msg)
 	{
 		printf("!DEBUG! %s\n", msg);
+	}
+
+	bool file_exists(const char *filename)
+	{
+		struct stat buf;
+
+		if (stat(filename, &buf) != -1)
+			return true;
+		else
+			return false;
 	}
 
 } /* toolbox */
