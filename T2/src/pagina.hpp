@@ -113,7 +113,6 @@ Pagina* Pagina::achar_filha(Node no)
         return this;
     for (i = 0; i < dados.size(); ++i)
     {
-        // std::cout << dados[i].get_pk() << " x " << no.get_pk() << std::endl;
         if (dados[i].get_pk().compare(no.get_pk()) > 0)
             break;
     }
@@ -126,15 +125,12 @@ void Pagina::adicionar(Node no)
 {
     unsigned int i;
 
-    /* THIS IS THE REASON OF THE SEGMENTATION FAULT */
-    std::cout << "wtf: " << no_pagina << " " << dados.size() << std::endl;
     if (dados.size() == 0)
         dados.push_back(no);
     else
     {
         for (i = 0; i < dados.size(); ++i)
         {
-            // std::cout << "- " << dados[i].get_pk() << " x " << no.get_pk() << std::endl;
             if (dados[i].get_pk().compare(no.get_pk()) > 0)
                 break;
         }
@@ -155,14 +151,6 @@ Node Pagina::dividir_filhas()
 	Pagina meio  = paginas[1];
 	Pagina maior = paginas[2];
 
-    // std::vector<Node>::iterator it;
-    // std::cout << "menor:" << std::endl;
-    // for (it = menor.dados.begin(); it != menor.dados.end(); ++it)
-    //     std::cout << "  " << (*it).get_pk() << std::endl;
-    // std::cout << "maior:" << std::endl;
-    // for (it = maior.dados.begin(); it != maior.dados.end(); ++it)
-    //     std::cout << "  " << (*it).get_pk() << std::endl;
-
 	menor.definir_pagina(++NUMERO_PAGINA);
 	menor.definir_mae(no_pagina);
 	filhas.push_back(NUMERO_PAGINA);
@@ -173,8 +161,6 @@ Node Pagina::dividir_filhas()
 	filhas.push_back(NUMERO_PAGINA);
 	maior.salvar();
 
-	// menor.identificar();
-	// maior.identificar();
     delete paginas;
 	return meio.dados[0];
 }
@@ -188,7 +174,6 @@ Pagina* Pagina::lidar_com_mae()
 
     if (no_mae == (unsigned int) -1)
     {
-        // std::cout << "i am my own mother" << std::endl;
         return this;
     }
 
@@ -200,7 +185,6 @@ Pagina* Pagina::lidar_com_mae()
 void Pagina::definir_pagina(unsigned int no)
 {
     no_pagina = no;
-    // carregar_pagina(); //?
 }
 
 void Pagina::definir_mae(unsigned int no)

@@ -69,5 +69,5 @@ void Banco::adicionar(std::string dado)
 
 void Banco::mostrar()
 {
-	// btree.mostrar();
+	btree.mostrar();
 }
