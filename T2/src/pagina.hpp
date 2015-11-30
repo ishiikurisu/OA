@@ -75,7 +75,7 @@ void Pagina::carregar_pagina()
         filhas.push_back(num);
     }
 
-	free(nome_pagina);
+	delete nome_pagina;
 	pagina.close();
 }
 
@@ -117,29 +117,27 @@ Pagina* Pagina::achar_filha(Node no)
         if (dados[i].get_pk().compare(no.get_pk()) > 0)
             break;
     }
-    Pagina filha(filhas[i]);
-    filha.definir_mae(no_pagina);
-    return filha.achar_filha(no);
+    Pagina *filha = new Pagina(filhas[i]);
+    filha->definir_mae(no_pagina);
+    return filha->achar_filha(no);
 }
 
 void Pagina::adicionar(Node no)
 {
     unsigned int i;
 
-    toolbox::debug(("adding " + no.get_pk() + "...").c_str());
+    /* THIS IS THE REASON OF THE SEGMENTATION FAULT */
+    std::cout << "wtf: " << no_pagina << " " << dados.size() << std::endl;
     if (dados.size() == 0)
         dados.push_back(no);
     else
     {
-        /* THIS IS THE REASON OF THE SEGMENTATION FAULT */
-        std::cout << "dados.size() == " << this->dados.size() << std::endl;
         for (i = 0; i < dados.size(); ++i)
         {
-            std::cout << "- " << dados[i].get_pk() << " x " << no.get_pk() << std::endl;
+            // std::cout << "- " << dados[i].get_pk() << " x " << no.get_pk() << std::endl;
             if (dados[i].get_pk().compare(no.get_pk()) > 0)
                 break;
         }
-        std::cout << "for returned " << i << std::endl;
         dados.insert(dados.begin() + i, no);
     }
     salvar();
@@ -177,7 +175,7 @@ Node Pagina::dividir_filhas()
 
 	// menor.identificar();
 	// maior.identificar();
-    free(paginas);
+    delete paginas;
 	return meio.dados[0];
 }
 
