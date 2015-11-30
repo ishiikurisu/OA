@@ -44,7 +44,7 @@ bool InterfaceUsuario::draw()
 	bool permaneca = true;
 	std::string junk;
 
-	std::cout << "# Selecione uma opcao" << std::endl;
+	std::cout << "--- # Selecione uma opcao" << std::endl;
 	std::cout << "0. Sair" << std::endl;
 	std::cout << "1. Buscar" << std::endl;
 	std::cout << "2. Adicionar" << std::endl;
@@ -62,6 +62,7 @@ bool InterfaceUsuario::draw()
 		//
 		case 2:
 			adicionar();
+			banco.mostrar();
 		break;
 
 		default:

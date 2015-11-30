@@ -29,17 +29,34 @@ public:
 
 void BTree::mostrar(Pagina* pagina)
 {
-    
+    std::vector<Node>::iterator dado;
+    std::vector<unsigned int>::iterator ui;
+    Pagina *filha;
 
     std::cout << "pagina: " << pagina->no_pagina << std::endl;
-	std::cout << "dados:" << std::endl;
-	for ()
+
+	std::cout << "dados: " << pagina->dados.size() << std::endl;
+    for (dado = pagina->dados.begin(); dado != pagina->dados.end(); ++dado)
+        std::cout << "- " << dado->get_pk() << std::endl;
+
 	if (pagina->filhas.size() > 0)
 	{
 		std::cout << "filhas:" << std::endl;
+        for (ui = pagina->filhas.begin(); ui != pagina->filhas.end(); ++ui)
+            std::cout << "- " << *ui << std::endl;
+        std::cout << std::endl;
 
+        for (ui = pagina->filhas.begin(); ui != pagina->filhas.end(); ++ui)
+        {
+            filha = new Pagina(*ui);
+            mostrar(filha);
+            delete filha;
+        }
 	}
-	std::cout << std::endl;
+    else
+    {
+	   std::cout << std::endl;
+    }
 }
 
 /*******************
