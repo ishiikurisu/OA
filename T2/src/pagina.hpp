@@ -14,8 +14,6 @@ class Pagina
     char* gerar_nome_pagina(unsigned int);
     void carregar_pagina();
     Pagina* dividir_pagina();
-    unsigned int no_pagina;
-    unsigned int no_mae;
     std::vector<Node> dados;
     std::vector<unsigned int> filhas;
 public:
@@ -32,6 +30,8 @@ public:
     void salvar();
     std::string escrever();
     std::string identificar();
+    unsigned int no_pagina;
+    unsigned int no_mae;
     friend class Node;
     friend class BTree;
 };
@@ -58,6 +58,8 @@ void Pagina::carregar_pagina()
         pagina.open(nome_pagina, std::fstream::in);
     else
         exit(2);
+
+    pagina >> no_mae;
 
     /* ler dados */
 	pagina >> n;
@@ -177,8 +179,7 @@ Pagina* Pagina::lidar_com_mae()
         return this;
     }
 
-    Pagina* mae = new Pagina();
-    mae->definir_pagina(no_mae);
+    Pagina* mae = new Pagina(no_mae);
     return mae;
 }
 
@@ -199,6 +200,7 @@ void Pagina::salvar()
 
 	pagina.open(nome_pagina, std::fstream::out);
 
+    pagina << no_mae << std::endl;
     pagina << dados.size() << std::endl;
 	for (dado = dados.begin(); dado != dados.end(); ++dado)
         pagina << dado->pk << " " << dado->linha << std::endl;
