@@ -65,8 +65,8 @@ void BTree::mostrar(Pagina* pagina)
 
 BTree::BTree()
 {
-	raiz.definir_pagina(1);
-	raiz.definir_mae(-1);
+	raiz.no_pagina = 1;
+	raiz.no_mae = -1;
 }
 
 void BTree::adicionar(Node no)
@@ -79,8 +79,8 @@ void BTree::adicionar(Node no)
 	{
 		toolbox::debug("  - overflow!");
 		no = filha->dividir_filhas();
-		filha = filha->lidar_com_mae();
-		filha->adicionar(no);
+		// não estou avisando as filhas sobre quem é a mãe delas
+		filha = filha->lidar_com_mae(no);
 	}
 
 	mostrar();

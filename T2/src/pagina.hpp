@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <node.hpp>
-#define TAMANHO_PAGINA (16)
+#define TAMANHO_PAGINA (4)
 #define NOME_PAGINA ("indicelista.%03d.bt")
 
 unsigned int NUMERO_PAGINA = 1;
@@ -21,12 +21,10 @@ public:
     Pagina(unsigned int);
     ~Pagina() { };
     Pagina* achar_filha(Node);
-    void adicionar(Node);
+    unsigned int adicionar(Node);
     bool overflow();
     Node dividir_filhas();
-    Pagina* lidar_com_mae();
-    void definir_pagina(unsigned int);
-    void definir_mae(unsigned int);
+    Pagina* lidar_com_mae(Node);
     void salvar();
     std::string escrever();
     std::string identificar();
@@ -119,13 +117,13 @@ Pagina* Pagina::achar_filha(Node no)
             break;
     }
     Pagina *filha = new Pagina(filhas[i]);
-    filha->definir_mae(no_pagina);
+    filha->no_mae = no_pagina;
     return filha->achar_filha(no);
 }
 
-void Pagina::adicionar(Node no)
+unsigned int Pagina::adicionar(Node no)
 {
-    unsigned int i;
+    unsigned int i = 0;
 
     if (dados.size() == 0)
         dados.push_back(no);
@@ -138,7 +136,9 @@ void Pagina::adicionar(Node no)
         }
         dados.insert(dados.begin() + i, no);
     }
+
     salvar();
+    return i;
 }
 
 bool Pagina::overflow()
@@ -153,13 +153,13 @@ Node Pagina::dividir_filhas()
 	Pagina meio  = paginas[1];
 	Pagina maior = paginas[2];
 
-	menor.definir_pagina(++NUMERO_PAGINA);
-	menor.definir_mae(no_pagina);
+	menor.no_pagina = ++NUMERO_PAGINA;
+    menor.no_mae = no_pagina;
 	filhas.push_back(NUMERO_PAGINA);
 	menor.salvar();
 
-	maior.definir_pagina(++NUMERO_PAGINA);
-	maior.definir_mae(no_pagina);
+	maior.no_pagina = ++NUMERO_PAGINA;
+    maior.no_mae = no_pagina;
 	filhas.push_back(NUMERO_PAGINA);
 	maior.salvar();
 
@@ -167,29 +167,24 @@ Node Pagina::dividir_filhas()
 	return meio.dados[0];
 }
 
-Pagina* Pagina::lidar_com_mae()
+Pagina* Pagina::lidar_com_mae(Node no)
 {
-    /* esta página não tem uma mãe */
-    // ela se torna a nova raiz
-    /* caso contrário... */
-    // retorne a mãe
+    Pagina *mae = NULL;
 
     if (no_mae == (unsigned int) -1)
     {
-        return this;
+        adicionar(no);
+        mae = this;
+    }
+    else
+    {
+        mae = new Pagina(no_mae);
+        unsigned int pos = mae->adicionar(no);
+        ++pos;
     }
 
-    Pagina* mae = new Pagina(no_mae);
     return mae;
 }
-
-void Pagina::definir_pagina(unsigned int no)
-{
-    no_pagina = no;
-}
-
-void Pagina::definir_mae(unsigned int no)
-{ no_mae = no; }
 
 void Pagina::salvar()
 {
