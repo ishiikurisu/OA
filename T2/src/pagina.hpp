@@ -51,9 +51,9 @@ char* Pagina::gerar_nome_pagina(unsigned int no)
 void Pagina::carregar_pagina()
 {
     std::fstream pagina;
-	char *nome_pagina = gerar_nome_pagina(no_pagina);
-	std::string pk;
-	unsigned int num, i, n;
+    char *nome_pagina = gerar_nome_pagina(no_pagina);
+    std::string pk;
+    unsigned int num, i, n;
 
     if (toolbox::file_exists(nome_pagina))
         pagina.open(nome_pagina, std::fstream::in);
@@ -63,12 +63,12 @@ void Pagina::carregar_pagina()
     pagina >> no_mae;
 
     /* ler dados */
-	pagina >> n;
+    pagina >> n;
     for (i = 0; i < n; ++i)
-	{
-		pagina >> pk >> num;
-		dados.push_back(Node(pk, num));
-	}
+    {
+        pagina >> pk >> num;
+        dados.push_back(Node(pk, num));
+    }
 
     /* ler filhas */
     pagina >> n;
@@ -78,23 +78,23 @@ void Pagina::carregar_pagina()
         filhas.push_back(num);
     }
 
-	delete nome_pagina;
-	pagina.close();
+    delete nome_pagina;
+    pagina.close();
 }
 
 Pagina* Pagina::dividir_pagina()
 {
-	Pagina *outlet = new Pagina[5];
-	unsigned int i;
+    Pagina *outlet = new Pagina[5];
+    unsigned int i;
 
-	for (i = 0; i < dados.size()/2; ++i)
+    for (i = 0; i < dados.size()/2; ++i)
         outlet[0].dados.push_back(dados[i]);
     outlet[1].dados.push_back(dados[i]);
-	for (++i; i < dados.size(); ++i)
-		outlet[2].dados.push_back(dados[i]);
+    for (++i; i < dados.size(); ++i)
+        outlet[2].dados.push_back(dados[i]);
 
     dados.clear();
-	return outlet;
+    return outlet;
 }
 
 /*******************
@@ -149,34 +149,41 @@ bool Pagina::overflow()
 Node Pagina::dividir(Node no)
 {
     Pagina *paginas = dividir_pagina();
-	Pagina menor = paginas[0];
-	Pagina meio  = paginas[1];
-	Pagina maior = paginas[2];
+    Pagina menor = paginas[0];
+    Pagina meio  = paginas[1];
+    Pagina maior = paginas[2];
 
     /* dividir filhas */
-	menor.no_pagina = ++NUMERO_PAGINA;
+    menor.no_pagina = ++NUMERO_PAGINA;
     menor.no_mae = no_pagina;
-	filhas.push_back(NUMERO_PAGINA);
 
-	maior.no_pagina = ++NUMERO_PAGINA;
+    maior.no_pagina = ++NUMERO_PAGINA;
     maior.no_mae = no_pagina;
-	filhas.push_back(NUMERO_PAGINA);
 
     /* lidar com mãe */
     Pagina *mae = this;
 
     if (no_mae == (unsigned int) -1)
+    {
         adicionar(no);
+        filhas.push_back(NUMERO_PAGINA-1);
+        filhas.push_back(NUMERO_PAGINA);
+    }
     else
     {
         mae = new Pagina(no_mae);
-        unsigned int pos = mae->adicionar(no);
+        // erase current daughter
         unsigned int del = toolbox::encontrar(mae->filhas, no_pagina);
-        
+        mae->filhas.erase(mae->filhas.begin() + del);
+        // add new daughters
+        unsigned int pos = mae->adicionar(no);
+        mae->filhas.insert(mae->filhas.begin() + pos, NUMERO_PAGINA-1);
+        mae->filhas.insert(mae->filhas.begin() + pos+1, NUMERO_PAGINA);
     }
 
-	menor.salvar();
-	maior.salvar();
+    menor.salvar();
+    maior.salvar();
+    mae->salvar();
     nova_mae = mae;
     delete paginas;
     return meio.dados[0];
@@ -189,23 +196,23 @@ Pagina* Pagina::atualizar()
 
 Node Pagina::dividir_filhas()
 {
-	Pagina *paginas = dividir_pagina();
-	Pagina menor = paginas[0];
-	Pagina meio  = paginas[1];
-	Pagina maior = paginas[2];
+    Pagina *paginas = dividir_pagina();
+    Pagina menor = paginas[0];
+    Pagina meio  = paginas[1];
+    Pagina maior = paginas[2];
 
-	menor.no_pagina = ++NUMERO_PAGINA;
+    menor.no_pagina = ++NUMERO_PAGINA;
     menor.no_mae = no_pagina;
-	filhas.push_back(NUMERO_PAGINA);
-	menor.salvar();
+    filhas.push_back(NUMERO_PAGINA);
+    menor.salvar();
 
-	maior.no_pagina = ++NUMERO_PAGINA;
+    maior.no_pagina = ++NUMERO_PAGINA;
     maior.no_mae = no_pagina;
-	filhas.push_back(NUMERO_PAGINA);
-	maior.salvar();
+    filhas.push_back(NUMERO_PAGINA);
+    maior.salvar();
 
     delete paginas;
-	return meio.dados[0];
+    return meio.dados[0];
 }
 
 Pagina* Pagina::lidar_com_mae(Node no)
@@ -227,22 +234,22 @@ Pagina* Pagina::lidar_com_mae(Node no)
 void Pagina::salvar()
 {
     std::fstream pagina;
-	char *nome_pagina = gerar_nome_pagina(no_pagina);
-	std::vector<Node>::iterator dado;
+    char *nome_pagina = gerar_nome_pagina(no_pagina);
+    std::vector<Node>::iterator dado;
     std::vector<unsigned int>::iterator filha;
 
-	pagina.open(nome_pagina, std::fstream::out);
+    pagina.open(nome_pagina, std::fstream::out);
 
     pagina << no_mae << std::endl;
     pagina << dados.size() << std::endl;
-	for (dado = dados.begin(); dado != dados.end(); ++dado)
+    for (dado = dados.begin(); dado != dados.end(); ++dado)
         pagina << dado->pk << " " << dado->linha << std::endl;
     pagina << filhas.size() << std::endl;
     for (filha = filhas.begin(); filha != filhas.end(); ++filha)
         pagina << *filha << std::endl;
 
-	free(nome_pagina);
-	pagina.close();
+    free(nome_pagina);
+    pagina.close();
 }
 
 std::string Pagina::identificar()
