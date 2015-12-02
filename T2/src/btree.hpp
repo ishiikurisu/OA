@@ -78,13 +78,11 @@ void BTree::adicionar(Node no)
 	while (filha->overflow())
 	{
 		toolbox::debug("  - overflow!");
-		no = filha->dividir(no);
+		filha->dividir(no);
 		filha = filha->atualizar();
-		// no = filha->dividir_filhas();
-		// // não estou avisando as filhas sobre quem é a mãe delas
-		// filha = filha->lidar_com_mae(no);
 	}
 
+	raiz = Pagina(1);
 	mostrar();
 }
 

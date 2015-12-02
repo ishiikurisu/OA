@@ -1,0 +1,1662 @@
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 024312Leon
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 2
+- 024312Leon
+- 031272Andr
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 3
+- 024312Leon
+- 031272Andr
+- 035830Roge
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 4
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 5
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 6
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 7
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 8
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 9
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+- 043341Fabr
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 10
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+- 043341Fabr
+- 044072Igor
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 11
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+- 043341Fabr
+- 044072Igor
+- 045058Marc
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 12
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+- 043341Fabr
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 13
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+- 043341Fabr
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 14
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+- 043341Fabr
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 15
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+- 043341Fabr
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 16
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+- 043341Fabr
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+
+...
+!DEBUG! = ADDING STUFF
+!DEBUG!   - overflow!
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 043341Fabr
+filhas:
+- 2
+- 3
+
+página: 2
+mãe: 1
+dados: 8
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 3
+mãe: 1
+dados: 8
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 043341Fabr
+filhas:
+- 2
+- 3
+
+página: 2
+mãe: 1
+dados: 8
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 3
+mãe: 1
+dados: 9
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 043341Fabr
+filhas:
+- 2
+- 3
+
+página: 2
+mãe: 1
+dados: 8
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 3
+mãe: 1
+dados: 10
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 043341Fabr
+filhas:
+- 2
+- 3
+
+página: 2
+mãe: 1
+dados: 9
+- 015511Ange
+- 024312Leon
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 3
+mãe: 1
+dados: 10
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 043341Fabr
+filhas:
+- 2
+- 3
+
+página: 2
+mãe: 1
+dados: 10
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 3
+mãe: 1
+dados: 10
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 043341Fabr
+filhas:
+- 2
+- 3
+
+página: 2
+mãe: 1
+dados: 11
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 3
+mãe: 1
+dados: 10
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 043341Fabr
+filhas:
+- 2
+- 3
+
+página: 2
+mãe: 1
+dados: 12
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 3
+mãe: 1
+dados: 10
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 043341Fabr
+filhas:
+- 2
+- 3
+
+página: 2
+mãe: 1
+dados: 13
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 3
+mãe: 1
+dados: 10
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 043341Fabr
+filhas:
+- 2
+- 3
+
+página: 2
+mãe: 1
+dados: 14
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+- 037396Hugo
+- 041881Ana
+- 042290Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 3
+mãe: 1
+dados: 10
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 043341Fabr
+filhas:
+- 2
+- 3
+
+página: 2
+mãe: 1
+dados: 15
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+- 037396Hugo
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 3
+mãe: 1
+dados: 10
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 043341Fabr
+filhas:
+- 2
+- 3
+
+página: 2
+mãe: 1
+dados: 16
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+- 037396Hugo
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 3
+mãe: 1
+dados: 10
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 043341Fabr
+filhas:
+- 2
+- 3
+
+página: 2
+mãe: 1
+dados: 16
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+- 037396Hugo
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 3
+mãe: 1
+dados: 11
+- 043648Fran
+- 044072Igor
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 043341Fabr
+filhas:
+- 2
+- 3
+
+página: 2
+mãe: 1
+dados: 16
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+- 037396Hugo
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 3
+mãe: 1
+dados: 12
+- 043648Fran
+- 044072Igor
+- 044281Jorg
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 043341Fabr
+filhas:
+- 2
+- 3
+
+página: 2
+mãe: 1
+dados: 16
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+- 037396Hugo
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 3
+mãe: 1
+dados: 13
+- 043648Fran
+- 044072Igor
+- 044281Jorg
+- 044637Leon
+- 045058Marc
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 043341Fabr
+filhas:
+- 2
+- 3
+
+página: 2
+mãe: 1
+dados: 16
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+- 037396Hugo
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 3
+mãe: 1
+dados: 14
+- 043648Fran
+- 044072Igor
+- 044281Jorg
+- 044637Leon
+- 045058Marc
+- 045460Muri
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 043341Fabr
+filhas:
+- 2
+- 3
+
+página: 2
+mãe: 1
+dados: 16
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+- 037396Hugo
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 3
+mãe: 1
+dados: 15
+- 043648Fran
+- 044072Igor
+- 044072Igor
+- 044281Jorg
+- 044637Leon
+- 045058Marc
+- 045460Muri
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 1
+- 043341Fabr
+filhas:
+- 2
+- 3
+
+página: 2
+mãe: 1
+dados: 16
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+- 037396Hugo
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 3
+mãe: 1
+dados: 16
+- 043648Fran
+- 044072Igor
+- 044072Igor
+- 044281Jorg
+- 044637Leon
+- 045058Marc
+- 045460Muri
+- 045585Otav
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+!DEBUG!   - overflow!
+# say hi to mother
+no_pagina: 3
+no_mae: 1
+where: 1
+where: 1
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 2
+- 043341Fabr
+- 045927Rafa
+filhas:
+- 2
+- 4
+- 5
+
+página: 2
+mãe: 1
+dados: 16
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+- 037396Hugo
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 4
+mãe: 1
+dados: 8
+- 043648Fran
+- 044072Igor
+- 044072Igor
+- 044281Jorg
+- 044637Leon
+- 045058Marc
+- 045460Muri
+- 045585Otav
+
+página: 5
+mãe: 1
+dados: 8
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+!DEBUG!   - overflow!
+# say hi to mother
+no_pagina: 2
+no_mae: 1
+where: 0
+where: 0
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 3
+- 037396Hugo
+- 043341Fabr
+- 045927Rafa
+filhas:
+- 6
+- 7
+- 4
+- 5
+
+página: 6
+mãe: 1
+dados: 8
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+
+página: 7
+mãe: 1
+dados: 8
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 4
+mãe: 1
+dados: 8
+- 043648Fran
+- 044072Igor
+- 044072Igor
+- 044281Jorg
+- 044637Leon
+- 045058Marc
+- 045460Muri
+- 045585Otav
+
+página: 5
+mãe: 1
+dados: 8
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 3
+- 037396Hugo
+- 043341Fabr
+- 045927Rafa
+filhas:
+- 6
+- 7
+- 4
+- 5
+
+página: 6
+mãe: 1
+dados: 8
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+
+página: 7
+mãe: 1
+dados: 8
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 4
+mãe: 1
+dados: 8
+- 043648Fran
+- 044072Igor
+- 044072Igor
+- 044281Jorg
+- 044637Leon
+- 045058Marc
+- 045460Muri
+- 045585Otav
+
+página: 5
+mãe: 1
+dados: 9
+- 045934Rafa
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 3
+- 037396Hugo
+- 043341Fabr
+- 045927Rafa
+filhas:
+- 6
+- 7
+- 4
+- 5
+
+página: 6
+mãe: 1
+dados: 8
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+
+página: 7
+mãe: 1
+dados: 8
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 4
+mãe: 1
+dados: 8
+- 043648Fran
+- 044072Igor
+- 044072Igor
+- 044281Jorg
+- 044637Leon
+- 045058Marc
+- 045460Muri
+- 045585Otav
+
+página: 5
+mãe: 1
+dados: 10
+- 045934Rafa
+- 046245Robe
+- 046306Rodr
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 3
+- 037396Hugo
+- 043341Fabr
+- 045927Rafa
+filhas:
+- 6
+- 7
+- 4
+- 5
+
+página: 6
+mãe: 1
+dados: 8
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+
+página: 7
+mãe: 1
+dados: 8
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 4
+mãe: 1
+dados: 8
+- 043648Fran
+- 044072Igor
+- 044072Igor
+- 044281Jorg
+- 044637Leon
+- 045058Marc
+- 045460Muri
+- 045585Otav
+
+página: 5
+mãe: 1
+dados: 11
+- 045934Rafa
+- 046245Robe
+- 046306Rodr
+- 046674Thar
+- 046708Thia
+- 046713Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 3
+- 037396Hugo
+- 043341Fabr
+- 045927Rafa
+filhas:
+- 6
+- 7
+- 4
+- 5
+
+página: 6
+mãe: 1
+dados: 8
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+
+página: 7
+mãe: 1
+dados: 8
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 4
+mãe: 1
+dados: 8
+- 043648Fran
+- 044072Igor
+- 044072Igor
+- 044281Jorg
+- 044637Leon
+- 045058Marc
+- 045460Muri
+- 045585Otav
+
+página: 5
+mãe: 1
+dados: 12
+- 045934Rafa
+- 046245Robe
+- 046306Rodr
+- 046674Thar
+- 046708Thia
+- 046713Thia
+- 046718Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 3
+- 037396Hugo
+- 043341Fabr
+- 045927Rafa
+filhas:
+- 6
+- 7
+- 4
+- 5
+
+página: 6
+mãe: 1
+dados: 8
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+
+página: 7
+mãe: 1
+dados: 8
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 4
+mãe: 1
+dados: 8
+- 043648Fran
+- 044072Igor
+- 044072Igor
+- 044281Jorg
+- 044637Leon
+- 045058Marc
+- 045460Muri
+- 045585Otav
+
+página: 5
+mãe: 1
+dados: 13
+- 045934Rafa
+- 046245Robe
+- 046306Rodr
+- 046674Thar
+- 046708Thia
+- 046713Thia
+- 046718Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+- 046961Vito
+
+...
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 3
+- 037396Hugo
+- 043341Fabr
+- 045927Rafa
+filhas:
+- 6
+- 7
+- 4
+- 5
+
+página: 6
+mãe: 1
+dados: 8
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+
+página: 7
+mãe: 1
+dados: 8
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 4
+mãe: 1
+dados: 8
+- 043648Fran
+- 044072Igor
+- 044072Igor
+- 044281Jorg
+- 044637Leon
+- 045058Marc
+- 045460Muri
+- 045585Otav
+
+página: 5
+mãe: 1
+dados: 13
+- 045934Rafa
+- 046245Robe
+- 046306Rodr
+- 046674Thar
+- 046708Thia
+- 046713Thia
+- 046718Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+- 046961Vito
+
+...
+--- # Selecione uma opcao
+0. Sair
+1. Buscar
+2. Adicionar
+--- # Adicionar
+Matricula do aluno:
+Nome:
+Opção:
+Curso:
+Turma:
+...
+!DEBUG! = ADDING STUFF
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 3
+- 037396Hugo
+- 043341Fabr
+- 045927Rafa
+filhas:
+- 6
+- 7
+- 4
+- 5
+
+página: 6
+mãe: 1
+dados: 8
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+
+página: 7
+mãe: 1
+dados: 8
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 4
+mãe: 1
+dados: 8
+- 043648Fran
+- 044072Igor
+- 044072Igor
+- 044281Jorg
+- 044637Leon
+- 045058Marc
+- 045460Muri
+- 045585Otav
+
+página: 5
+mãe: 1
+dados: 14
+- 045934Rafa
+- 046245Robe
+- 046306Rodr
+- 046674Thar
+- 046708Thia
+- 046713Thia
+- 046718Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+- 046961Vito
+- 666666Joe
+
+...
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 3
+- 037396Hugo
+- 043341Fabr
+- 045927Rafa
+filhas:
+- 6
+- 7
+- 4
+- 5
+
+página: 6
+mãe: 1
+dados: 8
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+
+página: 7
+mãe: 1
+dados: 8
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 4
+mãe: 1
+dados: 8
+- 043648Fran
+- 044072Igor
+- 044072Igor
+- 044281Jorg
+- 044637Leon
+- 045058Marc
+- 045460Muri
+- 045585Otav
+
+página: 5
+mãe: 1
+dados: 14
+- 045934Rafa
+- 046245Robe
+- 046306Rodr
+- 046674Thar
+- 046708Thia
+- 046713Thia
+- 046718Thia
+- 046802Tiag
+- 046944Vito
+- 046946Vito
+- 046956Vito
+- 046961Vito
+- 046961Vito
+- 666666Joe
+
+...
+--- # Selecione uma opcao
+0. Sair
+1. Buscar
+2. Adicionar
+Obrigado por usar a aplicacao :)

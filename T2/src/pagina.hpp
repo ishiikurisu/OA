@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <node.hpp>
-#define TAMANHO_PAGINA (4)
+#define TAMANHO_PAGINA (16)
 #define NOME_PAGINA ("indicelista.%03d.bt")
 
 unsigned int NUMERO_PAGINA = 1;
@@ -26,8 +26,6 @@ public:
     bool overflow();
     Node dividir(Node);
     Pagina *atualizar();
-    Node dividir_filhas();
-    Pagina* lidar_com_mae(Node);
     void salvar();
     std::string escrever();
     std::string identificar();
@@ -149,6 +147,8 @@ bool Pagina::overflow()
 Node Pagina::dividir(Node no)
 {
     Pagina *paginas = dividir_pagina();
+    Pagina *mae = this;
+    unsigned int where = -1;
     Pagina menor = paginas[0];
     Pagina meio  = paginas[1];
     Pagina maior = paginas[2];
@@ -161,28 +161,36 @@ Node Pagina::dividir(Node no)
     maior.no_mae = no_pagina;
 
     /* lidar com mãe */
-    Pagina *mae = this;
-
+    no = meio.dados[0];
     if (no_mae == (unsigned int) -1)
     {
-        adicionar(no);
-        filhas.push_back(NUMERO_PAGINA-1);
-        filhas.push_back(NUMERO_PAGINA);
+        where = adicionar(no);
+        filhas.insert(filhas.begin() + where++, NUMERO_PAGINA-1);
+        filhas.insert(filhas.begin() + where, NUMERO_PAGINA);
     }
     else
     {
+        std::cout << "# say hi to mother" << std::endl;
+        std::cout << "no_pagina: " << no_pagina << std::endl;
         mae = new Pagina(no_mae);
+        std::cout << "no_mae: " << mae->no_pagina << std::endl;
         // erase current daughter
-        unsigned int del = toolbox::encontrar(mae->filhas, no_pagina);
-        mae->filhas.erase(mae->filhas.begin() + del);
+        where = toolbox::encontrar(mae->filhas, no_pagina);
+        mae->filhas.erase(mae->filhas.begin() + where);
+        std::cout << "where: " << where << std::endl;
         // add new daughters
-        unsigned int pos = mae->adicionar(no);
-        mae->filhas.insert(mae->filhas.begin() + pos, NUMERO_PAGINA-1);
-        mae->filhas.insert(mae->filhas.begin() + pos+1, NUMERO_PAGINA);
+        mae->adicionar(no);
+        std::cout << "where: " << where << std::endl;
+        mae->filhas.insert(mae->filhas.begin() + where++, NUMERO_PAGINA-1);
+        mae->filhas.insert(mae->filhas.begin() + where, NUMERO_PAGINA);
     }
 
+    menor.no_mae = mae->no_pagina;
     menor.salvar();
+
+    maior.no_mae = mae->no_pagina;
     maior.salvar();
+
     mae->salvar();
     nova_mae = mae;
     delete paginas;
@@ -192,43 +200,6 @@ Node Pagina::dividir(Node no)
 Pagina* Pagina::atualizar()
 {
     return nova_mae;
-}
-
-Node Pagina::dividir_filhas()
-{
-    Pagina *paginas = dividir_pagina();
-    Pagina menor = paginas[0];
-    Pagina meio  = paginas[1];
-    Pagina maior = paginas[2];
-
-    menor.no_pagina = ++NUMERO_PAGINA;
-    menor.no_mae = no_pagina;
-    filhas.push_back(NUMERO_PAGINA);
-    menor.salvar();
-
-    maior.no_pagina = ++NUMERO_PAGINA;
-    maior.no_mae = no_pagina;
-    filhas.push_back(NUMERO_PAGINA);
-    maior.salvar();
-
-    delete paginas;
-    return meio.dados[0];
-}
-
-Pagina* Pagina::lidar_com_mae(Node no)
-{
-    Pagina *mae = this;
-
-    if (no_mae == (unsigned int) -1)
-        adicionar(no);
-    else
-    {
-        mae = new Pagina(no_mae);
-        unsigned int pos = mae->adicionar(no);
-        /* tell daughters about their mother */
-    }
-
-    return mae;
 }
 
 void Pagina::salvar()
