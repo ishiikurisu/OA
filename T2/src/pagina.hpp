@@ -16,6 +16,7 @@ class Pagina
     Pagina* dividir_pagina();
     std::vector<Node> dados;
     std::vector<unsigned int> filhas;
+    Pagina *nova_mae;
 public:
     Pagina() { no_mae = -1; };
     Pagina(unsigned int);
@@ -23,6 +24,8 @@ public:
     Pagina* achar_filha(Node);
     unsigned int adicionar(Node);
     bool overflow();
+    Node dividir(Node);
+    Pagina *atualizar();
     Node dividir_filhas();
     Pagina* lidar_com_mae(Node);
     void salvar();
@@ -98,10 +101,9 @@ Pagina* Pagina::dividir_pagina()
 * FUNÇÕES PÚBLICAS *
 *******************/
 
-Pagina::Pagina(unsigned int no)
+Pagina::Pagina(unsigned int no) : Pagina::Pagina()
 {
     no_pagina = no;
-    no_mae = -1;
     carregar_pagina();
 }
 
@@ -130,10 +132,8 @@ unsigned int Pagina::adicionar(Node no)
     else
     {
         for (i = 0; i < dados.size(); ++i)
-        {
             if (dados[i].get_pk().compare(no.get_pk()) > 0)
                 break;
-        }
         dados.insert(dados.begin() + i, no);
     }
 
@@ -144,6 +144,47 @@ unsigned int Pagina::adicionar(Node no)
 bool Pagina::overflow()
 {
     return (dados.size() > TAMANHO_PAGINA);
+}
+
+Node Pagina::dividir(Node no)
+{
+    Pagina *paginas = dividir_pagina();
+	Pagina menor = paginas[0];
+	Pagina meio  = paginas[1];
+	Pagina maior = paginas[2];
+
+    /* dividir filhas */
+	menor.no_pagina = ++NUMERO_PAGINA;
+    menor.no_mae = no_pagina;
+	filhas.push_back(NUMERO_PAGINA);
+
+	maior.no_pagina = ++NUMERO_PAGINA;
+    maior.no_mae = no_pagina;
+	filhas.push_back(NUMERO_PAGINA);
+
+    /* lidar com mãe */
+    Pagina *mae = this;
+
+    if (no_mae == (unsigned int) -1)
+        adicionar(no);
+    else
+    {
+        mae = new Pagina(no_mae);
+        unsigned int pos = mae->adicionar(no);
+        unsigned int del = toolbox::encontrar(mae->filhas, no_pagina);
+        
+    }
+
+	menor.salvar();
+	maior.salvar();
+    nova_mae = mae;
+    delete paginas;
+    return meio.dados[0];
+}
+
+Pagina* Pagina::atualizar()
+{
+    return nova_mae;
 }
 
 Node Pagina::dividir_filhas()
@@ -169,18 +210,15 @@ Node Pagina::dividir_filhas()
 
 Pagina* Pagina::lidar_com_mae(Node no)
 {
-    Pagina *mae = NULL;
+    Pagina *mae = this;
 
     if (no_mae == (unsigned int) -1)
-    {
         adicionar(no);
-        mae = this;
-    }
     else
     {
         mae = new Pagina(no_mae);
         unsigned int pos = mae->adicionar(no);
-        ++pos;
+        /* tell daughters about their mother */
     }
 
     return mae;
@@ -230,3 +268,5 @@ std::string Pagina::escrever()
 }
 
 #endif /* end of include guard: PAGINA_HPP */
+
+/* code is poetry */

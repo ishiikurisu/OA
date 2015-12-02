@@ -1,6 +1,7 @@
 #pragma once
 #include <stdio.h>
 #include <sys/stat.h>
+#include <vector>
 
 namespace toolbox {
 
@@ -29,6 +30,14 @@ namespace toolbox {
 			return true;
 		else
 			return false;
+	}
+
+	unsigned int encontrar(std::vector<unsigned int> arr, unsigned int ui)
+	{
+		for (unsigned int i = 0; i < arr.size(); ++i)
+			if (arr[i] == ui)
+				return i;
+		return -1;
 	}
 
 } /* toolbox */
