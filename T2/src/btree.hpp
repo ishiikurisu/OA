@@ -71,13 +71,13 @@ BTree::BTree()
 
 void BTree::adicionar(Node no)
 {
-	toolbox::debug("= ADDING STUFF");
+	toolbox::cat("= ADDING STUFF");
 	Pagina *filha = raiz.achar_filha(no);
 	filha->adicionar(no);
 
 	while (filha->overflow())
 	{
-		toolbox::debug("  - overflow!");
+		toolbox::cat("  - overflow!");
 		filha->dividir(no);
 		filha = filha->atualizar();
 	}

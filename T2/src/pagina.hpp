@@ -170,17 +170,12 @@ Node Pagina::dividir(Node no)
     }
     else
     {
-        std::cout << "# say hi to mother" << std::endl;
-        std::cout << "no_pagina: " << no_pagina << std::endl;
         mae = new Pagina(no_mae);
-        std::cout << "no_mae: " << mae->no_pagina << std::endl;
         // erase current daughter
         where = toolbox::encontrar(mae->filhas, no_pagina);
         mae->filhas.erase(mae->filhas.begin() + where);
-        std::cout << "where: " << where << std::endl;
         // add new daughters
         mae->adicionar(no);
-        std::cout << "where: " << where << std::endl;
         mae->filhas.insert(mae->filhas.begin() + where++, NUMERO_PAGINA-1);
         mae->filhas.insert(mae->filhas.begin() + where, NUMERO_PAGINA);
     }

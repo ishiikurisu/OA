@@ -1,11 +1,11 @@
 - [ ] Implementar a B-Tree
-  - [ ] Implementar adição de dados
-    - [x] Adicionar em ordem na página
-	+ Decisão de design: como lidar com páginas?
+  - [x] Implementar adição de dados
   - [ ] Implementar busca
+  - [ ] Implementar atualização
 - [ ] Escrever interface gráfica
   - [x] Criar classe banco de dados
     - [x] Conectar banco de dados à estrutura de arquivos
   - [ ] Escrever menus
     - [x] Adicionar
 	- [ ] Buscar
+    - [ ] Atualizar
