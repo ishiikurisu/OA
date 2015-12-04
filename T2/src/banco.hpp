@@ -6,8 +6,8 @@
 class Banco
 {
 	std::string gerar_chave(std::string);
+	std::string pegar(unsigned int)
 	std::string arquivo_principal;
-	std::string arquivo_chaves;
 	BTree btree;
 	unsigned int no_dados;
 public:
@@ -15,6 +15,7 @@ public:
 	void definir_arquivo_principal(std::string);
 	void popular(std::string);
 	void adicionar(std::string);
+	std::string buscar(std::string);
 	void mostrar();
 };
 
@@ -35,13 +36,17 @@ std::string Banco::gerar_chave(std::string linha)
 	return chave;
 }
 
+std::string Banco::pegar(unsigned int no_linha)
+{
+	return std::string("");
+}
+
 /*******************
 * FUNÇÕES PÚBLICAS *
 *******************/
 
 Banco::Banco()
 {
-	arquivo_chaves = "indicelista.bt";
 	no_dados = 0;
 }
 
@@ -65,6 +70,16 @@ void Banco::adicionar(std::string dado)
 	fs.close();
 
 	popular(dado);
+}
+
+std::string Banco::buscar(std::string pedido)
+{
+	unsigned int linha = btree.buscar(pedido);
+
+	if (linha == (unsigned int) -1)
+		return std::string("");
+	else
+		return pegar(linha);
 }
 
 void Banco::mostrar()

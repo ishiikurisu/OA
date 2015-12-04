@@ -56,10 +56,10 @@ bool InterfaceUsuario::draw()
 			std::cout << "Obrigado por usar a aplicacao :)" << std::endl;
 		break;
 
-		// case 1:
-		// 	buscar();
-		// break;
-		//
+		case 1:
+			buscar();
+		break;
+
 		case 2:
 			adicionar();
 			banco.mostrar();
@@ -78,7 +78,20 @@ bool InterfaceUsuario::draw()
 *******************/
 void InterfaceUsuario::buscar()
 {
+	std::string texto;
 
+	std::cout << "--- # Buscar" << std::endl;
+	std::cout << "Matricula do aluno" << std::endl;
+	std::cin >> texto;
+
+	texto = banco.buscar(texto);
+	if (texto.length() == 0) {
+		std::cout << "Matrícula não encontrada" << std::endl;
+	}
+	else {
+		std::cout << "Resultado da busca:" << std::endl;
+		std::cout << "  " << texto << std::endl;
+	}
 }
 
 void InterfaceUsuario::adicionar()

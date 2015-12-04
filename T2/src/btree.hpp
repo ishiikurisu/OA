@@ -19,6 +19,7 @@ public:
 	BTree();
 	void adicionar(std::string, unsigned int);
 	void adicionar(Node);
+	std::string buscar(std::string);
 	void mostrar();
 	friend class Pagina;
 };
@@ -71,24 +72,26 @@ BTree::BTree()
 
 void BTree::adicionar(Node no)
 {
-	toolbox::cat("= ADDING STUFF");
 	Pagina *filha = raiz.achar_filha(no);
 	filha->adicionar(no);
 
 	while (filha->overflow())
 	{
-		toolbox::cat("  - overflow!");
 		filha->dividir(no);
 		filha = filha->atualizar();
 	}
 
 	raiz = Pagina(1);
-	mostrar();
 }
 
 void BTree::adicionar(std::string dado, unsigned int no_linha)
 {
 	adicionar(Node(dado, no_linha));
+}
+
+unsigned int BTree::buscar(std::string matricula)
+{
+	return raiz.buscar(matricula);
 }
 
 void BTree::mostrar()

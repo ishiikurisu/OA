@@ -29,6 +29,7 @@ public:
     void salvar();
     std::string escrever();
     std::string identificar();
+    std::string buscar(std::string);
     unsigned int no_pagina;
     unsigned int no_mae;
     friend class Node;
@@ -238,6 +239,11 @@ std::string Pagina::escrever()
     data += "...\n";
 
     return data;
+}
+
+std::string Pagina::buscar(std::string)
+{
+    return string("");
 }
 
 #endif /* end of include guard: PAGINA_HPP */
