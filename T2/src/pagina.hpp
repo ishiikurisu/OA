@@ -14,6 +14,7 @@ class Pagina
     char* gerar_nome_pagina(unsigned int);
     void carregar_pagina();
     Pagina* dividir_pagina();
+    unsigned int procurar_na_filha(unsigned int, std::string);
     std::vector<Node> dados;
     std::vector<unsigned int> filhas;
     Pagina *nova_mae;
@@ -29,7 +30,7 @@ public:
     void salvar();
     std::string escrever();
     std::string identificar();
-    std::string buscar(std::string);
+    unsigned int buscar(std::string);
     unsigned int no_pagina;
     unsigned int no_mae;
     friend class Node;
@@ -94,6 +95,14 @@ Pagina* Pagina::dividir_pagina()
 
     dados.clear();
     return outlet;
+}
+
+unsigned int Pagina::procurar_na_filha(unsigned int filha, std::string pergunta)
+{
+    Pagina *pagina = new Pagina(filha);
+    unsigned int resultado = pagina->buscar(pergunta);
+    delete pagina;
+    return resultado;
 }
 
 /*******************
@@ -241,9 +250,19 @@ std::string Pagina::escrever()
     return data;
 }
 
-std::string Pagina::buscar(std::string)
+unsigned int Pagina::buscar(std::string pergunta)
 {
-    return string("");
+    std::cout << "pagina: " << no_pagina << std::endl;
+    for (unsigned int i = 0; i < dados.size(); ++i)
+    {
+        std::cout << "- " << dados[i].get_pk() << " x " << pergunta << std::endl;
+        if (toolbox::match(pergunta.c_str(), dados[i].get_pk().c_str()))
+            return dados[i].get_linha();
+        else if (dados[i].get_pk().compare(pergunta) > 0)
+            return procurar_na_filha(filhas[i], pergunta);
+    }
+
+    return -1;
 }
 
 #endif /* end of include guard: PAGINA_HPP */

@@ -48,6 +48,7 @@ bool InterfaceUsuario::draw()
 	std::cout << "0. Sair" << std::endl;
 	std::cout << "1. Buscar" << std::endl;
 	std::cout << "2. Adicionar" << std::endl;
+	std::cout << "3. Atualizar" << std::endl;
 	std::getline(std::cin, junk);
 
 	switch (toolbox::str2num(junk.c_str())) {
@@ -90,7 +91,7 @@ void InterfaceUsuario::buscar()
 	}
 	else {
 		std::cout << "Resultado da busca:" << std::endl;
-		std::cout << "  " << texto << std::endl;
+		std::cout << "- " << texto << std::endl;
 	}
 }
 

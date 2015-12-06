@@ -6,7 +6,7 @@
 class Banco
 {
 	std::string gerar_chave(std::string);
-	std::string pegar(unsigned int)
+	std::string pegar(unsigned int);
 	std::string arquivo_principal;
 	BTree btree;
 	unsigned int no_dados;
@@ -38,7 +38,15 @@ std::string Banco::gerar_chave(std::string linha)
 
 std::string Banco::pegar(unsigned int no_linha)
 {
-	return std::string("");
+	std::string linha;
+	std::fstream arquivo;
+
+	arquivo.open(arquivo_principal.c_str(), std::fstream::in);
+	for (unsigned int c = 0; c < no_linha; c++)
+		std::getline(arquivo, linha);
+
+	arquivo.close();
+	return linha;
 }
 
 /*******************

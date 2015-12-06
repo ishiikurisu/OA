@@ -1,46 +1,3 @@
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-  - overflow!
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-  - overflow!
-= ADDING STUFF
-  - overflow!
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
-= ADDING STUFF
 --- # BTREE
 página: 1
 mãe: 4294967295
@@ -112,6 +69,7 @@ dados: 13
 0. Sair
 1. Buscar
 2. Adicionar
+3. Atualizar
 --- # Adicionar
 Matricula do aluno:
 Nome:
@@ -119,7 +77,6 @@ Opção:
 Curso:
 Turma:
 ...
-= ADDING STUFF
 --- # BTREE
 página: 1
 mãe: 4294967295
@@ -192,6 +149,7 @@ dados: 14
 0. Sair
 1. Buscar
 2. Adicionar
+3. Atualizar
 --- # Adicionar
 Matricula do aluno:
 Nome:
@@ -199,7 +157,6 @@ Opção:
 Curso:
 Turma:
 ...
-= ADDING STUFF
 --- # BTREE
 página: 1
 mãe: 4294967295
@@ -273,6 +230,7 @@ dados: 15
 0. Sair
 1. Buscar
 2. Adicionar
+3. Atualizar
 --- # Adicionar
 Matricula do aluno:
 Nome:
@@ -280,7 +238,6 @@ Opção:
 Curso:
 Turma:
 ...
-= ADDING STUFF
 --- # BTREE
 página: 1
 mãe: 4294967295
@@ -355,6 +312,7 @@ dados: 16
 0. Sair
 1. Buscar
 2. Adicionar
+3. Atualizar
 --- # Adicionar
 Matricula do aluno:
 Nome:
@@ -362,8 +320,6 @@ Opção:
 Curso:
 Turma:
 ...
-= ADDING STUFF
-  - overflow!
 --- # BTREE
 página: 1
 mãe: 4294967295
@@ -444,6 +400,7 @@ dados: 8
 0. Sair
 1. Buscar
 2. Adicionar
+3. Atualizar
 --- # Adicionar
 Matricula do aluno:
 Nome:
@@ -451,7 +408,6 @@ Opção:
 Curso:
 Turma:
 ...
-= ADDING STUFF
 --- # BTREE
 página: 1
 mãe: 4294967295
@@ -533,6 +489,7 @@ dados: 9
 0. Sair
 1. Buscar
 2. Adicionar
+3. Atualizar
 --- # Adicionar
 Matricula do aluno:
 Nome:
@@ -540,7 +497,6 @@ Opção:
 Curso:
 Turma:
 ...
-= ADDING STUFF
 --- # BTREE
 página: 1
 mãe: 4294967295
@@ -623,4 +579,21 @@ dados: 10
 0. Sair
 1. Buscar
 2. Adicionar
+3. Atualizar
+--- # Buscar
+Matricula do aluno
+pagina: 1
+- 037396Hugo x 031200
+pagina: 6
+- 015511Ange x 031200
+- 024312Leon x 031200
+- 031147Ande x 031200
+- 031200Andr x 031200
+Resultado da busca:
+- 031200 Andre Luiz Silva Bezerra                 34  CC       B
+--- # Selecione uma opcao
+0. Sair
+1. Buscar
+2. Adicionar
+3. Atualizar
 Obrigado por usar a aplicacao :)

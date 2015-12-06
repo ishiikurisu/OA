@@ -19,7 +19,7 @@ public:
 	BTree();
 	void adicionar(std::string, unsigned int);
 	void adicionar(Node);
-	std::string buscar(std::string);
+	unsigned int buscar(std::string);
 	void mostrar();
 	friend class Pagina;
 };

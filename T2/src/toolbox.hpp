@@ -40,4 +40,14 @@ namespace toolbox {
 		return -1;
 	}
 
+	bool match(const char *s, const char *t)
+	{
+		while (*s && *t)
+			if (*s != *t)
+				return false;
+			else
+				++s, ++t;
+		return true;
+	}
+
 } /* toolbox */
