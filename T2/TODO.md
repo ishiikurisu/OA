@@ -1,11 +1,11 @@
-- [ ] Implementar a B-Tree
+- [x] Implementar a B-Tree
   - [x] Implementar adição de dados
-  - [ ] Implementar busca
-  - [ ] Implementar atualização
-- [ ] Escrever interface gráfica
+  - [x] Implementar busca
+  - [x] Implementar atualização
+- [x] Escrever interface gráfica
   - [x] Criar classe banco de dados
     - [x] Conectar banco de dados à estrutura de arquivos
-  - [ ] Escrever menus
+  - [x] Escrever menus
     - [x] Adicionar
-	- [ ] Buscar
-    - [ ] Atualizar
+	- [x] Buscar
+    - [x] Atualizar

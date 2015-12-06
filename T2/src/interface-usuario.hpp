@@ -160,11 +160,9 @@ void InterfaceUsuario::atualizar()
 		atualizacao = matricula + " ";
 		std::cout << "Nome:" << std::endl;
 		std::getline(std::cin, info);
-		std::cout << "@ " << info << std::endl;
 		atualizacao += (info.length() == 0)?
 		 	pesquisa.substr(8, 40) : toolbox::preencher(info, 40);
 		atualizacao += " ";
-		std::cout << "# " << atualizacao << std::endl;
 		std::cout << "Opcao:" << std::endl;
 		std::getline(std::cin, info);
 		atualizacao += (info.length() == 0)?
@@ -180,7 +178,6 @@ void InterfaceUsuario::atualizar()
 		atualizacao += (info.length() == 0)?
 		 	pesquisa.substr(62, 1) : toolbox::preencher(info, 1);
 
-		std::cout << "Nova linha: " << atualizacao << std::endl;
 		banco.atualizar(atualizacao);
 	}
 	else {

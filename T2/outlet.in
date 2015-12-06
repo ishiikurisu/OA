@@ -604,12 +604,9 @@ Dados encontrados:
 - 123456 Average Joe                              25  CC       A
 # Deixe o campo em branco para manter o mesmo dado
 Nome:
-@ Luigi Mario
-# 123456 Luigi Mario                              
 Opcao:
 Curso:
 Turma:
-Nova linha: 123456 Luigi Mario                              24  MEC      A
 --- # BTREE
 página: 1
 mãe: 4294967295
