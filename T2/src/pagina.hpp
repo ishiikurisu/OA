@@ -252,17 +252,16 @@ std::string Pagina::escrever()
 
 unsigned int Pagina::buscar(std::string pergunta)
 {
-    std::cout << "pagina: " << no_pagina << std::endl;
     for (unsigned int i = 0; i < dados.size(); ++i)
-    {
-        std::cout << "- " << dados[i].get_pk() << " x " << pergunta << std::endl;
         if (toolbox::match(pergunta.c_str(), dados[i].get_pk().c_str()))
             return dados[i].get_linha();
         else if (dados[i].get_pk().compare(pergunta) > 0)
             return procurar_na_filha(filhas[i], pergunta);
-    }
 
-    return -1;
+    if (filhas.size() > 0)
+        return procurar_na_filha(filhas[dados.size()], pergunta);
+    else
+        return -1;
 }
 
 #endif /* end of include guard: PAGINA_HPP */

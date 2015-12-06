@@ -83,7 +83,7 @@ void InterfaceUsuario::buscar()
 
 	std::cout << "--- # Buscar" << std::endl;
 	std::cout << "Matricula do aluno" << std::endl;
-	std::cin >> texto;
+	std::getline(std::cin, texto);
 
 	texto = banco.buscar(texto);
 	if (texto.length() == 0) {

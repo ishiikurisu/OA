@@ -70,10 +70,9 @@ void Banco::popular(std::string dado)
 
 void Banco::adicionar(std::string dado)
 {
-	std::fstream fs;
+	std::ofstream fs;
 
-	fs.open(arquivo_principal.c_str(), std::fstream::in);
-	fs.seekg(0, fs.end);
+	fs.open(arquivo_principal.c_str(), std::ios_base::app);
 	fs << dado << std::endl;
 	fs.close();
 

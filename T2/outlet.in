@@ -582,15 +582,17 @@ dados: 10
 3. Atualizar
 --- # Buscar
 Matricula do aluno
-pagina: 1
-- 037396Hugo x 031200
-pagina: 6
-- 015511Ange x 031200
-- 024312Leon x 031200
-- 031147Ande x 031200
-- 031200Andr x 031200
 Resultado da busca:
 - 031200 Andre Luiz Silva Bezerra                 34  CC       B
+--- # Selecione uma opcao
+0. Sair
+1. Buscar
+2. Adicionar
+3. Atualizar
+--- # Buscar
+Matricula do aluno
+Resultado da busca:
+- 666666 Joe Frank                                23  MKT      A
 --- # Selecione uma opcao
 0. Sair
 1. Buscar
