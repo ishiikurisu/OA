@@ -598,4 +598,99 @@ Resultado da busca:
 1. Buscar
 2. Adicionar
 3. Atualizar
+--- # Atualizar
+Matricula do aluno:
+Dados encontrados:
+- 123456 Average Joe                              25  CC       A
+# Deixe o campo em branco para manter o mesmo dado
+Nome:
+@ Luigi Mario
+# 123456 Luigi Mario                              
+Opcao:
+Curso:
+Turma:
+Nova linha: 123456 Luigi Mario                              24  MEC      A
+--- # BTREE
+página: 1
+mãe: 4294967295
+dados: 4
+- 037396Hugo
+- 043341Fabr
+- 045927Rafa
+- 046944Vito
+filhas:
+- 6
+- 7
+- 4
+- 8
+- 9
+
+página: 6
+mãe: 1
+dados: 8
+- 015511Ange
+- 024312Leon
+- 031147Ande
+- 031200Andr
+- 031272Andr
+- 032725Fell
+- 033282Henr
+- 035830Roge
+
+página: 7
+mãe: 1
+dados: 8
+- 041881Ana
+- 042290Brun
+- 042348Brun
+- 042728Dani
+- 042780Dani
+- 042780Dani
+- 042865Dani
+- 043217Erik
+
+página: 4
+mãe: 1
+dados: 8
+- 043648Fran
+- 044072Igor
+- 044072Igor
+- 044281Jorg
+- 044637Leon
+- 045058Marc
+- 045460Muri
+- 045585Otav
+
+página: 8
+mãe: 1
+dados: 8
+- 045934Rafa
+- 046245Robe
+- 046306Rodr
+- 046674Thar
+- 046708Thia
+- 046713Thia
+- 046718Thia
+- 046802Tiag
+
+página: 9
+mãe: 1
+dados: 10
+- 046946Vito
+- 046956Vito
+- 046961Vito
+- 046961Vito
+- 123456Aver
+- 190596Caro
+- 232323Isa
+- 666666Joe
+- 951753Prin
+- 987654Fred
+
+...
+--- # Selecione uma opcao
+0. Sair
+1. Buscar
+2. Adicionar
+3. Atualizar
 Obrigado por usar a aplicacao :)

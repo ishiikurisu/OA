@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <btree.hpp>
+#include <stdio.h>
 
 class Banco
 {
@@ -10,11 +11,13 @@ class Banco
 	std::string arquivo_principal;
 	BTree btree;
 	unsigned int no_dados;
+	unsigned int ultima_pesquisa;
 public:
 	Banco();
 	void definir_arquivo_principal(std::string);
 	void popular(std::string);
 	void adicionar(std::string);
+	void atualizar(std::string);
 	std::string buscar(std::string);
 	void mostrar();
 };
@@ -46,6 +49,7 @@ std::string Banco::pegar(unsigned int no_linha)
 		std::getline(arquivo, linha);
 
 	arquivo.close();
+	ultima_pesquisa = no_linha;
 	return linha;
 }
 
@@ -87,6 +91,36 @@ std::string Banco::buscar(std::string pedido)
 		return std::string("");
 	else
 		return pegar(linha);
+}
+
+void Banco::atualizar(std::string pesquisa)
+{
+	std::string TEMP = "TEMP";
+	std::string linha;
+	std::fstream arquivo;
+	std::fstream temp;
+	unsigned int c;
+
+	arquivo.open(arquivo_principal.c_str(), std::fstream::in);
+	temp.open(TEMP.c_str(), std::fstream::out);
+
+	for (c = 0; c < ultima_pesquisa-1; c++)
+	{
+		std::getline(arquivo, linha);
+		temp << linha << std::endl;
+	}
+	std::getline(arquivo, linha);
+	temp << pesquisa << std::endl;
+	for (c++; c < no_dados; c++)
+	{
+		std::getline(arquivo, linha);
+		temp << linha << std::endl;
+	}
+
+	arquivo.close();
+	temp.close();
+	remove(arquivo_principal.c_str());
+	rename(TEMP.c_str(), arquivo_principal.c_str());
 }
 
 void Banco::mostrar()

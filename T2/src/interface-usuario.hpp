@@ -11,6 +11,7 @@ class InterfaceUsuario
 {
 	void adicionar();
 	void buscar();
+	void atualizar();
 	Banco banco;
 public:
 	InterfaceUsuario() {};
@@ -63,6 +64,11 @@ bool InterfaceUsuario::draw()
 
 		case 2:
 			adicionar();
+			banco.mostrar();
+		break;
+
+		case 3:
+			atualizar();
 			banco.mostrar();
 		break;
 
@@ -131,6 +137,55 @@ void InterfaceUsuario::adicionar()
 
 	std::cout << "..." << std::endl;
 	banco.adicionar(info);
+}
+
+void InterfaceUsuario::atualizar()
+{
+	std::string matricula;
+	std::string pesquisa;
+	std::string atualizacao;
+	std::string info;
+
+	std::cout << "--- # Atualizar" << std::endl;
+	std::cout << "Matricula do aluno:" << std::endl;
+	std::getline(std::cin, matricula);
+	pesquisa = banco.buscar(matricula);
+
+	if (pesquisa.length() > 0) {
+		std::cout << "Dados encontrados:" << std::endl;
+		std::cout << "- " << pesquisa << std::endl;
+		std::cout << "# Deixe o campo em branco ";
+		std::cout << "para manter o mesmo dado" << std::endl;
+
+		atualizacao = matricula + " ";
+		std::cout << "Nome:" << std::endl;
+		std::getline(std::cin, info);
+		std::cout << "@ " << info << std::endl;
+		atualizacao += (info.length() == 0)?
+		 	pesquisa.substr(8, 40) : toolbox::preencher(info, 40);
+		atualizacao += " ";
+		std::cout << "# " << atualizacao << std::endl;
+		std::cout << "Opcao:" << std::endl;
+		std::getline(std::cin, info);
+		atualizacao += (info.length() == 0)?
+		 	pesquisa.substr(49, 3) : toolbox::preencher(info, 3);
+		atualizacao += " ";
+		std::cout << "Curso:" << std::endl;
+		std::getline(std::cin, info);
+		atualizacao += (info.length() == 0)?
+		 	pesquisa.substr(53, 8) : toolbox::preencher(info, 8);
+		atualizacao += " ";
+		std::cout << "Turma:" << std::endl;
+		std::getline(std::cin, info);
+		atualizacao += (info.length() == 0)?
+		 	pesquisa.substr(62, 1) : toolbox::preencher(info, 1);
+
+		std::cout << "Nova linha: " << atualizacao << std::endl;
+		banco.atualizar(atualizacao);
+	}
+	else {
+		std::cout << "Matricula nao encontrada" << std::endl;
+	}
 }
 
 #undef CAMINHO

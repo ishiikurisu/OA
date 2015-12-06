@@ -50,4 +50,17 @@ namespace toolbox {
 		return true;
 	}
 
+	std::string preencher(std::string str, size_t size)
+	{
+		std::string nstr;
+		size_t i;
+
+		for (i = 0; i < str.length() && i < size; i++)
+			nstr += str[i];
+		for (i = i; i < size; ++i)
+			nstr += ' ';
+
+		return nstr;
+	}
+
 } /* toolbox */
