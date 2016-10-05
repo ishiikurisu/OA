@@ -5,7 +5,7 @@ int strlen(char*);
 char* concat(char*, char*);
 char* ctos(char);
 char* itos(int);
-char* substr(char*, int, int);
+char* substring(char*, int, int);
 int compare(char*, char*);
 char last_char(char*);
 char* tidy_string(char*);
@@ -52,7 +52,8 @@ Every function in those headers use the following convention:
 + Maps
   - put
 
-# Cosequential list processing
+Cosequential list processing
+============================
 
 Can be added by the `coseq.h` header.
 
@@ -71,16 +72,3 @@ LIST* match_on_RAM(LIST* list1, LIST* list2);
 void merge_on_memory(char* i1, char* i2, char* o);
 LIST* merge_on_RAM(LIST* list1, LIST* list2);
 ```
-
-# Buffer
-
-This header adds another buffer layer to the app. Makes reading and writing from big files faster. This reader follows the same name pattern as the linked data types.
-
-To create a new buffer, you can use the function `BUFFER* buffer_new(char *source, char *mode, int buffer_size)`.
-
-Methods
--------
-
-+ read
-+ write
-+ read_line
